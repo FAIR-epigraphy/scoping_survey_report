@@ -1,0 +1,404 @@
+---
+title: "Digital epigraphy in 2022: state of the art"
+description: 
+author: 
+ - Petra Hermankova^[Johannes Gutenberg University in Mainz, petra.hermankova@uni.mainz.de, https://orcid.org/0000-0002-6349-0540]
+ - Marietta Horster^[Johannes Gutenberg University in Mainz, horster@uni.mainz.de, https://orcid.org/0000-0003-1434-224X ]
+ - Jonathan Prag^[Oxford University, jonathan.prag@merton.ox.ac.uk, https://orcid.org/0000-0003-3819-8537 ]
+date: "28/2/2022"
+output: 
+  html_document:
+    css: ../"style.css"
+    theme: paper
+    toc: yes
+    toc_float: true
+    number_sections: true
+    smooth_scroll: true
+    toc_depth: 4
+    df_print: paged
+    highlight: monochrome
+    fontsize: 12pt
+    
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+```
+
+# Introduction
+The aim of the report is to summarise the state of digital epigraphy in 2022 and to do so in a transparent and FAIR manner. This report has been compiled on the basis of an online survey *FAIR Epigraphy: Scoping survey for partners and collaborators* and *Digital epigraphy in 2022: scoping survey* for all digital epigraphy projects, circulating in February 2022. 
+
+The survey was organised by The FAIR Epigraphy Project (https://www.csad.ox.ac.uk/fair-epigraphy), a collaboration between Johannes Gutenberg University in Mainz (Prof. Marietta Horster) and Oxford University (Prof. Jonathan Prag). The project is funded by the Arts and Humanities Research Council (AHRC) and Deutsche Forschungemeinschaft (DFG) and will run for 36 months from 2022-2025.
+
+The FAIR Epigraphy project was launched in February 2022, aiming to create an interactive platform for all epigraphic projects, aligning their digital needs with the principles of FAIR science. *"The principles emphasise machine-actionability (i.e., the capacity of computational systems to find, access, interoperate, and reuse data with none or minimal human intervention) because humans increasingly rely on computational support to deal with data as a result of the increase in volume, complexity, and creation speed of data."* (Quote from the FAIR Principles website, https://www.go-fair.org/fair-principles/) 
+The FAIR Epigraphy project does not wish to replicate any current efforts, but align existing initiatives and bring them together to create a hub of high-quality tools and FAIR compliant standards and resources for the modern epigraphic discipline.
+
+In order to map the existing field of digital epigraphy, current practices and standards, as well as find out the (digital) needs of the discipline, we have circulated the two scoping surveys in February 2022. The results of the survey, presented in the current report, will be used to plan the activities and efficiently allocate the resources of the FAIR Epigraphy Project in the next three years (2022-2024). The survey answers are anonymised so the individual projects cannot be identified on the basis of their answers, and stored as .TSV (tab separated values) within the same GitHub repository (https://github.com/FAIR-epigraphy/scoping_survey_report) as a supplement to the text of the report.
+
+# FAIR Epigraphy partner projects
+
+```{r data_partners, include=FALSE}
+# loading data from TSV file
+partners<- read_tsv("../data/01_scoping_survey_anonymised.tsv")
+```
+
+This section summarises the results of the online survey *FAIR Epigraphy: Scoping survey for partners and collaborators* aimed at established digital projects that became official partners and collaborators with the FAIR Epigraphy Project.
+Originally there were 14 partner projects. We have recieved `r nrow(partners)` responses to the survey.
+
+The partner projects represent relatively established projects with the average duration of a project shortest being `r median(partners$Length_numeric_years)`. The shortest participating project reported their duration as `r min(partners$Length_numeric_years)` years and the longest `r max(partners$Length_numeric_years)` years.
+
+## Language coverage
+
+**Question:** *What is the predominant language of epigraphic data in your project (for mixed collections or collections where other languages are predominant provide details in Other)*
+```{r}
+partners_language <- as.data.frame(unlist(str_split(partners$Language_clean, "; ")))
+colnames(partners_language) <- c("language")
+
+partners_language_ratio <- partners_language %>% 
+  count(language, sort=T) %>% 
+  mutate(ratio = n/(sum(n)/100))
+partners_language_ratio
+```
+**Commentary:** The language coverage of the participating projects consisted predominantly from Latin and Greek projects (representing `r sum(partners_language_ratio$ratio[1:2])`% of the answers). The Other category encompassed a substantial part of the surveyed projects, documenting the need to expand beyond the traditional Latin and Greek focus of epigraphic discipline. The languages listed as `Other` consisted of `r partners_language_ratio$language[4:10]`.
+
+## IT infrastructure
+
+**Question**: *Does the project have a website?*
+```{r}
+partners %>% 
+  count(Website)
+```
+**Commentary**: All of the participating projects maintain an online presence (as of February 2022).
+
+---
+
+**Question**: *Does you project have an IT specialist(s)?*
+```{r}
+IT <- partners %>% 
+  count(`Does you project have an IT specialist(s)?`, sort=T) %>% 
+  rename(IT_spec = `Does you project have an IT specialist(s)?`) %>% 
+  mutate(ratio = n/(sum(n)/100))
+IT
+```
+**Commentary**: Vast majority of digital projects have an IT specialist, yet only `r sum(IT$n[3:4])` projects have an equivalent of 1.0 FTE or more to their disposal. The `r round(IT$ratio[1],2)` % of projects have access to part-time IT support for their projects, which in some instances may be only few hours per week per project.
+
+---
+
+**Question**: *Does your project store epigraphic data in the following formats...?* 
+```{r}
+format <- partners %>% 
+  count(`Our projects stores epigraphic data in the following formats`, sort=T) %>% 
+  rename(format = `Our projects stores epigraphic data in the following formats`) %>% 
+  mutate(no_format = str_count(format, ",") + 1)
+format
+```
+**Commentary**: Majority of projects use Epidoc XML as their main output data format (representing `r round(sum(format$n[1:4])/(nrow(partners)/100),2)`% of participating projects). `r round((sum(format$no_format == 1))/(nrow(partners)/100),2)`% of projects use only one type of data format, while `r round((sum(format$no_format > 1))/(nrow(partners)/100),2)`% two or more data format types (such as `r unique(unlist(str_split(format$format, ", ")))`).
+
+
+## Data sharing
+
+**Question**: Do you share your data outside of your project?
+```{r}
+share<- partners %>% 
+  count(`Do you share your data outside of your project`, sort=T) %>% 
+  rename(share = `Do you share your data outside of your project`) %>% 
+  mutate(ratio = round((n/(sum(n)/100)),2))
+share
+```
+**Commentary**: Majority of partner projects share their data: `r share$ratio[1]`% shares the data under a Creative Common license, which is the preferred more according to the FAIR data principles. All partner projects reported their willingness to share the data, even if they are not currently doing it, or provide the data only on demand.
+
+---
+
+**Question**: *How do share your data with users outside your project?*
+```{r}
+outshare<- partners %>% 
+  count(`How do share your data with users outside your project`, sort=T) %>% 
+  rename(share_all = `How do share your data with users outside your project`) %>% 
+  mutate(share_method = str_count(share_all, "; ") + 1) 
+
+outshare
+```
+**Commentary**: All partner projects provide at least one way of sharing the data (whether it maybe currently accesible to public or not, or it is intended to be accessible in the future). The average (median) number of sharing methods per project is `r median(outshare$share_method)`.
+
+---
+
+**Question**: *What is the number of sharing methods accross projects?*
+```{r, fig.width=10}
+sharingserv <- as.data.frame(unlist(str_split(partners$`How do share your data with users outside your project`, "; ")))
+colnames(sharingserv) <- c("service")
+
+
+sharing_service <- sharingserv %>% 
+  count(service, sort= T) 
+
+sharingplot<- sharing_service %>% 
+  ggplot() + 
+  geom_col(aes(y= reorder(service, -n), x= n, fill = n), width = 0.9) + 
+  scale_y_discrete(labels = function(x) str_wrap(x, width = 75))  +
+  ggtitle("Number of sharing methods per project") +
+  xlab("Sharing method") + ylab("Number of projects") +
+  #coord_flip() +
+  theme_bw() +
+  coord_cartesian(xlim = c(0, 5)) +
+  theme(axis.text = element_text(size = 9)) +
+  theme(plot.title = element_text(size = 13))
+
+sharingplot
+```
+**Commentary**: Epidoc XML is by far the most popular format for data sharing, however other Open Science services are starting to make it way to digital epigraphy, such as sharing via public repository on GitHub or Zenodo, as well as providing raw data in the CSV (comma separated value) format, or JSON files. Only a relative minority of participating partner projects shares the data on demand or have a non-public API access point to their data.
+
+## Institutional policies
+
+*Question:* Does your institution of funding body require your project to comply with any data policies (e.g., FAIR principles, data storage, data sharing, Open Science)?
+
+```{r}
+partners %>% 
+  mutate(policies = `Does your institution of funding body require your project to comply with any data policies (e.g., FAIR principles, data storage, data sharing, Open Science)?`) %>% 
+  count(policies, sort=T)
+```
+**Commentary**:
+
+**Question**: If you have answered YES in the previous question, please specify what are the policies, or provide link.
+
+```{r}
+unique(partners$`If you have answered YES in the previous question, please specify what are the policies, or provide link.`)
+```
+**Commentary**:
+
+## FAIR Principles
+
+### Standardized terminologies
+
+The project uses the following systems:
+```{r}
+stand_term <- as.data.frame(unlist(str_split(partners$`Standardized terminologies: The project uses the following systems (check all that apply)`, ", ")))
+colnames(stand_term) <- c("standard_terminologies")
+
+
+stand_term %>% 
+  count(standard_terminologies, sort= T) %>% 
+  mutate(ratio = n/(sum(n)/100))
+```
+**Commentary**:
+
+#### Linked Open Datasets
+
+The project uses the following systems:
+```{r}
+lod <- as.data.frame(unlist(str_split(partners$`Linked Open Data: The project uses the following systems (check all that apply)`, ", ")))
+colnames(lod) <- c("linked_data")
+
+
+lod %>% 
+  count(linked_data, sort= T) %>% 
+  mutate(ratio = n/(sum(n)/100))
+```
+**Commentary**:
+
+
+### Future needs of digital epigraphy
+
+*Our project would like to be able to use within the next three years:*
+```{r}
+lod_future <- as.data.frame(unlist(str_split(partners$`Select all options your project like to be able to use within the next three years:`, ", ")))
+colnames(lod_future) <- c("lod_f")
+
+
+lod_future %>% 
+  count(lod_f, sort= T) %>% 
+  mutate(ratio = n/(sum(n)/100))
+```
+**Commentary**:
+
+*Potential ideas that our project would benefit from:*
+```{r}
+lod_ideas <- as.data.frame(unlist(str_split(partners$`Select all items your project would benefit from in the next three years:`, ", ")))
+colnames(lod_ideas) <- c("lod_i")
+
+
+lod_ideas %>% 
+  count(lod_i, sort= T) %>% 
+  mutate(ratio = n/(sum(n)/100))
+```
+
+**Commentary**:
+
+*Additional digital needs*
+```{r}
+unique(na.omit(partners$`Your personal wish list. Provide a description of potential tasks and issues the FAIR Epigraphy can help your project within the next three years (and beyond)`))
+```
+**Commentary**:
+
+
+
+
+# Digital epigraphy projects
+
+This section summarises the results of the online survey *Digital epigraphy in 2022: scoping survey* aimed at digital projects listed under the Digital Epigraphy Projects on the Digital Classicist Wiki page (https://wiki.digitalclassicist.org/Category:Projects).
+
+
+```{r data_projects, include=FALSE}
+# loading data from TSV file
+projects<- read_tsv("../data/02_scoping_survey_anonymised.tsv")
+```
+
+### Length of the project
+
+Minimal length of participating projects in years.
+```{r}
+min(projects$Length_numeric_years)
+```
+Maximal length of participating projects in years.
+```{r}
+max(projects$Length_numeric_years)
+```
+
+Average length of of participating projects in years (median value).
+```{r}
+median(projects$Length_numeric_years)
+```
+
+### Language
+
+**Question**: Predominant language of epigraphic data (for mixed collections or collections where other languages are predominant provide details in Other) *
+```{r}
+projects_language <- as.data.frame(unlist(str_split(projects$Language_clean, "; ")))
+colnames(projects_language) <- c("language")
+
+projects_language %>% 
+  count(language, sort=T) %>% 
+  mutate(ratio = n/(sum(n)/100))
+```
+
+### Website
+
+**Question**: Does the project have a website?
+```{r}
+projects %>% 
+  count(Website)
+```
+
+### Current status
+**Question**: Is the project still active?
+```{r}
+projects %>% 
+  count(`Is the project still active?`)
+```
+
+### IT infrastructure
+
+**Question**: Does you project have an IT specialist(s)?
+```{r}
+projects %>% 
+  count(`Does you project have an IT specialist(s)?`, sort=T)
+```
+
+**Question**: Does your project store epigraphic data in the following formats...? 
+```{r}
+projects %>% 
+  count(`Our projects stores epigraphic data in the following formats`, sort=T)
+```
+
+### Data sharing
+
+**Question**: Do you share your data outside of your project?
+```{r}
+projects %>% 
+  count(`Do you share your data outside of your project`, sort=T)
+```
+
+**Question**: How do share your data with users outside your project?
+```{r}
+projects %>% 
+  count(`How do share your data with users outside your project`, sort=T)
+```
+
+**Question**: What is the ratio of sharing services accross projects:
+```{r}
+sharingserv2 <- as.data.frame(unlist(str_split(projects$`How do share your data with users outside your project`, ";")))
+colnames(sharingserv2) <- c("service")
+
+
+sharingserv2 %>% 
+  count(service, sort= T)
+```
+
+### Institutional policies
+
+*Question:* Does your institution of funding body require your project to comply with any data policies (e.g., FAIR principles, data storage, data sharing, Open Science)?
+
+```{r}
+projects %>% 
+  mutate(policies = `Does your institution of funding body require your project to comply with any data policies (e.g., FAIR principles, data storage, data sharing, Open Science)?`) %>% 
+  count(policies, sort=T)
+```
+
+**Question**: If you have answered YES in the previous question, please specify what are the policies, or provide link.
+
+```{r}
+unique(na.omit(projects$`If you have answered YES in the previous question, please specify what are the policies, or provide link.`))
+```
+
+### FAIR Principles
+
+#### Standardized terminologies
+
+The project uses the following systems:
+```{r}
+stand_term2 <- as.data.frame(unlist(str_split(projects$`Standardized terminologies: The project uses the following systems (check all that apply)`, ", ")))
+colnames(stand_term2) <- c("standard_terminologies")
+
+
+stand_term2 %>% 
+  count(standard_terminologies, sort= T) %>% 
+  mutate(ratio = n/(sum(n)/100))
+```
+
+
+#### Linked Open Datasets
+
+The project uses the following systems:
+```{r}
+lod2 <- as.data.frame(unlist(str_split(projects$`Linked Open Data: The project uses the following systems (check all that apply)`, ", ")))
+colnames(lod2) <- c("linked_data")
+
+
+lod2 %>% 
+  count(linked_data, sort= T) %>% 
+  mutate(ratio = n/(sum(n)/100))
+```
+
+
+
+### Future needs of digital epigraphy
+
+*Our project would like to be able to use within the next three years:*
+```{r}
+lod_future2 <- as.data.frame(unlist(str_split(projects$`Select all options your project like to be able to use within the next three years:`, ", ")))
+colnames(lod_future2) <- c("lod_f")
+
+
+lod_future2 %>% 
+  count(lod_f, sort= T) %>% 
+  mutate(ratio = n/(sum(n)/100))
+```
+
+*Potential ideas that our project would benefit from:*
+```{r}
+lod_ideas2 <- as.data.frame(unlist(str_split(projects$`Select all items your project would benefit from in the next three years:`, ", ")))
+colnames(lod_ideas2) <- c("lod_i")
+
+
+lod_ideas2 %>% 
+  count(lod_i, sort= T) %>% 
+  mutate(ratio = n/(sum(n)/100))
+```
+
+*Additional digital needs*
+```{r}
+unique(na.omit(projects$`Your personal wish list. Provide a description of potential tasks and issues the FAIR Epigraphy can help your project within the next three years (and beyond)`))
+```
+
