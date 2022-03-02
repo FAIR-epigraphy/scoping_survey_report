@@ -152,85 +152,68 @@ sharingplot
 
 ## Institutional policies
 
-*Question:* Does your institution of funding body require your project to comply with any data policies (e.g., FAIR principles, data storage, data sharing, Open Science)?
+**Question:** *Does your institution of funding body require your project to comply with any data policies (e.g., FAIR principles, data storage, data sharing, Open Science)?*
 
 ```{r}
-partners %>% 
+policies <- partners %>% 
   mutate(policies = `Does your institution of funding body require your project to comply with any data policies (e.g., FAIR principles, data storage, data sharing, Open Science)?`) %>% 
-  count(policies, sort=T)
+  count(policies, sort=T) %>% 
+  mutate(ratio = round((n/(sum(n)/100)),2))
+policies
 ```
-**Commentary**:
+**Commentary**: The majority of projects (`r policies$ratio[1]`%) are required to comply with data-related policy introduced either by their institution or funding body. Only a minority of partner projects (`r policies$ratio[2]`%) are not required to follow nay data policy, nor follow it on a voluntary basis.
 
-**Question**: If you have answered YES in the previous question, please specify what are the policies, or provide link.
+---
+
+**Question**: *If you have answered YES in the previous question, please specify what are the policies, or provide link.*
 
 ```{r}
-unique(partners$`If you have answered YES in the previous question, please specify what are the policies, or provide link.`)
+unique(na.omit(partners$`If you have answered YES in the previous question, please specify what are the policies, or provide link.`))
 ```
-**Commentary**:
+**Commentary**: Several of the partner projects follow the ERC data and open access policies. More information on ERC Open Research Data and Data Management Plans can be found at https://erc.europa.eu/sites/default/files/document/file/ERC_info_document-Open_Research_Data_and_Data_Management_Plans.pdf or at ERC Open Science policies page https://erc.europa.eu/managing-your-project/open-science.
 
-## FAIR Principles
+## Open Science practice
 
-### Standardized terminologies
-
-The project uses the following systems:
+**Question**: *Standardized terminologies: The project uses the following systems:*
 ```{r}
 stand_term <- as.data.frame(unlist(str_split(partners$`Standardized terminologies: The project uses the following systems (check all that apply)`, ", ")))
 colnames(stand_term) <- c("standard_terminologies")
 
-
-stand_term %>% 
+stand_term_ratio<- stand_term %>% 
   count(standard_terminologies, sort= T) %>% 
-  mutate(ratio = n/(sum(n)/100))
+  mutate(ratio = round(n/(sum(n)/100),2))  
+
+stand_term_ratio
 ```
-**Commentary**:
+**Commentary**: The lists of vocabularies for the epigraphic discipline created by the EAGLE project (https://www.eagle-network.eu/resources/vocabularies/) are used by most of the projects: either in the original form (representing `r stand_term_ratio$ratio[3]`% of participating projects) or in the form modified for the needs of the project (representing `r stand_term_ratio$ratio[1]`% of participating projects). The need of modifications suggests that the EAGLE vocabularies do not in fact form a community wide standard and need to be improved before becoming one. 
 
-#### Linked Open Datasets
 
-The project uses the following systems:
+```{r}
+stand_method<- partners %>% 
+  #count(`Standardized terminologies: The project uses the following systems (check all that apply)`, sort=T) %>% 
+  rename(stand_all = `Standardized terminologies: The project uses the following systems (check all that apply)`) %>% 
+  mutate(standard_method_no = str_count(stand_all, ", ") + 1)  %>% 
+  select(standard_method_no) %>% 
+  count(standard_method_no) %>% 
+  mutate(ratio = round(n/(sum(n)/100),2))
+stand_method
+```
+The internal authority lists are used in combination with the EAGLE vocabularies in its original and modified form. Majority of projects (`r stand_method$ratio[1]`%) uses only one method to record their standards, while `r sum(stand_method$ratio[2:3])`% of projects use a combination of two or three methods.
+
+**Question**: *Linked Open Datasets: The project uses the following systems:*
 ```{r}
 lod <- as.data.frame(unlist(str_split(partners$`Linked Open Data: The project uses the following systems (check all that apply)`, ", ")))
 colnames(lod) <- c("linked_data")
 
 
-lod %>% 
+lod_ratio<- lod %>% 
   count(linked_data, sort= T) %>% 
-  mutate(ratio = n/(sum(n)/100))
+  mutate(ratio = round(n/(sum(n)/100),2)) %>% 
+  mutate(ratio_all_proj = round(n/(nrow(partners)/100),2))
+lod_ratio
 ```
-**Commentary**:
+**Commentary**: From the listed Linked Open Datasets (LOD), Pleaides and Trismegistos are by far the most popular, being used in `r lod_ratio$ratio_all_proj[1]`% of all participating projects. EAGLE vocabularies are used in `r lod_ratio$ratio_all_proj[3]`% of all participating projects. The onomastic and prosopographic data, represented by EDH People, PIR, and LGPN are used only sporadically, namely in `r lod_ratio$ratio_all_proj[4]`% or `r lod_ratio$ratio_all_proj[5]`% of all participating projects, suggesting there is a great space for improvement and potentially great benefit in creating onomastic and prosopographic LOD.
 
-
-### Future needs of digital epigraphy
-
-*Our project would like to be able to use within the next three years:*
-```{r}
-lod_future <- as.data.frame(unlist(str_split(partners$`Select all options your project like to be able to use within the next three years:`, ", ")))
-colnames(lod_future) <- c("lod_f")
-
-
-lod_future %>% 
-  count(lod_f, sort= T) %>% 
-  mutate(ratio = n/(sum(n)/100))
-```
-**Commentary**:
-
-*Potential ideas that our project would benefit from:*
-```{r}
-lod_ideas <- as.data.frame(unlist(str_split(partners$`Select all items your project would benefit from in the next three years:`, ", ")))
-colnames(lod_ideas) <- c("lod_i")
-
-
-lod_ideas %>% 
-  count(lod_i, sort= T) %>% 
-  mutate(ratio = n/(sum(n)/100))
-```
-
-**Commentary**:
-
-*Additional digital needs*
-```{r}
-unique(na.omit(partners$`Your personal wish list. Provide a description of potential tasks and issues the FAIR Epigraphy can help your project within the next three years (and beyond)`))
-```
-**Commentary**:
 
 
 
@@ -371,11 +354,54 @@ lod2 %>%
   mutate(ratio = n/(sum(n)/100))
 ```
 
+# Future needs of digital epigraphy
+
+This section covers the wishes of partner projects as well as all participating digital epigraphy projects. The responses were anonymised so no individual or project can be identified but otherwise presented as submitted in the survey.
+
+## Partner projects 
+
+**Question**: *Our project would like to be able to use within the next three years:*
+```{r}
+lod_future <- as.data.frame(unlist(str_split(partners$`Select all options your project like to be able to use within the next three years:`, ", ")))
+colnames(lod_future) <- c("lod_f")
 
 
-### Future needs of digital epigraphy
+lod_f_ratio<- lod_future %>% 
+  count(lod_f, sort= T) %>% 
+  mutate(ratio = round(n/(sum(n)/100),2)) %>% 
+  mutate(ratio_all_proj = round(n/(nrow(partners)/100),2))
+lod_f_ratio
+```
+**Commentary**: The most popular is the option `Bibliographical references to all epigraphic publications with stable URI (e.g. Zenon)` with `r lod_f_ratio$ratio[1]`% of responses representing the wishes of `r lod_f_ratio$ratio_all_proj[1]`% of all projects. The great interest in onomastic and prosopographical LOD for both Greek and Roman world is supported by `r sum(lod_f_ratio$ratio[c(3:4)])`% of positives responses from `r lod_f_ratio$ratio_all_proj[3]`% and `r lod_f_ratio$ratio_all_proj[4]`% of projects respectively. The `improved EAGLE vocabularies` are wished for by `r lod_f_ratio$ratio_all_proj[2]`% of participating projects. The `domain specific repository for epigraphic data` or the `open and accessible RDF Triplestore` do not seem to be the highest priority of participating projects, but still relatively popular as `r lod_f_ratio$ratio_all_proj[5]`% of responses wishes for one of the two. One participating project wishes specifically for the following: ``r lod_f_ratio$lod_f[7]``.
 
-*Our project would like to be able to use within the next three years:*
+--- 
+ 
+**Question**: *Potential ideas that our project would benefit from:*
+```{r}
+lod_ideas <- as.data.frame(unlist(str_split(partners$`Select all items your project would benefit from in the next three years:`, ", ")))
+colnames(lod_ideas) <- c("lod_i")
+
+
+lod_i_ratio<- lod_ideas %>% 
+  count(lod_i, sort= T) %>% 
+  mutate(ratio = n/(sum(n)/100)) %>% 
+  mutate(ratio_all_proj = round(n/(nrow(partners)/100),2))
+
+lod_i_ratio
+```
+**Commentary**: `r lod_i_ratio$ratio_all_proj[1]`% of all projects would benefit from `Set of guidelines for FAIR and Linked Open Data in epigraphy`. There is general interest in practical examples and workshop on how to used LOD and FAIR Principles in Epigraphy, as well as resources for quantitative analysis of data in epigraphy.
+
+---
+
+**Question**: *Additional digital needs*
+```{r}
+unique(na.omit(partners$`Your personal wish list. Provide a description of potential tasks and issues the FAIR Epigraphy can help your project within the next three years (and beyond)`))
+```
+**Commentary**: This section covers additional needs of partner projects. 
+
+## Digital epigraphy projects
+
+**Question**: *Our project would like to be able to use within the next three years:*
 ```{r}
 lod_future2 <- as.data.frame(unlist(str_split(projects$`Select all options your project like to be able to use within the next three years:`, ", ")))
 colnames(lod_future2) <- c("lod_f")
@@ -386,7 +412,7 @@ lod_future2 %>%
   mutate(ratio = n/(sum(n)/100))
 ```
 
-*Potential ideas that our project would benefit from:*
+**Question**: *Potential ideas that our project would benefit from:*
 ```{r}
 lod_ideas2 <- as.data.frame(unlist(str_split(projects$`Select all items your project would benefit from in the next three years:`, ", ")))
 colnames(lod_ideas2) <- c("lod_i")
@@ -397,7 +423,7 @@ lod_ideas2 %>%
   mutate(ratio = n/(sum(n)/100))
 ```
 
-*Additional digital needs*
+**Question**: *Additional digital needs*
 ```{r}
 unique(na.omit(projects$`Your personal wish list. Provide a description of potential tasks and issues the FAIR Epigraphy can help your project within the next three years (and beyond)`))
 ```
