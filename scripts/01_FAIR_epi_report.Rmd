@@ -248,7 +248,7 @@ projects_language_ratio <- projects_language %>%
   mutate(ratio = round(n/(sum(n)/100),2))
 projects_language_ratio
 ```
-**Commentary:** The language coverage of the participating projects consisted predominantly from Latin and Greek projects (representing `r sum(projects_language_ratio$ratio[1:2])`% of the answers). The Other category encompassed a substantial part of the surveyed projects, documenting the need to expand beyond the traditional Latin and Greek focus of epigraphic discipline. The languages listed as `Other` consisted of `r projects_language_ratio$language[4:15]`.
+**Commentary:** The language coverage of the participating projects consisted predominantly from Latin and Greek projects (representing `r sum(projects_language_ratio$ratio[1:2])`% of the answers). The Other category encompassed a substantial part of the surveyed projects, documenting the need to expand beyond the traditional Latin and Greek focus of epigraphic discipline. The languages listed as `Other` consisted of `r projects_language_ratio$language[4:16]`.
 
 
 ## IT infrastructure
@@ -258,7 +258,7 @@ projects_language_ratio
 projects %>% 
   count(Website)
 ```
-**Commentary**: The majority of the participating projects maintain an online presence (as of February 2022).
+**Commentary**: The vast majority of the participating projects maintains an online presence (as of February 2022).
 
 ---
 
@@ -271,7 +271,7 @@ IT2 <- projects %>%
   mutate(ratio = round(n/(nrow(projects)/100),2))
 IT2
 ```
-**Commentary**: The `r sum(IT2$ratio[c(2,5,6,8)])`% of digital projects have an IT specialist available for at least several hours, yet only `r IT2$ratio[4]`% of projects have an equivalent of 1.0 FTE or more to their disposal. The `r sum(IT2$ratio[c(2,6,8)])` % of projects have access to part-time IT support for their projects, which in some instances may be only a few hours per week per project. Several projects report difficulty with finding financial resources to support further development, or day-to-day support. The `r sum(IT2$ratio[c(2,7)])` % of projects report currently not having any access to IT support. The `r IT2$ratio[1]`% projects did not indicate whether they have access to IT support.
+**Commentary**: Only `r IT2$ratio[na.omit(IT2$IT_spec) == "Yes, equivalent of full-time (1.0 FTE) position"]`% of projects have an equivalent of 1.0 FTE or more to their disposal. The `r sum(IT2$ratio[c(3,6,7,9)])`% of digital projects have an IT specialist available for at least several hours per week or share them with other digital projects within their institution. Several projects report difficulty with finding financial resources to support further development and its sustainability, or even with day-to-day support. The `r sum(IT2$ratio[c(2,8)])`% of the participating projects report currently not having any access to IT support. Additional `r IT2$ratio[1]`% projects did not indicate whether they have access to IT support (most likely because they are no longer active).
 
 ---
 
@@ -283,8 +283,9 @@ format2 <- projects %>%
   mutate(no_format = str_count(format, ",") + 1)
 format2
 ```
-**Commentary**: A large portion of projects did not indicate any format of the data  `r round(sum(format2$n[c(3,5,6,7)])/(nrow(projects)/100),2)`%. Epidoc XML represented one the two main output data formats with `r round(sum(format2$n[c(3,5,6,7)])/(nrow(projects)/100),2)`% of participating projects, while the data stored in SQL and similar database languages represented `r round(sum(format2$n[c(2,4,7,8,10)])/(nrow(projects)/100),2)`% of participating projects. `r round(format2$n[10]/(nrow(projects)/100),2)`% projects indicated use of analogue data, such as printed materials and 3D format. `r round(format2$n[11]/(nrow(projects)/100),2)`% projects indicated using their own version of Epidoc XML, adapted to their specific needs. `r round((sum(na.omit(format2$no_format == 1)))/(nrow(projects)/100),2)`% of projects use only one type of data format, while `r round((sum(na.omit(format2$no_format > 1)))/(nrow(projects)/100),2)`% two or more data format types (such as `r unique(unlist(str_split(format2$format, ", ")))[2:6]`).
+**Commentary**: Epidoc XML represented one the two main output data formats with `r round(sum(format2$n[c(2,5,6,7,12)])/(nrow(projects)/100),2)`% of participating projects, while the data stored in SQL and similar database languages represented `r round(sum(format2$n[c(3,4,7,8,11)])/(nrow(projects)/100),2)`% of participating projects. `r round(format2$n[9]/(nrow(projects)/100),2)`% projects indicated use of analogue data, such as printed materials and 3D format. `r round(format2$n[12]/(nrow(projects)/100),2)`% projects indicated using their own version of Epidoc XML, adapted to their specific needs. JSON (`r round(sum(format2$n[c(6,8)])/(nrow(projects)/100),2)`%) and RDF (`r round(sum(format2$n[c(6,10)])/(nrow(projects)/100),2)`%) formats are used only by small number of projects and mostly as complementary data format to more popular formats such as Epidoc XML or SQL. A relatively large portion of projects did not indicate any format of the data (`r round(format2$n[format2$format == "N/A"]/(nrow(projects)/100),2)`%, a number corresponding with the number of no longer active projects).
 
+`r round((sum(na.omit(format2$no_format == 1)))/(nrow(projects)/100),2)`% of projects use only one type of data format, while `r round((sum(na.omit(format2$no_format > 1)))/(nrow(projects)/100),2)`% two or more data format types (such as `r unique(unlist(str_split(format2$format, ", ")))[2:6]`).
 
 ## Data sharing
 
@@ -296,7 +297,7 @@ share2<- projects %>%
   mutate(ratio = round((n/(sum(n)/100)),2))
 share2
 ```
-**Commentary**: Large part of projects did not indicate whether they share their data (`r share2$ratio[1]`%). However, the majority of projects are willing to their their data, representing `r sum(share2$ratio[c(2,4,5,6,7,8,9,10,11)])`% of participating projects. `r sum(share2$ratio[c(2,8,9,10)])`% of participating projects share the data under a Creative Common license, which is the preferred more according to the FAIR data principles. `r sum(share2$ratio[c(4,11)])`% of participating projects share the data without any specific license, `r share2$ratio[5]`% of participating projects provide the data only on demand.
+**Commentary**: Large part of projects did not indicate whether they share their data (`r share2$ratio[1]`%), again possibly corresponding with projects that are no longer active. However, the majority of projects are willing to their their data, representing `r sum(share2$ratio[c(2,4,5,6,7,8,9,10,11)])`% of participating projects. `r sum(share2$ratio[c(2,8,9,10)])`% of participating projects share the data under a Creative Common license, which is the preferred more according to the FAIR data principles. `r sum(share2$ratio[c(4,11)])`% of participating projects share the data without any specific license, `r share2$ratio[5]`% of participating projects provide the data only on demand.
 
 ---
 
@@ -305,15 +306,15 @@ share2
 outshare2<- projects %>% 
   count(`How do share your data with users outside your project`, sort=T) %>% 
   rename(share_all = `How do share your data with users outside your project`) %>% 
-  mutate(share_method = str_count(share_all, "; ") + 1) 
+  mutate(share_method = str_count(share_all, "[,|;] ") + 1) 
 
 outshare2
 ```
-**Commentary**: All partner projects provide at least one way of sharing the data (whether it maybe currently accesible to public or not, or it is intended to be accessible in the future). The average (median) number of sharing methods per project is `r median(na.omit(outshare2$share_method))`.
+**Commentary**: All partner projects provide at least one way of sharing the data (whether it maybe currently accesible to public or not, or it is intended to be accessible in the future). The average (median) number of sharing methods per project is `r median(na.omit(outshare2$share_method))`, while the maximum number is `r max(na.omit(outshare2$share_method))` (e.g.,``r outshare2$share_all[outshare2$share_method > 5]``).
 
 ---
 
-**Question**: *What is the number of sharing methods accross projects?*
+**Question**: *What is the proportion of sharing methods accross projects?*
 ```{r, fig.width=10}
 sharingserv2 <- as.data.frame(unlist(str_split(projects$`How do share your data with users outside your project`, "; ")))
 colnames(sharingserv2) <- c("service")
@@ -326,66 +327,81 @@ sharingplot2<- sharing_service2 %>%
   ggplot() + 
   geom_col(aes(y= reorder(service, -n), x= n, fill = n), width = 0.9) + 
   scale_y_discrete(labels = function(x) str_wrap(x, width = 100))  +
-  ggtitle("Number of sharing methods per project") +
+  ggtitle("Proportion of sharing methods per project") +
   xlab("Sharing method") + ylab("Number of projects") +
   #coord_flip() +
   theme_bw() +
   coord_cartesian(xlim = c(0, 7)) +
-  theme(axis.text = element_text(size = 7)) +
+  theme(axis.text = element_text(size = 5.5)) +
   theme(plot.title = element_text(size = 13))
 
 sharingplot2
 ```
-**Commentary**: Majority of digital projects does not provide any indication of sharing their data, which severely limits any attempts of dicispline-wide integration of data. From those who share the data, the Epidoc XML format is the most popular format for data sharing, as well as seach output on the project's website. Open Science practices do not seem to be popular choice in digital epigraphy, such as sharing via public repository on GitHub or Zenodo, as well as providing raw data in the CSV (comma separated value) format, or JSON files. Computer-automated-acess to data is rare and manual human interaction, such as manual selection, manual download of files prevails, potentially hindering any quantitative and reproducible studies, or linking of datasets via automating processes. For example, an API access point is currently available only for 1 project.
-
-
-#Petra continue here -----
+**Commentary**: Majority of digital projects does not provide any indication of method for sharing their data, which severely limits any attempts of dicispline-wide integration of data. From those who share the data, the Epidoc XML format is the most popular format for data sharing, as well as seach output on the project's website. Open Science practices do not seem to be popular choice in digital epigraphy, such as sharing via public repository on GitHub or Zenodo, as well as providing raw data in the CSV (comma separated value) format, or JSON files. Computer-automated-acess to data is rare and manual human interaction, such as manual selection, manual download of files prevails, potentially hindering any quantitative and reproducible studies, or linking of datasets via automating processes. For example, an API access point is currently available only for 1 project and 1 is planned for the future.
 
 
 ### Institutional policies
 
-*Question:* Does your institution of funding body require your project to comply with any data policies (e.g., FAIR principles, data storage, data sharing, Open Science)?
+*Question:* *Does your institution or funding body require your project to comply with any data policies (e.g., FAIR principles, data storage, data sharing, Open Science)?*
 
 ```{r}
-projects %>% 
+policies2 <- projects %>% 
   mutate(policies = `Does your institution of funding body require your project to comply with any data policies (e.g., FAIR principles, data storage, data sharing, Open Science)?`) %>% 
-  count(policies, sort=T)
+  count(policies, sort=T) %>% 
+  mutate(ratio = round((n/(sum(n)/100)),2))
+  
+policies2
 ```
+**Commentary**: `r policies2$ratio[policies2$policies == "Yes"]`% of projects are required to comply with data related policies, while additional `r sum(policies2$ratio[c(4,5,6,7)])`% of projects are encouraged to comply with FAIR data principles but no rules are enforced. `r policies2$ratio[policies2$policies == "No"]`% of projects do not have to explicitly follow any policy and `r policies2$ratio[policies2$policies == "N/A"]`% of projects did not disclose any information.
 
-**Question**: If you have answered YES in the previous question, please specify what are the policies, or provide link.
+---
+
+**Question**: *If you have answered YES in the previous question, please specify what are the policies, or provide link.*
 
 ```{r}
 unique(na.omit(projects$`If you have answered YES in the previous question, please specify what are the policies, or provide link.`))
 ```
+**Commentary**: Digital policies in the field of digital epigraphy are still being implemented, which does not reflect yet on past and current projects. There is a variation between national policies, with France providing a vocal example in the implementation of Open Science in digital epigraphy. 
 
-### FAIR Principles
 
-#### Standardized terminologies
+### Open Science Practice
 
-The project uses the following systems:
+**Question**: *Standardized terminologies: The project uses the following systems:*
 ```{r}
 stand_term2 <- as.data.frame(unlist(str_split(projects$`Standardized terminologies: The project uses the following systems (check all that apply)`, ", ")))
 colnames(stand_term2) <- c("standard_terminologies")
 
 
-stand_term2 %>% 
+stand_term_ratio2<- stand_term2 %>% 
   count(standard_terminologies, sort= T) %>% 
-  mutate(ratio = n/(sum(n)/100))
+  mutate(ratio = round(n/(sum(n)/100),2))
+
+stand_term_ratio2
 ```
+**Commentary**: `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="We don't use any standardized lists"]`% of projects don't use any standardized lists or vocabularies. `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="Internal authority lists"]`% of projects uses their internal authority lists. EAGLE vocabularies in its original form are used by `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="EAGLE vocabularies as provided at https://www.eagle-network.eu/resources/vocabularies/"]`% of projects, and in its edited version by `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="Own version of EAGLE vocabularies (edited for our project)"]`% of projects. Several projects focusing on languages other than Greek and Latin have created their own systems including thesauri, e.g. the response: ``r stand_term_ratio2$standard_terminologies[7]`` or ``r stand_term_ratio2$standard_terminologies[9]``.
 
+---
 
-#### Linked Open Datasets
-
-The project uses the following systems:
+**Question**: *Linked Open Datasets: The project uses the following systems:*
 ```{r}
 lod2 <- as.data.frame(unlist(str_split(projects$`Linked Open Data: The project uses the following systems (check all that apply)`, ", ")))
 colnames(lod2) <- c("linked_data")
 
 
-lod2 %>% 
+lod_ratio2<- lod2 %>% 
   count(linked_data, sort= T) %>% 
-  mutate(ratio = n/(sum(n)/100))
+  mutate(ratio = round(n/(sum(n)/100),2))
+
+lod_ratio2
 ```
+**Commentary**: Pleiades is the most popular LOD dataset, being used in `r lod_ratio2$ratio[lod_ratio2$linked_data == "Pleiades"]`% of all participating projects, followed by Trismegistos with `r lod_ratio2$ratio[lod_ratio2$linked_data == "Trismegistos"]`%. EAGLE vocabularies are represented in `r lod_ratio2$ratio[lod_ratio2$linked_data == "EAGLE vocabularies"]`% of participating projects, while LGPN in `r lod_ratio2$ratio[lod_ratio2$linked_data == "LGPN"]`%. 
+Only `r lod_ratio2$ratio[lod_ratio2$linked_data == "None"]`% of participating projects do not use any LOD.
+
+
+
+# Petra continue here
+
+
 
 # Future needs of digital epigraphy
 
