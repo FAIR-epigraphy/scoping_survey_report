@@ -1,24 +1,29 @@
 ---
-title: "Digital epigraphy in 2022: state of the art"
-description: 
-author: 
- - Petra Hermankova^[Johannes Gutenberg University in Mainz, petra.hermankova@uni.mainz.de, https://orcid.org/0000-0002-6349-0540]
- - Marietta Horster^[Johannes Gutenberg University in Mainz, horster@uni.mainz.de, https://orcid.org/0000-0003-1434-224X ]
- - Jonathan Prag^[Oxford University, jonathan.prag@merton.ox.ac.uk, https://orcid.org/0000-0003-3819-8537 ]
+title: 'Digital epigraphy in 2022: state of the art'
+author:
+- Petra Hermankova^[Johannes Gutenberg University in Mainz, petra.hermankova@uni.mainz.de,
+- Marietta Horster^[Johannes Gutenberg University in Mainz, horster@uni.mainz.de,
+  ]
+  https://orcid.org/0000-0002-6349-0540]
+  https://orcid.org/0000-0003-1434-224X ]
+- Jonathan Prag^[Oxford University, jonathan.prag@merton.ox.ac.uk, https://orcid.org/0000-0003-3819-8537
 date: "28/2/2022"
-output: 
+output:
+  word_document:
+    toc: yes
+    toc_depth: '4'
   html_document:
     css: ../"style.css"
+    df_print: paged
+    fontsize: 12pt
+    highlight: monochrome
+    number_sections: yes
+    smooth_scroll: yes
     theme: paper
     toc: yes
-    toc_float: true
-    number_sections: true
-    smooth_scroll: true
     toc_depth: 4
-    df_print: paged
-    highlight: monochrome
-    fontsize: 12pt
-    
+    toc_float: yes
+description: null
 ---
 
 
