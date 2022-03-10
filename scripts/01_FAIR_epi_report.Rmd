@@ -399,10 +399,6 @@ Only `r lod_ratio2$ratio[lod_ratio2$linked_data == "None"]`% of participating pr
 
 
 
-# Petra continue here
-
-
-
 # Future needs of digital epigraphy
 
 This section covers the wishes of partner projects as well as all participating digital epigraphy projects. The responses were anonymised so no individual or project can be identified but otherwise presented as submitted in the survey.
@@ -446,7 +442,7 @@ lod_i_ratio
 ```{r}
 unique(na.omit(partners$`Your personal wish list. Provide a description of potential tasks and issues the FAIR Epigraphy can help your project within the next three years (and beyond)`))
 ```
-**Commentary**: This section covers additional needs of partner projects. 
+**Commentary**: This section covers additional needs of partner projects. Partner projects would like to see a platform linking epigraphic data from multiple sources, including a stable reference point or an API for improved epigraphic vocabularies. Partner projects would also like to be able to use guidelines of FAIR practices in epigraphy, that currently do not exist.
 
 ## Digital epigraphy projects
 
@@ -456,10 +452,15 @@ lod_future2 <- as.data.frame(unlist(str_split(projects$`Select all options your 
 colnames(lod_future2) <- c("lod_f")
 
 
-lod_future2 %>% 
+lod_f_ratio2<- lod_future2 %>% 
   count(lod_f, sort= T) %>% 
-  mutate(ratio = n/(sum(n)/100))
+  mutate(ratio = round(n/(sum(n)/100),2)) %>% 
+  mutate(ratio_all_proj = round(n/(nrow(projects)/100),2))
+lod_f_ratio2
 ```
+**Commentary**: The most popular is the option `Bibliographical references to all epigraphic publications with stable URI (e.g. Zenon)` representing the wishes of `r lod_f_ratio2$ratio_all_proj[1]`% of all participating projects. The great interest in onomastic and prosopographical LOD for both Greek and Roman world is supported by `r sum(lod_f_ratio2$ratio_all_proj[c(3,10)])`% and `r lod_f_ratio2$ratio_all_proj[5]`% of of positives responses from participating projects. The `improved EAGLE vocabularies` are wished for by `r lod_f_ratio2$ratio_all_proj[2]`% of participating projects. The `domain specific repository for epigraphic data` (`r lod_f_ratio2$ratio_all_proj[4]`%) or the `open and accessible RDF Triplestore` do not seem to be the highest priority of participating projects (`r lod_f_ratio2$ratio_all_proj[6]`%), but still relatively popular response. One participating project wishes specifically for the following: ``r lod_f_ratio2$lod_f[8]``.
+
+---
 
 **Question**: *Potential ideas that our project would benefit from:*
 ```{r}
@@ -467,13 +468,24 @@ lod_ideas2 <- as.data.frame(unlist(str_split(projects$`Select all items your pro
 colnames(lod_ideas2) <- c("lod_i")
 
 
-lod_ideas2 %>% 
+lod_i_ratio2<- lod_ideas2 %>% 
   count(lod_i, sort= T) %>% 
-  mutate(ratio = n/(sum(n)/100))
+  mutate(ratio = n/(sum(n)/100)) %>% 
+  mutate(ratio_all_proj = round(n/(nrow(projects)/100),2))
+
+lod_i_ratio2
 ```
+**Commentary**: `r lod_i_ratio2$ratio_all_proj[1]`% of all participating projects would benefit from `Set of guidelines for FAIR and Linked Open Data in epigraphy` and `r lod_i_ratio2$ratio_all_proj[1]`% from `Workshop on FAIR principles in epigraphy`. There is general interest in practical examples (`r lod_i_ratio2$ratio_all_proj[2]`%) and workshop(s) on how to used LOD in epigraphy (`r lod_i_ratio2$ratio_all_proj[1]`%), as well as resources for quantitative analysis of data in epigraphy (`r lod_i_ratio2$ratio_all_proj[3]`%). There might be potential synergy in organising workshops in digital epigraphy between the participating projects, e.g. `the French School at Athens`.
+
+
+---
 
 **Question**: *Additional digital needs*
 ```{r}
 unique(na.omit(projects$`Your personal wish list. Provide a description of potential tasks and issues the FAIR Epigraphy can help your project within the next three years (and beyond)`))
 ```
+**Commentary**: This section covers additional needs of particiating digital projects. Some of the wishes might be beyond scope of the FAIR Epigraphy project but the responses provide a valuable guidance and hint to some of the challenges the epigraphic discipline will be facing in the near future. The responses may inspire other projects with similar needs to join forces and potentially develop the solution together.
 
+
+# Summary
+Petra continue here
