@@ -83,7 +83,7 @@ partners_language_ratio <- partners_language %>%
 partners_language_ratio
 ```
 
-**Commentary:** The language coverage of the participating projects consisted predominantly of Latin and Greek projects (representing `r sum(partners_language_ratio$ratio[1:2])`% of the answers). The Other category encompassed a substantial part of the surveyed projects, documenting the need to expand beyond the traditional Latin and Greek focus of the epigraphic discipline. The languages listed as `Other` consisted of `r partners_language_ratio$language[4:10]`.
+**Commentary:** The language coverage of the participating projects consisted predominantly of Latin and Greek projects (representing `r sum(partners_language_ratio$ratio[1:2])`% of the answers). The Other category encompassed a substantial part of the surveyed projects, documenting the need to expand beyond the traditional Latin and Greek focus of the epigraphic discipline. The languages listed as `Other` consisted of ``r partners_language_ratio$language[4:10]``.
 
 ## IT infrastructure
 
@@ -355,7 +355,7 @@ share2<- projects %>%
 share2
 ```
 
-**Commentary**: As of February 2022, `r sum(active_proj)` projects participated the survey as active projects. The majority of active projects are willing to share their data, representing `r sum(share2$ratio[c(1,3,4,5,6,7,8,9,10)])`% of participating projects. `r sum(share2$ratio[c(1,7,8,9)])`% of participating projects share the data under a Creative Commons license, which is the preferred mode according to the FAIR data principles. `r sum(share2$ratio[c(3,10)])`% of participating projects share the data without any specific license, `r share2$ratio[4]`% of participating projects provide the data only on demand.
+**Commentary**: As of February 2022, `r sum(active_proj)` projects participated in the survey as active projects. The majority of active projects are willing to share their data, representing `r sum(share2$ratio[c(1,3,4,5,6,7,8,9,10)])`% of participating projects. `r sum(share2$ratio[c(1,7,8,9)])`% of participating projects share the data under a Creative Commons license, which is the preferred mode according to the FAIR data principles. `r sum(share2$ratio[c(3,10)])`% of participating projects share the data without any specific license, `r share2$ratio[4]`% of participating projects provide the data only on demand.
 
 ------------------------------------------------------------------------
 
@@ -371,7 +371,7 @@ outshare2<- projects %>%
 outshare2
 ```
 
-**Commentary**: As of February 2022, all active projects provide at least one way of sharing the data (whether it may be currently accessible to the public or not, or it is intended to be accessible in the future). The average (median) number of sharing methods per project is `r round(median(na.omit(outshare2$share_method)))`, while the maximum number is `r max(na.omit(outshare2$share_method))` (e.g.,``r outshare2$share_all[outshare2$share_method > 5]``).
+**Commentary**: As of February 2022, all active projects provide at least one way of sharing the data (whether it may be currently accessible to the public or not, or it is intended to be accessible in the future). The average (median) number of sharing methods per project is `r round(median(na.omit(outshare2$share_method)))`, while the maximum number is `r max(na.omit(outshare2$share_method))` (e.g.,``r outshare2$share_all[outshare2$share_method > 5]``). There is no discipline-wide standard as all projects use either their institutional or national resources that may or may not be ideal for epigraphic data.
 
 ------------------------------------------------------------------------
 
