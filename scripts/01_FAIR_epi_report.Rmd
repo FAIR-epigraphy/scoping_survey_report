@@ -504,7 +504,8 @@ policies2
 ```{r}
 unique(na.omit(projects$`If you have answered YES in the previous question, please specify what are the policies, or provide link.`))
 ```
-**Commentary**: Digital policies in the field of digital epigraphy are still being implemented, which does not reflect yet on past and current projects. There is a variation between national policies amongst our responses, with France providing a vocal example in the implementation of Open Science in digital epigraphy. 
+
+**Commentary**: Digital policies in the field of digital epigraphy are still being implemented, which does not reflect yet on past and current projects. There is a variation between national policies amongst our responses, with France providing a vocal example in the implementation of Open Science in digital epigraphy.
 
 ```{r, echo=FALSE}
 policies2_length<- projects %>% 
@@ -520,14 +521,15 @@ policies2_length_mean<- policies2_length %>% group_by(policy_simple) %>%
   summarise_at(vars(Length_numeric_years), list(average_duration_yr = mean))
 ```
 
-When we compare the average duration of the project and the requirement to follow any institutional policies regarding the FAIR data, we see that established projects are more likely required to follow such policies than short and mid-term projects. 
+When we compare the average duration of the project and the requirement to follow any institutional policies regarding the FAIR data, we see that established projects are more likely required to follow such policies than short and mid-term projects.
 
 ```{r}
 policies2_length_mean
 ```
 
-The main factor influencing the need to comply with institutional principles seems to be however also the age of the project - for projects created in recent years (e.g., since 2015), we would expect FAIR data policy being one of conditions for securing funding.
-After the survey responses were processed, we have manually added information from project websites and published outcomes about the official project start-date and the country of origin of a given project. Our expectations were confirmed only partially, for overview see the following chart. The number of projects that responded `YES` grows since 2015 and the number of projects that responded `NO` decreases, but only relatively slowly. The projects responded `N/A` are those who consider themselves as `closed`.
+**Additional investigation**:
+
+The main factor influencing the need to comply with institutional principles seems to be however also the age of the project - for projects created in recent years (e.g., since 2015), we would expect FAIR data policy being one of conditions for securing funding. In order to verify this additional hypothesis, we collected the additional information manually from projects websites and published materials, such as the official project start-date, the country of origin of a given project, indication of existing funding and primary focus of a given project (text publication or metadata collection); the anonymised data are saved as a TSV in the same GitHub repository as `/data/02_scoping_survey_anonymised_PostSurvey.tsv`. Our expectations on data policies being progressively implemented over the last seven years were confirmed only partially. As the chart below demonstrates, the number of projects that indicated existing institutional data policy grows steadily since 2015 (indicated by brown dashed line). On contrary, the number of projects that indicated no existing data policy decreases, but only relatively slowly. The projects responded `N/A` are those who consider themselves in February 2022 as `closed`.
 
 ```{r data_postsurvey, include=FALSE, echo=FALSE}
 # loading data from TSV file
@@ -567,7 +569,6 @@ policy_year_started %>%
 ```
 
 The following chart shows clear geographic differences based on the main country where the project is based. France, Germany, and Italy are listed as countries where data policies are required, yet some projects in Germany and Italy answered that no data policies are required. Thus the practical implementation of data policies may depend on particular funding agency or institution, rather than on nation-wide policies. However, our results are only preliminary and based on a very small sample and need to be confirmed by further investigation.
-
 
 ```{r, echo=FALSE}
 #processing
@@ -623,7 +624,7 @@ stand_term_ratio2<- stand_term2 %>%
 stand_term_ratio2
 ```
 
-**Commentary**: `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="We don't use any standardized lists"]`% of projects don't use any standardized lists or vocabularies. `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="Internal authority lists"]`% of projects use their own internal authority lists. EAGLE vocabularies in their original form are used by `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="EAGLE vocabularies as provided at https://www.eagle-network.eu/resources/vocabularies/"]`% of projects, and in an edited version by `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="Own version of EAGLE vocabularies (edited for our project)"]`% of projects. Several projects focusing on languages other than Greek and Latin have created their own systems, sometimes working from existing vocabularies, but also building thesauri, e.g. the response:``r stand_term_ratio2$standard_terminologies[7]`` or ``r stand_term_ratio2$standard_terminologies[9] ``.
+**Commentary**: `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="We don't use any standardized lists"]`% of projects don't use any standardized lists or vocabularies. `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="Internal authority lists"]`% of projects use their own internal authority lists. EAGLE vocabularies in their original form are used by `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="EAGLE vocabularies as provided at https://www.eagle-network.eu/resources/vocabularies/"]`% of projects, and in an edited version by `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="Own version of EAGLE vocabularies (edited for our project)"]`% of projects. Several projects focusing on languages other than Greek and Latin have created their own systems, sometimes working from existing vocabularies, but also building thesauri, e.g. the response:`r stand_term_ratio2$standard_terminologies[7]` or `r stand_term_ratio2$standard_terminologies[9]`.
 
 ------------------------------------------------------------------------
 
@@ -677,13 +678,13 @@ lod_f_ratio<- lod_future %>%
 lod_f_ratio
 ```
 
-**Commentary**: The most popular is the option `Bibliographical references to all epigraphic publications with stable URI (e.g. Zenon)` represents the wishes of `r lod_f_ratio$ratio_all_proj[lod_f_ratio$lod_f=="Bibliographical references to all epigraphic publications with stable URI (e.g. Zenon)"]`% of all partner projects. 
+**Commentary**: The most popular is the option `Bibliographical references to all epigraphic publications with stable URI (e.g. Zenon)` represents the wishes of `r lod_f_ratio$ratio_all_proj[lod_f_ratio$lod_f=="Bibliographical references to all epigraphic publications with stable URI (e.g. Zenon)"]`% of all partner projects.
 
-The great interest in prosopographic LOD for is supported by `r lod_f_ratio$ratio_all_proj[lod_f_ratio$lod_f=="Roman Prosopographical data with stable URIs"]`% of partner projects for the Roman world and `r lod_f_ratio$ratio_all_proj[lod_f_ratio$lod_f=="Greek Onomastic data with stable URIs (e.g. LGPN with stable identifiers)"]`% of projects for the Greek world respectively. 
+The great interest in prosopographic LOD for is supported by `r lod_f_ratio$ratio_all_proj[lod_f_ratio$lod_f=="Roman Prosopographical data with stable URIs"]`% of partner projects for the Roman world and `r lod_f_ratio$ratio_all_proj[lod_f_ratio$lod_f=="Greek Onomastic data with stable URIs (e.g. LGPN with stable identifiers)"]`% of projects for the Greek world respectively.
 
-The `improved EAGLE vocabularies` are wished for by `r lod_f_ratio$ratio_all_proj[lod_f_ratio$lod_f=="EAGLE vocabularies (revised and extended with clear structure + eliminated duplicates + multi-language support)"]`% of partner projects. 
+The `improved EAGLE vocabularies` are wished for by `r lod_f_ratio$ratio_all_proj[lod_f_ratio$lod_f=="EAGLE vocabularies (revised and extended with clear structure + eliminated duplicates + multi-language support)"]`% of partner projects.
 
-The `domain-specific repository for epigraphic data` or the `open and accessible RDF Triplestore` do not seem to be the highest priority of participating projects, but still relatively popular as `r lod_f_ratio$ratio_all_proj[lod_f_ratio$lod_f=="One domain specific repository for epigraphic data"]`% of responses wishes for one of the two. One participating project wishes specifically for the following: ``r lod_f_ratio$lod_f[7]``.
+The `domain-specific repository for epigraphic data` or the `open and accessible RDF Triplestore` do not seem to be the highest priority of participating projects, but still relatively popular as `r lod_f_ratio$ratio_all_proj[lod_f_ratio$lod_f=="One domain specific repository for epigraphic data"]`% of responses wishes for one of the two. One participating project wishes specifically for the following: `r lod_f_ratio$lod_f[7]`.
 
 ------------------------------------------------------------------------
 
@@ -728,7 +729,7 @@ lod_f_ratio2<- lod_future2 %>%
 lod_f_ratio2
 ```
 
-**Commentary**: The most popular is the option `Bibliographical references to all epigraphic publications with stable URI (e.g. Zenon)` representing the wishes of `r lod_f_ratio2$ratio_all_proj[lod_f_ratio2$lod_f =="Bibliographical references to all epigraphic publications with stable URI (e.g. Zenon)"]`% of all participating projects. The great interest in onomastic and prosopographic LOD for both the Greek and Roman world is supported by `r lod_f_ratio2$ratio_all_proj[lod_f_ratio2$lod_f == "Greek Onomastic data with stable URIs (e.g. LGPN with stable identifiers)"]+lod_f_ratio2$ratio_all_proj[lod_f_ratio2$lod_f == "Roman Prosopographical data with stable URIs"]`% of non-partnered projects. The `improved EAGLE vocabularies` are wished for by `r lod_f_ratio2$ratio_all_proj[lod_f_ratio2$lod_f=="EAGLE vocabularies (revised and extended with clear structure + eliminated duplicates + multi-language support)"]`% of non-partnered projects. The `domain-specific repository for epigraphic data` (`r lod_f_ratio2$ratio_all_proj[lod_f_ratio$lod_f=="One domain specific repository for epigraphic data"]`%) or the `open and accessible RDF Triplestore` (`r lod_f_ratio2$ratio_all_proj[lod_f_ratio$lod_f=="Open and accessible RDF Triplestore"]`%) do not seem to be the highest priority of participating projects, but still a relatively popular response. One participating project wishes specifically for the following: ``r lod_f_ratio2$lod_f[8]``, which other projects, such as Pleiades or Trismegistos, might be better equipped to do.
+**Commentary**: The most popular is the option `Bibliographical references to all epigraphic publications with stable URI (e.g. Zenon)` representing the wishes of `r lod_f_ratio2$ratio_all_proj[lod_f_ratio2$lod_f =="Bibliographical references to all epigraphic publications with stable URI (e.g. Zenon)"]`% of all participating projects. The great interest in onomastic and prosopographic LOD for both the Greek and Roman world is supported by `r lod_f_ratio2$ratio_all_proj[lod_f_ratio2$lod_f == "Greek Onomastic data with stable URIs (e.g. LGPN with stable identifiers)"]+lod_f_ratio2$ratio_all_proj[lod_f_ratio2$lod_f == "Roman Prosopographical data with stable URIs"]`% of non-partnered projects. The `improved EAGLE vocabularies` are wished for by `r lod_f_ratio2$ratio_all_proj[lod_f_ratio2$lod_f=="EAGLE vocabularies (revised and extended with clear structure + eliminated duplicates + multi-language support)"]`% of non-partnered projects. The `domain-specific repository for epigraphic data` (`r lod_f_ratio2$ratio_all_proj[lod_f_ratio$lod_f=="One domain specific repository for epigraphic data"]`%) or the `open and accessible RDF Triplestore` (`r lod_f_ratio2$ratio_all_proj[lod_f_ratio$lod_f=="Open and accessible RDF Triplestore"]`%) do not seem to be the highest priority of participating projects, but still a relatively popular response. One participating project wishes specifically for the following: `r lod_f_ratio2$lod_f[8]`, which other projects, such as Pleiades or Trismegistos, might be better equipped to do.
 
 ------------------------------------------------------------------------
 
@@ -746,9 +747,7 @@ lod_i_ratio2<- lod_ideas2 %>%
 lod_i_ratio2
 ```
 
-**Commentary**: 
-`r lod_i_ratio2$ratio_all_proj[lod_i_ratio2$lod_i == "Set of guidelines for FAIR and Linked Open Data in epigraphy"]`% of all non-partnered projects would benefit from `A set of guidelines for FAIR and Linked Open Data in epigraphy`.
-There is a general interest in practical examples (`r lod_i_ratio2$ratio_all_proj[lod_i_ratio2$lod_i =="Practical scripted examples on how to use LOD in epigraphy"]`%) and workshop(s) on how to use LOD in epigraphy (`r lod_i_ratio2$ratio_all_proj[lod_i_ratio2$lod_i =="Workshop on how to use LOD in epigraphy"]`%), as well as resources for quantitative analysis of data in epigraphy (`r lod_i_ratio2$ratio_all_proj[lod_i_ratio$lod_i =="Set of guidelines/resources for quantitative analysis of epigraphic data"]`%). There might be potential synergy in organising workshops in digital epigraphy between some of the participating projects, e.g. `the French School at Athens`.
+**Commentary**: `r lod_i_ratio2$ratio_all_proj[lod_i_ratio2$lod_i == "Set of guidelines for FAIR and Linked Open Data in epigraphy"]`% of all non-partnered projects would benefit from `A set of guidelines for FAIR and Linked Open Data in epigraphy`. There is a general interest in practical examples (`r lod_i_ratio2$ratio_all_proj[lod_i_ratio2$lod_i =="Practical scripted examples on how to use LOD in epigraphy"]`%) and workshop(s) on how to use LOD in epigraphy (`r lod_i_ratio2$ratio_all_proj[lod_i_ratio2$lod_i =="Workshop on how to use LOD in epigraphy"]`%), as well as resources for quantitative analysis of data in epigraphy (`r lod_i_ratio2$ratio_all_proj[lod_i_ratio$lod_i =="Set of guidelines/resources for quantitative analysis of epigraphic data"]`%). There might be potential synergy in organising workshops in digital epigraphy between some of the participating projects, e.g. `the French School at Athens`.
 
 ------------------------------------------------------------------------
 
@@ -760,14 +759,13 @@ unique(na.omit(projects$`Your personal wish list. Provide a description of poten
 
 **Commentary**: This section covers additional needs of participating digital projects. Some of the wishes might be beyond the scope of the FAIR Epigraphy project but the responses provide valuable guidance and hint to some of the challenges the epigraphic discipline will be facing in the near future. The responses may inspire other projects with similar needs to join forces and potentially develop the solution together. The FAIR Epigraphy project may offer one channel to explore and collaborate on the meeting of these needs in future.
 
-
 # Summary
 
 The present report demonstrates a great variation in the epigraphic discipline in 2022. Although the majority of participating projects record inscriptions in Latin and Greek, we see a diverse array of projects expanding beyond the traditional boundaries of the discipline. The projects participating in the survey involve well-established projects that have existed over several decades, regional or thematic corpora, and more specialised, short-term PhD projects. We have observed a clear distinction between on the one hand projects with a long tradition and most importantly with relatively stable institutional support, which have access to institutional repositories, policies and IT services and other, small-scale projects with limited support and access to resources and training, typified by to short-term projects on a specific topic that may lack access to long-term institutional support. One of the missions of the FAIR Epigraphy project is to support projects with limited access to resources by providing accessible and comprehensible training and guidelines for FAIR and Linked Open Data principles in epigraphy.
 
 The established projects mostly follow the FAIR principles, although to a variable extent. The majority of established projects share their data under a Creative Commons license in one or more widely accepted formats (with Epidoc XML being the most popular format for all types of projects irrespective of their status and longevity). In general, the more established projects provide more access points to their data as well as more data formats than the projects with less institutional support. The use of standardized terminologies is still limited and project-specific, mostly due to the lack of uniformly accepted standards. On contrary, the adoption of Linked Open Datasets (LOD) and creation of links within the epigraphic datasets with stable identifiers to those LOD sources seems to be fairly advanced, especially in the case of well-established LOD domains such as Pleiades or Trismegistos, and to a lesser extent the EAGLE vocabularies.
 
-As to the current and future needs of digital epigraphy, there is a clear demand for more LOD, especially for bibliographical references to standard epigraphic corpora, standardisation of discipline-specific vocabularies (improved EAGLE vocabularies), and  prosopographic LOD for the ancient world, all supported by training and providing accessible resources and sets of guidelines for FAIR and Open epigraphy. The need for an accessible and open platform connecting and linking various epigraphic resources through a single access point is generally supported, building on the experience of the EAGLE Project, but now exploiting the model of Linked Open Data.
+As to the current and future needs of digital epigraphy, there is a clear demand for more LOD, especially for bibliographical references to standard epigraphic corpora, standardisation of discipline-specific vocabularies (improved EAGLE vocabularies), and prosopographic LOD for the ancient world, all supported by training and providing accessible resources and sets of guidelines for FAIR and Open epigraphy. The need for an accessible and open platform connecting and linking various epigraphic resources through a single access point is generally supported, building on the experience of the EAGLE Project, but now exploiting the model of Linked Open Data.
 
 # Bibliography
 
