@@ -8,12 +8,6 @@ author:
 - Jonathan Prag^[Oxford University, jonathan.prag@merton.ox.ac.uk, https://orcid.org/0000-0003-3819-8537]
 date: "`r format(Sys.Date())`"
 output:
-  word_document:
-    toc: yes
-    toc_depth: '4'
-  pdf_document:
-    toc: yes
-    toc_depth: '4'
   html_document:
     css: ../"style.css"
     df_print: paged
@@ -26,6 +20,12 @@ output:
     toc_depth: 4
     toc_float: yes
     code_download: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '4'
+  word_document:
+    toc: yes
+    toc_depth: '4'
 csl: https://raw.githubusercontent.com/citation-style-language/styles/master/research-institute-for-nature-and-forest.csl
 link-citations: yes
 zotero: yes
@@ -91,18 +91,20 @@ partners_language_ratio <- partners_language %>%
   mutate(ratio = round(n/(sum(n)/100)))
 partners_language_ratio
 ```
+
 ```{r,}
 partner_language_count<- str_count(partners$Language_clean, ";")+1
 ```
 
-**Commentary:** The language coverage of the participating projects consists predominantly of Latin and Greek either on its own or in combination (representing `r sum(partners_language_ratio$ratio[partners_language_ratio$language %in% c("Greek", "Latin")])`% of the answers).  The languages listed as `Other` consisted of *`r partners_language_ratio$language[4:10]`*. `r length(partner_language_count[partner_language_count==1])` participating projects record inscriptions in one language only, while `r length(partner_language_count[partner_language_count>1])` contain inscriptions in two and more languages (`r max(partner_language_count)` being the maximum number of listed languages.) The `Other` (i.e. other than Greek and Latin) category encompassed a substantial part of the surveyed projects, documenting the need to expand beyond the traditional Latin and Greek focus of the classical epigraphic discipline. It is, however, worth noting the majority of participating projects the records languages from the wider Mediterranean/European linguistic space.
+**Commentary:** The language coverage of the participating projects consists predominantly of Latin and Greek either on its own or in combination (representing `r sum(partners_language_ratio$ratio[partners_language_ratio$language %in% c("Greek", "Latin")])`% of the answers). The languages listed as `Other` consisted of *`r partners_language_ratio$language[4:10]`*. `r length(partner_language_count[partner_language_count==1])` participating projects record inscriptions in one language only, while `r length(partner_language_count[partner_language_count>1])` contain inscriptions in two and more languages (`r max(partner_language_count)` being the maximum number of listed languages.) The `Other` (i.e. other than Greek and Latin) category encompassed a substantial part of the surveyed projects, documenting the need to expand beyond the traditional Latin and Greek focus of the classical epigraphic discipline. It is, however, worth noting the majority of participating projects the records languages from the wider Mediterranean/European linguistic space.
 
 **Combinations of languages as retrieved from the survey:**
+
 ```{r}
 partners$Language_clean
 ```
 
----
+------------------------------------------------------------------------
 
 ## IT infrastructure
 
@@ -127,7 +129,7 @@ IT <- partners %>%
 IT
 ```
 
-**Commentary**: All but one of these established digital projects have an IT specialist, yet only `r sum(IT$n[IT$IT_spec %in% c("Yes, equivalent of full-time (1.0 FTE) position","Yes, equivalent of more than full-time (>1.0 FTE) position")])` projects have an equivalent of 1.0 FTE or more at their disposal. `r round(IT$ratio[IT$IT_spec == "Yes, equivalent of part-time (<1.0 FTE) position"])` % of projects have access to part-time IT support for their projects, which in some instances may be only a few hours per week per project. 
+**Commentary**: All but one of these established digital projects have an IT specialist, yet only `r sum(IT$n[IT$IT_spec %in% c("Yes, equivalent of full-time (1.0 FTE) position","Yes, equivalent of more than full-time (>1.0 FTE) position")])` projects have an equivalent of 1.0 FTE or more at their disposal. `r round(IT$ratio[IT$IT_spec == "Yes, equivalent of part-time (<1.0 FTE) position"])` % of projects have access to part-time IT support for their projects, which in some instances may be only a few hours per week per project.
 
 ------------------------------------------------------------------------
 
@@ -140,6 +142,7 @@ format <- partners %>%
   mutate(no_format = str_count(format, ",") + 1)
 format
 ```
+
 ```{r}
 epidoc <- sum(str_detect(partners$`Our projects stores epigraphic data in the following formats`, "Epidoc XML"))
 json <- sum(str_detect(partners$`Our projects stores epigraphic data in the following formats`, "JSON"))
@@ -147,7 +150,6 @@ rdf <- sum(str_detect(partners$`Our projects stores epigraphic data in the follo
 csv <- sum(str_detect(partners$`Our projects stores epigraphic data in the following formats`, "CSV"))
 sql <- sum(str_detect(partners$`Our projects stores epigraphic data in the following formats`, "SQL"))
 ```
-
 
 **Commentary**: The majority of projects use `Epidoc XML` as their main output data format (`r round(epidoc/(nrow(partners)/100))`% of participating projects), either in combination with other formats or as a sole data format. Other data formats are represented less frequently: JSON (`r round(json/(nrow(partners)/100))`%), RDF (`r round(rdf/(nrow(partners)/100))`%), SQL(`r round(sql/(nrow(partners)/100))`%) and CSV (`r round(csv/(nrow(partners)/100))`%). `r round((sum(format$no_format == 1))/(nrow(partners)/100))`% of projects use only one type of data format, while `r round((sum(format$no_format > 1))/(nrow(partners)/100))`% use two or more data format types (such as `r unique(unlist(str_split(format$format, ", ")))`).
 
@@ -177,6 +179,7 @@ outshare<- partners %>%
 
 outshare
 ```
+
 **Commentary**: Epidoc XML is by far the most popular format for data sharing (implemented by `r sum(str_count(outshare$share_all,"Individual Epidoc XMLs or Epidoc XML dumps on the website"))` projects), however other Open Science services are starting to make their way into established digital epigraphy projects, such as sharing via a public repository, implemented by `r sum(str_count(outshare$share_all,"GitHub"))` (GitHub) and `r sum(str_count(outshare$share_all,"Zenodo"))` (Zenodo) projects respectively, as well as providing raw data in the CSV (comma-separated value) format (`r sum(str_count(outshare$share_all,"CSV"))` projects), or as JSON (JavaScript Object Notation) files (`r sum(str_count(outshare$share_all,"JSON"))` projects). Only a relative minority of participating partner projects shares the data on an on-demand basis or have a non-public API access point to their data.
 
 ------------------------------------------------------------------------
@@ -293,7 +296,7 @@ lod_ratio
 projects<- read_tsv("../data/02_scoping_survey_anonymised.tsv")
 ```
 
-This section summarises the results of the online survey [*Digital epigraphy in 2022: scoping survey*](https://github.com/FAIR-epigraphy/scoping_survey_report/data/02_Survey_projects_questions.pdf) for all digital epigraphy projects) aimed at digital projects currently listed under Digital Epigraphy Projects on the Digital Classicist Wiki page (<https://wiki.digitalclassicist.org/Category:Projects>) that were possible to trace in February 2022. The survey was  sent to 83 projects and the link circulated until mid-April 2022. We have received `r nrow(projects)` responses to the survey, a response rate of `r round(nrow(projects)/0.83)`%. Some participants contributed on behalf of multiple projects in one response, which we were unable to disentangle and thus the response rate is slightly skewed. Only the participating projects that gave consent to publish their anonymised responses are included in this report.
+This section summarises the results of the online survey [*Digital epigraphy in 2022: scoping survey*](https://github.com/FAIR-epigraphy/scoping_survey_report/data/02_Survey_projects_questions.pdf) for all digital epigraphy projects) aimed at digital projects currently listed under Digital Epigraphy Projects on the Digital Classicist Wiki page (<https://wiki.digitalclassicist.org/Category:Projects>) that were possible to trace in February 2022. The survey was sent to 83 projects and the link circulated until mid-April 2022. We have received `r nrow(projects)` responses to the survey, a response rate of `r round(nrow(projects)/0.83)`%. Some participants contributed on behalf of multiple projects in one response, which we were unable to disentangle and thus the response rate is slightly skewed. Only the participating projects that gave consent to publish their anonymised responses are included in this report.
 
 The respondents represent a wide range of projects from well established projects to short-term mostly PhD projects, with the average duration of a project being `r median(projects$Length_numeric_years)` years. The shortest participating project reported their duration as `r min(projects$Length_numeric_years)` year and the longest `r max(projects$Length_numeric_years)` years (that was clearly not digital for the whole of that time).
 
@@ -326,12 +329,13 @@ projects_language_ratio
 ```{r}
 project_language_count<- str_count(projects$Language_clean, ";")+1
 ```
-**Commentary:** The language coverage of the participating projects consisted predominantly of Latin and Greek projects  representing `r sum(projects_language_ratio$ratio[projects_language_ratio$language %in% c("Greek", "Latin")])`% of projects combined. Greek being the most frequent language, either as a sole/predominant language (`r sum(projects$Language_clean == "Greek")` projects) or in combination with other languages (`r sum(str_count(projects$Language_clean,"Greek"))-sum(projects$Language_clean == "Greek")` projects). Latin being a sole/predominant language in `r sum(projects$Language_clean == "Latin")` projects or in combination with other languages (`r sum(str_count(projects$Language_clean,"Latin"))-sum(projects$Language_clean == "Latin")` projects).
-`r length(project_language_count[project_language_count==1])` participating projects record inscriptions in one language only, while `r length(project_language_count[project_language_count>1])` contain inscriptions in two and more languages (`r max(project_language_count)` being the maximum number of listed languages.).
 
-The languages listed as `Other` consisted of languages such as ``r projects_language_ratio$language[3:16]``. All languages come from the wider Mediterranean/European linguistic space.
+**Commentary:** The language coverage of the participating projects consisted predominantly of Latin and Greek projects representing `r sum(projects_language_ratio$ratio[projects_language_ratio$language %in% c("Greek", "Latin")])`% of projects combined. Greek being the most frequent language, either as a sole/predominant language (`r sum(projects$Language_clean == "Greek")` projects) or in combination with other languages (`r sum(str_count(projects$Language_clean,"Greek"))-sum(projects$Language_clean == "Greek")` projects). Latin being a sole/predominant language in `r sum(projects$Language_clean == "Latin")` projects or in combination with other languages (`r sum(str_count(projects$Language_clean,"Latin"))-sum(projects$Language_clean == "Latin")` projects). `r length(project_language_count[project_language_count==1])` participating projects record inscriptions in one language only, while `r length(project_language_count[project_language_count>1])` contain inscriptions in two and more languages (`r max(project_language_count)` being the maximum number of listed languages.).
+
+The languages listed as `Other` consisted of languages such as `r projects_language_ratio$language[3:16]`. All languages come from the wider Mediterranean/European linguistic space.
 
 **Combinations of languages as retrieved from the survey:**
+
 ```{r}
 unique(projects$Language_clean)
 ```
@@ -360,7 +364,7 @@ IT2 <- projects %>%
 IT2
 ```
 
-**Commentary**: Only `r IT2$ratio[na.omit(IT2$IT_spec) == "Yes, equivalent of full-time (1.0 FTE) position"]`% of projects have an equivalent of 1.0 FTE or more at their disposal. `r sum(IT2$ratio[c(6,7,9)]) + sum(IT2$ratio[na.omit(IT2$IT_spec) == "Yes, equivalent of part-time (<1.0 FTE) position"])`% of digital projects have an IT specialist available for at least several hours per week or share them with other digital projects within their institution. Several projects report difficulty with finding financial resources to support further development and long-term sustainability of the project or even day-to-day support. `r sum(IT2$ratio[na.omit(IT2$IT_spec) %in% c("No", "We had")])`% of the participating projects report that they currently do not have any access to IT support. An additional `r IT2$ratio[na.omit(IT2$IT_spec) == "N/A"]`% of projects did not indicate whether they have access to IT support because they are no longer active. In order to understand the precise significance of this data, it would be necessary in future surveys to clarify the current funding status of individual projects. 
+**Commentary**: Only `r IT2$ratio[na.omit(IT2$IT_spec) == "Yes, equivalent of full-time (1.0 FTE) position"]`% of projects have an equivalent of 1.0 FTE or more at their disposal. `r sum(IT2$ratio[c(6,7,9)]) + sum(IT2$ratio[na.omit(IT2$IT_spec) == "Yes, equivalent of part-time (<1.0 FTE) position"])`% of digital projects have an IT specialist available for at least several hours per week or share them with other digital projects within their institution. Several projects report difficulty with finding financial resources to support further development and long-term sustainability of the project or even day-to-day support. `r sum(IT2$ratio[na.omit(IT2$IT_spec) %in% c("No", "We had")])`% of the participating projects report that they currently do not have any access to IT support. An additional `r IT2$ratio[na.omit(IT2$IT_spec) == "N/A"]`% of projects did not indicate whether they have access to IT support because they are no longer active. In order to understand the precise significance of this data, it would be necessary in future surveys to clarify the current funding status of individual projects.
 
 ------------------------------------------------------------------------
 
@@ -375,8 +379,6 @@ format2 <- projects %>%
 format2
 ```
 
-
-
 ```{r}
 epidoc2 <- sum(str_detect(projects$`Our projects stores epigraphic data in the following formats`, "Epidoc XML"))
 json2 <- sum(str_detect(projects$`Our projects stores epigraphic data in the following formats`, "JSON"))
@@ -385,10 +387,9 @@ csv2 <- sum(str_detect(projects$`Our projects stores epigraphic data in the foll
 sql2 <- sum(str_detect(projects$`Our projects stores epigraphic data in the following formats`, "SQL"))
 ```
 
+**Commentary**: The majority of projects use `Epidoc XML` as their main output data format (`r round(epidoc2/(nrow(projects)/100))`% of participating projects), either in combination with other formats or as a sole data format. SQL and similar database formats are relatively common in `r round(sql2/(nrow(projects)/100))`% of projects. Other data formats are represented less frequently by a small number of projects and mostly as complementary data formats to more popular formats such as Epidoc XML or SQL: JSON (`r round(json2/(nrow(projects)/100))`%), RDF (`r round(rdf2/(nrow(projects)/100))`%), and CSV (`r round(csv2/(nrow(projects)/100))`%). `r round(format2$n[9]/(nrow(projects)/100))`% of projects indicated the use of combination of analogue data and 3D data format. `r round(format2$n[format2$format=="XML adapted from Epidoc XML"]/(nrow(projects)/100))`% of projects indicated using their own version of Epidoc XML, adapted to their specific needs.
 
-**Commentary**: The majority of projects use `Epidoc XML` as their main output data format (`r round(epidoc2/(nrow(projects)/100))`% of participating projects), either in combination with other formats or as a sole data format. SQL and similar database formats are relatively common in `r round(sql2/(nrow(projects)/100))`% of projects. Other data formats are represented less frequently by a small number of projects and mostly as complementary data formats to more popular formats such as Epidoc XML or SQL: JSON (`r round(json2/(nrow(projects)/100))`%), RDF (`r round(rdf2/(nrow(projects)/100))`%), and CSV (`r round(csv2/(nrow(projects)/100))`%). `r round(format2$n[9]/(nrow(projects)/100))`% of projects indicated the use of combination of analogue data and 3D data format. `r round(format2$n[format2$format=="XML adapted from Epidoc XML"]/(nrow(projects)/100))`% of projects indicated using their own version of Epidoc XML, adapted to their specific needs. 
-
-`r round((sum(format2$no_format == 1))/(nrow(projects)/100))`% of projects use only one type of data format, while `r round((sum(format2$no_format > 1))/(nrow(projects)/100))`% use two or more data format types (such as ``r unique(unlist(str_split(format2$format, ", ")))``). 
+`r round((sum(format2$no_format == 1))/(nrow(projects)/100))`% of projects use only one type of data format, while `r round((sum(format2$no_format > 1))/(nrow(projects)/100))`% use two or more data format types (such as `r unique(unlist(str_split(format2$format, ", ")))`).
 
 The frequent use of SQL format signalize a relatively low compliance with the FAIR data principles, with individual databases being recorded in non-standard format with a specific purpose in mind, which are not immediately interoperable with e.g. Epidoc XML based projects. `r projects$n[projects$format == "SQL or similar"]` projects use SQL as their sole data storage format preventing them from being easily *Findable*, *Accessible*, and *Interoperable* with the rest of the existing epigraphic datasets.
 
@@ -431,7 +432,7 @@ outshare2<- projects %>%
 outshare2
 ```
 
-**Commentary**: As of February 2022, all active projects provide at least one way of sharing the data (whether it is currently accessible to the public or not, or it is intended to be accessible in the future). The average (median) number of sharing methods per project is `r round(median(na.omit(outshare2$share_method)))`, while the maximum number is `r max(na.omit(outshare2$share_method))` (e.g.,``r outshare2$share_all[outshare2$share_method > 5]``). 
+**Commentary**: As of February 2022, all active projects provide at least one way of sharing the data (whether it is currently accessible to the public or not, or it is intended to be accessible in the future). The average (median) number of sharing methods per project is `r round(median(na.omit(outshare2$share_method)))`, while the maximum number is `r max(na.omit(outshare2$share_method))` (e.g.,`r outshare2$share_all[outshare2$share_method > 5]`).
 
 There is no discipline-wide standard for data repository as all projects use either their institutional or national resources that may or may not be ideal for epigraphic data. From those who share the data, the Epidoc XML format is the most popular format for data sharing, as well as search output on the project's website. Open Science practices do not seem to be a popular choice in digital epigraphy, such as sharing via public repository (e.g., GitHub or Zenodo), as well as providing raw data in the CSV (comma-separated value) format, or as JSON (JavaScript Object Notation) files. Computer-automated access to data is rare and manual human interaction, such as manual selection and/or manual download of files prevails, potentially hindering any quantitative and reproducible studies, or linking of datasets via automated processes. For example, an API access point is currently available only for a very limited number of projects.
 
@@ -496,8 +497,6 @@ policies2
 
 **Commentary**: `r policies2$ratio[policies2$policies == "No"]`% of projects do not explicitly have to follow any policy. `r policies2$ratio[policies2$policies == "Yes"]`% of projects are required to comply with data related policies, while an additional `r sum(policies2$ratio[c(3,4,5,6)])`% of projects are encouraged to comply with FAIR data principles but no rules are enforced.
 
-Petra Continue  - time vs policy
-
 ------------------------------------------------------------------------
 
 **Question**: *If you have answered YES in the previous question, please specify what are the policies, or provide a link.*
@@ -505,8 +504,94 @@ Petra Continue  - time vs policy
 ```{r}
 unique(na.omit(projects$`If you have answered YES in the previous question, please specify what are the policies, or provide link.`))
 ```
+**Commentary**: Digital policies in the field of digital epigraphy are still being implemented, which does not reflect yet on past and current projects. There is a variation between national policies amongst our responses, with France providing a vocal example in the implementation of Open Science in digital epigraphy. 
 
-**Commentary**: Digital policies in the field of digital epigraphy are still being implemented, which does not reflect yet on past and current projects. There is a variation between national policies amongst our responses, with France providing a vocal example in the implementation of Open Science in digital epigraphy.
+```{r, echo=FALSE}
+policies2_length<- projects %>% 
+  select(Length_numeric_years, `Does your institution of funding body require your project to comply with any data policies (e.g., FAIR principles, data storage, data sharing, Open Science)?`) %>% 
+  mutate(policy = `Does your institution of funding body require your project to comply with any data policies (e.g., FAIR principles, data storage, data sharing, Open Science)?`)
+  
+policies2_length$policy_simple <- ifelse(grepl("Neither our grant funding*", policies2_length$policy), "Voluntary", 
+                                        ifelse(grepl("Policies are on the way*|Not with an official request*|We don't work for any institution*", policies2_length$policy), "No", 
+                                               ifelse(grepl("The French National Centre for Scientific Research strongly encourages its members to comply*|Not with an official request*", policies2_length$policy), "Yes",
+                                                                                policies2_length$policy)))
+
+policies2_length_mean<- policies2_length %>% group_by(policy_simple) %>% 
+  summarise_at(vars(Length_numeric_years), list(average_duration_yr = mean))
+```
+
+When we compare the average duration of the project and the requirement to follow any institutional policies regarding the FAIR data, we see that established projects are more likely required to follow such policies than short and mid-term projects. 
+
+```{r}
+policies2_length_mean
+```
+
+The main factor influencing the need to comply with institutional principles seems to be however also the age of the project - for projects created in recent years (e.g., since 2015), we would expect FAIR data policy being one of conditions for securing funding.
+After the survey responses were processed, we have manually added information from project websites and published outcomes about the official project start-date and the country of origin of a given project. Our expectations were confirmed only partially, for overview see the following chart. The number of projects that responded `YES` grows since 2015 and the number of projects that responded `NO` decreases, but only relatively slowly. The projects responded `N/A` are those who consider themselves as `closed`.
+
+```{r data_postsurvey, include=FALSE, echo=FALSE}
+# loading data from TSV file
+projects_post<- read_tsv("../data/02_scoping_survey_anonymised_PostSurvey.tsv")
+```
+
+```{r, echo=FALSE, warning=FALSE}
+# merging with the original dataset
+projects_comb <- merge(x=projects, y=projects_post, by="ID_anon")
+
+#processing
+policy_year_started<- projects_comb %>% 
+  select(YearStarted, `Does your institution of funding body require your project to comply with any data policies (e.g., FAIR principles, data storage, data sharing, Open Science)?`) %>% 
+  mutate(policy = `Does your institution of funding body require your project to comply with any data policies (e.g., FAIR principles, data storage, data sharing, Open Science)?`)
+  
+policy_year_started$policy_simple <- ifelse(grepl("Neither our grant funding*", policy_year_started$policy), "Voluntary", 
+                                        ifelse(grepl("Policies are on the way*|Not with an official request*|We don't work for any institution*", policy_year_started$policy), "No", 
+                                               ifelse(grepl("The French National Centre for Scientific Research strongly encourages its members to comply*|Not with an official request*", policy_year_started$policy), "Yes",
+                                                                                policy_year_started$policy)))
+## ggplot policy by years started
+
+policy_year_started %>% 
+  filter(YearStarted>1950) %>% 
+  ggplot(aes(x=YearStarted, y=policy_simple, color=policy_simple))+
+  geom_violin() +
+  #geom_point(aes(x=YearStarted, y=policy_simple))
+  geom_density()+
+  geom_vline(xintercept=2015, linetype=2, colour="brown") +
+  ggtitle("Requirement of institutional data policy for non-partnered projects since 1990") +
+  xlab("Start year of a project") + ylab("Existence of institutional data policy") +
+  #coord_flip() +
+  theme_bw() +
+  #coord_cartesian(xlim = c(0, 5)) +
+  theme(axis.text = element_text(size = 9)) +
+  theme(plot.title = element_text(size = 13))
+
+```
+
+The following chart shows clear geographic differences based on the main country where the project is based. France, Germany, and Italy are listed as countries where data policies are required, yet some projects in Germany and Italy answered that no data policies are required. Thus the practical implementation of data policies may depend on particular funding agency or institution, rather than on nation-wide policies. However, our results are only preliminary and based on a very small sample and need to be confirmed by further investigation.
+
+
+```{r, echo=FALSE}
+#processing
+policy_country<- projects_comb %>% 
+  select(YearStarted, `Does your institution of funding body require your project to comply with any data policies (e.g., FAIR principles, data storage, data sharing, Open Science)?`, Country) %>% 
+  mutate(policy = `Does your institution of funding body require your project to comply with any data policies (e.g., FAIR principles, data storage, data sharing, Open Science)?`)
+  
+policy_country$policy_simple <- ifelse(grepl("Neither our grant funding*", policy_year_started$policy), "Voluntary", 
+                                        ifelse(grepl("Policies are on the way*|Not with an official request*|We don't work for any institution*", policy_year_started$policy), "No", 
+                                               ifelse(grepl("The French National Centre for Scientific Research strongly encourages its members to comply*|Not with an official request*", policy_year_started$policy), "Yes",
+                                                                                policy_year_started$policy)))
+  
+## ggplot policy by countries
+policy_country %>% 
+  filter(YearStarted>1950) %>% 
+  ggplot(aes(x=Country, y=policy_simple, color=policy_simple))+
+  geom_point(aes(x=Country, y=policy_simple), size=4) +
+  ggtitle("Requirement of institutional data policy for non-partnered projects by country") +
+  xlab("Country") + ylab("Existence of institutional data policy") +
+  #coord_cartesian(xlim = c(0, 5)) +
+  theme_bw() +
+  theme(axis.text = element_text(size = 9)) +
+  theme(plot.title = element_text(size = 13))
+```
 
 ## Open Science Practice
 
@@ -516,7 +601,7 @@ unique(na.omit(projects$`If you have answered YES in the previous question, plea
 fair<- projects %>% 
   mutate(policy = `Are you familiar with the FAIR data principles?`) %>%
   count(policy, sort=T) %>% 
-  mutate(ratio = round(n/(sum(n)/100),2))
+  mutate(ratio = round(n/(sum(n)/100)))
 fair
 ```
 
@@ -533,12 +618,12 @@ colnames(stand_term2) <- c("standard_terminologies")
 
 stand_term_ratio2<- stand_term2 %>% 
   count(standard_terminologies, sort= T) %>% 
-  mutate(ratio = round(n/(sum(n)/100),2))
+  mutate(ratio = round(n/(sum(n)/100)))
 
 stand_term_ratio2
 ```
 
-**Commentary**: `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="We don't use any standardized lists"]`% of projects don't use any standardized lists or vocabularies. `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="Internal authority lists"]`% of projects use their internal authority lists. EAGLE vocabularies in their original form are used by `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="EAGLE vocabularies as provided at https://www.eagle-network.eu/resources/vocabularies/"]`% of projects, and in its edited version by `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="Own version of EAGLE vocabularies (edited for our project)"]`% of projects. Several projects focusing on languages other than Greek and Latin have created their own systems including thesauri, e.g. the response:`` r stand_term_ratio2$standard_terminologies[7]` or `r stand_term_ratio2$standard_terminologies[9] ``.
+**Commentary**: `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="We don't use any standardized lists"]`% of projects don't use any standardized lists or vocabularies. `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="Internal authority lists"]`% of projects use their own internal authority lists. EAGLE vocabularies in their original form are used by `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="EAGLE vocabularies as provided at https://www.eagle-network.eu/resources/vocabularies/"]`% of projects, and in an edited version by `r stand_term_ratio2$ratio[stand_term_ratio2$standard_terminologies =="Own version of EAGLE vocabularies (edited for our project)"]`% of projects. Several projects focusing on languages other than Greek and Latin have created their own systems, sometimes working from existing vocabularies, but also building thesauri, e.g. the response:``r stand_term_ratio2$standard_terminologies[7]`` or ``r stand_term_ratio2$standard_terminologies[9] ``.
 
 ------------------------------------------------------------------------
 
@@ -548,12 +633,12 @@ stand_term_ratio2
 policy_share<- projects %>% 
   mutate(policy_share = `Are you willing to share the standardized terminologies used in your project with us (e.g. type of inscription vocabularies, type of material etc.)`) %>% 
   count(policy_share, sort=T) %>% 
-  mutate(ratio = round(n/(sum(n)/100),2))
+  mutate(ratio = round(n/(sum(n)/100)))
   
 policy_share
 ```
 
-**Commentary**: Vast majority of participating projects (`r policy_share$ratio[policy_share$policy_share == "Yes"]`%) is willing to share any standardized terminologies used in their project, such as terminologies covering the type of inscription vocabularies, the type of material etc.
+**Commentary**: The vast majority of participating projects (`r policy_share$ratio[policy_share$policy_share == "Yes"]`%) is willing to share any standardized terminologies used in their project, such as terminologies covering the type of inscription vocabularies, the type of material etc.
 
 ------------------------------------------------------------------------
 
@@ -566,12 +651,12 @@ colnames(lod2) <- c("linked_data")
 
 lod_ratio2<- lod2 %>% 
   count(linked_data, sort= T) %>% 
-  mutate(ratio = round(n/(sum(n)/100),2))
+  mutate(ratio = round(n/(nrow(projects)/100)))
 
 lod_ratio2
 ```
 
-**Commentary**: Pleiades is the most popular LOD dataset, being used in `r lod_ratio2$ratio[lod_ratio2$linked_data == "Pleiades"]`% of all participating projects, followed by Trismegistos with `r lod_ratio2$ratio[lod_ratio2$linked_data == "Trismegistos"]`%. EAGLE vocabularies are represented in `r lod_ratio2$ratio[lod_ratio2$linked_data == "EAGLE vocabularies"]`% of participating projects, while LGPN in `r lod_ratio2$ratio[lod_ratio2$linked_data == "LGPN"]`% of projects. Only `r lod_ratio2$ratio[lod_ratio2$linked_data == "None"]`% of participating projects do not use any LOD.
+**Commentary**: Pleiades is the most popular LOD dataset, being used in `r lod_ratio2$ratio[lod_ratio2$linked_data == "Pleiades"]`% of all participating projects, followed by Trismegistos with `r lod_ratio2$ratio[lod_ratio2$linked_data == "Trismegistos"]`%. EAGLE vocabularies are represented in `r lod_ratio2$ratio[lod_ratio2$linked_data == "EAGLE vocabularies"]`% of participating projects, while combined prosopographic datasets (LGPN+PIR) in `r sum(lod_ratio2$ratio[lod_ratio2$linked_data == "LGPN"]+lod_ratio2$ratio[lod_ratio2$linked_data == "PIR"])`% of projects. Only `r lod_ratio2$ratio[lod_ratio2$linked_data == "None"]`% of participating projects do not use any LOD.
 
 # Future needs of digital epigraphy
 
@@ -588,12 +673,17 @@ colnames(lod_future) <- c("lod_f")
 
 lod_f_ratio<- lod_future %>% 
   count(lod_f, sort= T) %>% 
-  mutate(ratio = round(n/(sum(n)/100),2)) %>% 
-  mutate(ratio_all_proj = round(n/(nrow(partners)/100),2))
+  mutate(ratio_all_proj = round(n/(nrow(partners)/100)))
 lod_f_ratio
 ```
 
-**Commentary**: The most popular is the option `Bibliographical references to all epigraphic publications with stable URI (e.g. Zenon)` with `r lod_f_ratio$ratio[1]`% of responses representing the wishes of `r lod_f_ratio$ratio_all_proj[1]`% of all projects. The great interest in onomastic and prosopographical LOD for both the Greek and Roman world is supported by `r sum(lod_f_ratio$ratio[c(3:4)])`% of positive responses from `r lod_f_ratio$ratio_all_proj[3]`% and `r lod_f_ratio$ratio_all_proj[4]`% of projects respectively. The `improved EAGLE vocabularies` are wished for by `r lod_f_ratio$ratio_all_proj[2]`% of participating projects. The `domain-specific repository for epigraphic data` or the `open and accessible RDF Triplestore` do not seem to be the highest priority of participating projects, but still relatively popular as `r lod_f_ratio$ratio_all_proj[5]`% of responses wishes for one of the two. One participating project wishes specifically for the following: `r lod_f_ratio$lod_f[7]`.
+**Commentary**: The most popular is the option `Bibliographical references to all epigraphic publications with stable URI (e.g. Zenon)` represents the wishes of `r lod_f_ratio$ratio_all_proj[lod_f_ratio$lod_f=="Bibliographical references to all epigraphic publications with stable URI (e.g. Zenon)"]`% of all partner projects. 
+
+The great interest in prosopographic LOD for is supported by `r lod_f_ratio$ratio_all_proj[lod_f_ratio$lod_f=="Roman Prosopographical data with stable URIs"]`% of partner projects for the Roman world and `r lod_f_ratio$ratio_all_proj[lod_f_ratio$lod_f=="Greek Onomastic data with stable URIs (e.g. LGPN with stable identifiers)"]`% of projects for the Greek world respectively. 
+
+The `improved EAGLE vocabularies` are wished for by `r lod_f_ratio$ratio_all_proj[lod_f_ratio$lod_f=="EAGLE vocabularies (revised and extended with clear structure + eliminated duplicates + multi-language support)"]`% of partner projects. 
+
+The `domain-specific repository for epigraphic data` or the `open and accessible RDF Triplestore` do not seem to be the highest priority of participating projects, but still relatively popular as `r lod_f_ratio$ratio_all_proj[lod_f_ratio$lod_f=="One domain specific repository for epigraphic data"]`% of responses wishes for one of the two. One participating project wishes specifically for the following: ``r lod_f_ratio$lod_f[7]``.
 
 ------------------------------------------------------------------------
 
@@ -606,13 +696,12 @@ colnames(lod_ideas) <- c("lod_i")
 
 lod_i_ratio<- lod_ideas %>% 
   count(lod_i, sort= T) %>% 
-  mutate(ratio = n/(sum(n)/100)) %>% 
-  mutate(ratio_all_proj = round(n/(nrow(partners)/100),2))
+  mutate(ratio_all_proj = round(n/(nrow(partners)/100)))
 
 lod_i_ratio
 ```
 
-**Commentary**: `r lod_i_ratio$ratio_all_proj[1]`% of all projects would benefit from `A set of guidelines for FAIR and Linked Open Data in epigraphy`. There is a general interest in practical examples and workshop(s) on how to use LOD and FAIR Principles in Epigraphy, as well as resources for quantitative analysis of data in epigraphy.
+**Commentary**: `r lod_i_ratio$ratio_all_proj[lod_i_ratio$lod_i == "Set of guidelines for FAIR and Linked Open Data in epigraphy"]`% of all projects would benefit from `A set of guidelines for FAIR and Linked Open Data in epigraphy`. There is a general interest in practical examples and workshop(s) on how to use LOD and FAIR Principles in Epigraphy, as well as resources for quantitative analysis of data in epigraphy.
 
 ------------------------------------------------------------------------
 
@@ -622,9 +711,9 @@ lod_i_ratio
 unique(na.omit(partners$`Your personal wish list. Provide a description of potential tasks and issues the FAIR Epigraphy can help your project within the next three years (and beyond)`))
 ```
 
-**Commentary**: This section covers the additional needs of partner projects. Partner projects would like to see a platform linking epigraphic data from multiple sources, including a stable reference point or an API for improved epigraphic vocabularies. Partner projects would also like to be able to use guidelines of FAIR practices in epigraphy, that currently do not exist.
+**Commentary**: This section covers the additional needs of partner projects. Partner projects would like to see a platform linking epigraphic data from multiple sources, including a stable reference point or an API for improved epigraphic vocabularies (in other words, the sort of resource which agreed vocabularies and an RDF triplestore might facilitate). Partner projects would also like to be able to use guidelines for FAIR practices in epigraphy, which currently do not exist.
 
-## Digital epigraphy projects
+## Non-partnered projects
 
 **Question**: *Our project would like to be able to use within the next three years:*
 
@@ -635,12 +724,11 @@ colnames(lod_future2) <- c("lod_f")
 
 lod_f_ratio2<- lod_future2 %>% 
   count(lod_f, sort= T) %>% 
-  mutate(ratio = round(n/(sum(n)/100),2)) %>% 
-  mutate(ratio_all_proj = round(n/(nrow(projects)/100),2))
+  mutate(ratio_all_proj = round(n/(nrow(projects)/100)))
 lod_f_ratio2
 ```
 
-**Commentary**: The most popular is the option `Bibliographical references to all epigraphic publications with stable URI (e.g. Zenon)` representing the wishes of `r lod_f_ratio2$ratio_all_proj[1]`% of all participating projects. The great interest in onomastic and prosopographical LOD for both the Greek and Roman world is supported by `r sum(lod_f_ratio2$ratio_all_proj[c(3,10)])`% and `r lod_f_ratio2$ratio_all_proj[5]`% of positive responses from participating projects. The `improved EAGLE vocabularies` are wished for by `r lod_f_ratio2$ratio_all_proj[2]`% of participating projects. The `domain-specific repository for epigraphic data` (`r lod_f_ratio2$ratio_all_proj[4]`%) or the `open and accessible RDF Triplestore` do not seem to be the highest priority of participating projects (`r lod_f_ratio2$ratio_all_proj[6]`%), but still a relatively popular response. One participating project wishes specifically for the following: `r lod_f_ratio2$lod_f[8]`.
+**Commentary**: The most popular is the option `Bibliographical references to all epigraphic publications with stable URI (e.g. Zenon)` representing the wishes of `r lod_f_ratio2$ratio_all_proj[lod_f_ratio2$lod_f =="Bibliographical references to all epigraphic publications with stable URI (e.g. Zenon)"]`% of all participating projects. The great interest in onomastic and prosopographic LOD for both the Greek and Roman world is supported by `r lod_f_ratio2$ratio_all_proj[lod_f_ratio2$lod_f == "Greek Onomastic data with stable URIs (e.g. LGPN with stable identifiers)"]+lod_f_ratio2$ratio_all_proj[lod_f_ratio2$lod_f == "Roman Prosopographical data with stable URIs"]`% of non-partnered projects. The `improved EAGLE vocabularies` are wished for by `r lod_f_ratio2$ratio_all_proj[lod_f_ratio2$lod_f=="EAGLE vocabularies (revised and extended with clear structure + eliminated duplicates + multi-language support)"]`% of non-partnered projects. The `domain-specific repository for epigraphic data` (`r lod_f_ratio2$ratio_all_proj[lod_f_ratio$lod_f=="One domain specific repository for epigraphic data"]`%) or the `open and accessible RDF Triplestore` (`r lod_f_ratio2$ratio_all_proj[lod_f_ratio$lod_f=="Open and accessible RDF Triplestore"]`%) do not seem to be the highest priority of participating projects, but still a relatively popular response. One participating project wishes specifically for the following: ``r lod_f_ratio2$lod_f[8]``, which other projects, such as Pleiades or Trismegistos, might be better equipped to do.
 
 ------------------------------------------------------------------------
 
@@ -653,13 +741,14 @@ colnames(lod_ideas2) <- c("lod_i")
 
 lod_i_ratio2<- lod_ideas2 %>% 
   count(lod_i, sort= T) %>% 
-  mutate(ratio = n/(sum(n)/100)) %>% 
-  mutate(ratio_all_proj = round(n/(nrow(projects)/100),2))
+  mutate(ratio_all_proj = round(n/(nrow(projects)/100)))
 
 lod_i_ratio2
 ```
 
-**Commentary**: `r lod_i_ratio2$ratio_all_proj[1]`% of all participating projects would benefit from `A set of guidelines for FAIR and Linked Open Data in epigraphy` and `r lod_i_ratio2$ratio_all_proj[1]`% from `Workshop on FAIR principles in epigraphy`. There is a general interest in practical examples (`r lod_i_ratio2$ratio_all_proj[2]`%) and workshop(s) on how to use LOD in epigraphy (`r lod_i_ratio2$ratio_all_proj[1]`%), as well as resources for quantitative analysis of data in epigraphy (`r lod_i_ratio2$ratio_all_proj[3]`%). There might be potential synergy in organising workshops in digital epigraphy between the participating projects, e.g. `the French School at Athens`.
+**Commentary**: 
+`r lod_i_ratio2$ratio_all_proj[lod_i_ratio2$lod_i == "Set of guidelines for FAIR and Linked Open Data in epigraphy"]`% of all non-partnered projects would benefit from `A set of guidelines for FAIR and Linked Open Data in epigraphy`.
+There is a general interest in practical examples (`r lod_i_ratio2$ratio_all_proj[lod_i_ratio2$lod_i =="Practical scripted examples on how to use LOD in epigraphy"]`%) and workshop(s) on how to use LOD in epigraphy (`r lod_i_ratio2$ratio_all_proj[lod_i_ratio2$lod_i =="Workshop on how to use LOD in epigraphy"]`%), as well as resources for quantitative analysis of data in epigraphy (`r lod_i_ratio2$ratio_all_proj[lod_i_ratio$lod_i =="Set of guidelines/resources for quantitative analysis of epigraphic data"]`%). There might be potential synergy in organising workshops in digital epigraphy between some of the participating projects, e.g. `the French School at Athens`.
 
 ------------------------------------------------------------------------
 
@@ -669,15 +758,16 @@ lod_i_ratio2
 unique(na.omit(projects$`Your personal wish list. Provide a description of potential tasks and issues the FAIR Epigraphy can help your project within the next three years (and beyond)`))
 ```
 
-**Commentary**: This section covers additional needs of participating digital projects. Some of the wishes might be beyond scope of the FAIR Epigraphy project but the responses provide valuable guidance and hint to some of the challenges the epigraphic discipline will be facing in the near future. The responses may inspire other projects with similar needs to join forces and potentially develop the solution together.
+**Commentary**: This section covers additional needs of participating digital projects. Some of the wishes might be beyond the scope of the FAIR Epigraphy project but the responses provide valuable guidance and hint to some of the challenges the epigraphic discipline will be facing in the near future. The responses may inspire other projects with similar needs to join forces and potentially develop the solution together. The FAIR Epigraphy project may offer one channel to explore and collaborate on the meeting of these needs in future.
+
 
 # Summary
 
-The present report demonstrates a great variation of the epigraphic discipline in 2022. Although the majority of participating projects record inscriptions in Latin and Greek, we see a diverse array of projects expanding beyond the traditional boundaries of the discipline. The projects participating in the survey involve well-established projects that exist over several decades, regional or thematic corpora or more specialised short-term PhD projects. We have observed a clear distinction between projects with a long tradition and most importantly with relatively stable institutional support, that have access to institutional repositories, policies and IT services and the small-scale projects with limited support and access to resources and training, as opposed to short-term projects on a specific topic that may lack access to long-term institutional support. One of the missions of the FAIR Epigraphy project is to support projects with limited access to resources by providing accessible and comprehensible training and guidelines for FAIR and Linked Open Data principles in epigraphy.
+The present report demonstrates a great variation in the epigraphic discipline in 2022. Although the majority of participating projects record inscriptions in Latin and Greek, we see a diverse array of projects expanding beyond the traditional boundaries of the discipline. The projects participating in the survey involve well-established projects that have existed over several decades, regional or thematic corpora, and more specialised, short-term PhD projects. We have observed a clear distinction between on the one hand projects with a long tradition and most importantly with relatively stable institutional support, which have access to institutional repositories, policies and IT services and other, small-scale projects with limited support and access to resources and training, typified by to short-term projects on a specific topic that may lack access to long-term institutional support. One of the missions of the FAIR Epigraphy project is to support projects with limited access to resources by providing accessible and comprehensible training and guidelines for FAIR and Linked Open Data principles in epigraphy.
 
-The established projects mostly follow the FAIR principles, although to a variable extent. The majority of established projects share their data under a Creative Commons license in one or more widely accepted formats (with Epidoc XML being the most popular format for all types of projects irrespective of their status and longevity). In general, the more established projects provide more access points to the data as well as more data formats than the projects with less institutional support. The use of standardized terminologies is still limited and project-specific, mostly due to the lack of uniformly accepted standards. On contrary, the adoption of Linked Open Datasets (LOD) and creating links within the epigraphic datasets with stable identifiers to those LOD sources seems to be fairly advanced, especially in the case of established LOD such as Pleiades or Trismegistos, and to some degree the EAGLE vocabularies.
+The established projects mostly follow the FAIR principles, although to a variable extent. The majority of established projects share their data under a Creative Commons license in one or more widely accepted formats (with Epidoc XML being the most popular format for all types of projects irrespective of their status and longevity). In general, the more established projects provide more access points to their data as well as more data formats than the projects with less institutional support. The use of standardized terminologies is still limited and project-specific, mostly due to the lack of uniformly accepted standards. On contrary, the adoption of Linked Open Datasets (LOD) and creation of links within the epigraphic datasets with stable identifiers to those LOD sources seems to be fairly advanced, especially in the case of well-established LOD domains such as Pleiades or Trismegistos, and to a lesser extent the EAGLE vocabularies.
 
-As to the current and future needs of digital epigraphy, there is a growing demand for more LOD, especially for bibliographical references of standard epigraphic corpora, standardisation of discipline-specific vocabularies (improved EAGLE vocabularies), and onomastic and prosopographic LOD for the ancient world, all supported by training and providing accessible resources and sets of guidelines for FAIR and Open epigraphy. The need for an accessible and open platform connecting and linking various epigraphic resources into one source of truth/access point is generally supported, building on the experience of the EAGLE Project.
+As to the current and future needs of digital epigraphy, there is a clear demand for more LOD, especially for bibliographical references to standard epigraphic corpora, standardisation of discipline-specific vocabularies (improved EAGLE vocabularies), and  prosopographic LOD for the ancient world, all supported by training and providing accessible resources and sets of guidelines for FAIR and Open epigraphy. The need for an accessible and open platform connecting and linking various epigraphic resources through a single access point is generally supported, building on the experience of the EAGLE Project, but now exploiting the model of Linked Open Data.
 
 # Bibliography
 
