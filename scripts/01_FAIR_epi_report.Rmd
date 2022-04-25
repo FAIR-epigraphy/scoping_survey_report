@@ -4,14 +4,25 @@ author:
 - Petra Hermankova^[Johannes Gutenberg University in Mainz, petra.hermankova@uni.mainz.de, https://orcid.org/0000-0002-6349-0540]
 - Marietta Horster^[Johannes Gutenberg University in Mainz, horster@uni.mainz.de, https://orcid.org/0000-0003-1434-224X]
 - Jonathan Prag^[Oxford University, jonathan.prag@merton.ox.ac.uk, https://orcid.org/0000-0003-3819-8537]
-date: "`r format(Sys.Date())`"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+header-includes: 
+       \usepackage{graphicx}
+       \usepackage{fancyhdr}
+       \pagestyle{fancy}
+       \setlength\headheight{18pt}
+       \fancyhead[R]{\includegraphics[width=1.2cm]{../assets/logo.jpg}}
 output:
   pdf_document:
-    toc: true
-    toc_depth: '4'
+    toc: false
+    toc_depth: '2'
     number_sections: true
     df_print: kable
     highlight: tango
+    keep_tex: true
+    latex_engine: pdflatex
+    fig_caption: yes
+    includes:
+      in_header: "../preamble.tex"
   word_document:
     toc: yes
     toc_depth: '4'
@@ -32,6 +43,10 @@ link-citations: yes
 zotero: yes
 bibliography: ../data/bibliography.bib
 description: null
+fontsize: 10pt
+thanks: "The FAIR Epigraphy project was funded by ..."
+abstract: "This document maps the state of digital epigraphy in 2022, with a focus on Open Science practices and accessibility of resources. The report is based on responses received during the digital survey circulating between February and April 2022, organised by the FAIR Epigraphy Project. The responses cover a broad spectrum of projects from Europe and the US, ranging from well established projects with a relatively stable institutional support to a short-term projects with more narrow focus and limited access to IT support and funding. The results of the survey will be used to inform the planning of the FAIR Epigraphy project in the following three years."
+keywords: ["inscriptions", "digital-epigraphy", "FAIR data principles", "Linked Open Data", "survey"]
 ---
 
 ```{css style settings, echo = FALSE}
@@ -61,7 +76,6 @@ knit_hooks$set(output = function(x, options) {
   hook_output(x, options)
 })
 ```
-
 # Introduction
 
 The field of digital epigraphy has seen significant development in recent years: not only are traditional epigraphic corpora increasingly being digitised and made accessible via their websites for anyone to browse and search but several resources are already born digital without any printed edition, e.g., *Inscriptions of Greek Cyrenaica* [@roueche_inscriptions_2020], *Inscriptions of Roman Tripolitania* [@roueche_inscriptions_2022]; for more see [@bruun_epigraphy_2015]. Most inscriptions contain references to places, people or events, or contain spatio-temporal data related to the place and time of their creation and provide an ideal resource to study past communities as a whole. However, in order to be able to harness their full potential and for example access *all* inscriptions from a place of interest or of a given type, we need to link the existing datasets together. The concept of *Linked Open Data* (LOD) provides a means of connecting various digital datasets while enriching the text with broader spatio-temporal context as well as prosopographic data, leading to the creation of new connections between individual inscriptions as well as archaeological sites or potential re-evaluation of historical narratives [@bagnall_pleiades_2006; @tupman_where_2021; @geser_wp15_2016]. Although many epigraphic datasets have been using LOD, especially to record the spatial component by using Pleiades or Trismegistos, there is still a considerable gap in the LOD implementation across the discipline and thus the accessibility of the data.
@@ -263,6 +277,7 @@ unique(na.omit(partners$`If you have answered YES in the previous question, plea
 **Question**: *Standardized terminologies: The project uses the following systems:*
 
 To see more data, click on the arrow in the top right hand corner of the table below.
+
 ```{r}
 stand_term <- as.data.frame(unlist(str_split(partners$`Standardized terminologies: The project uses the following systems (check all that apply)`, ", ")))
 colnames(stand_term) <- c("standard_terminologies")
@@ -567,7 +582,7 @@ policies2_length_mean
 
 **Additional investigation**:
 
-The main factor influencing the need to comply with institutional principles seems to be however also the age of the project - for projects created in recent years (e.g., since 2015), we would expect FAIR data policy being one of conditions for securing funding. In order to verify this hypothesis, we collected the additional information manually from projects websites and published materials, such as the official project start-date, the country of origin of a given project, indication of existing funding and primary focus of a given project (text publication or metadata collection); the anonymised data are saved as a TSV in the same GitHub repository as `/data/02_scoping_survey_anonymised_PostSurvey.tsv`. Our expectations on data policies being progressively implemented over the last seven years were confirmed only partially. As the chart below demonstrates, the number of projects that indicated existing institutional data policy grows steadily since 2015 (year is indicated by brown dashed vertical line). On contrary, the number of projects that indicated no existing data policy decreases, but only relatively slowly. The projects responded `N/A` are those who consider themselves in February 2022 as `closed`.
+The main factor influencing the need to comply with institutional principles seems to be however also the age of the project - for projects created in recent years (e.g., since 2015), we would expect FAIR data policy being one of conditions for securing funding. In order to verify this hypothesis, we collected the additional information manually from projects websites and published materials, such as the official project start-date, the country of origin of a given project, indication of existing funding and primary focus of a given project (text publication or metadata collection); the anonymised data are saved as a TSV in the same GitHub repository as `/data/02_scoping_survey_anonymised_PostSurvey.tsv`. 
 
 ```{r data_postsurvey, include=FALSE, echo=FALSE}
 # loading data from TSV file
@@ -589,8 +604,11 @@ policy_year_started$policy_simple <- ifelse(grepl("Neither our grant funding*", 
                                         ifelse(grepl("Policies are on the way*|Not with an official request*|We don't work for any institution*", policy_year_started$policy), "No", 
                                                ifelse(grepl("The French National Centre for Scientific Research strongly encourages its members to comply*|Not with an official request*", policy_year_started$policy), "Yes",
                                                                                 policy_year_started$policy)))
-## ggplot policy by years started
 
+```
+
+```{r, fig.align="center", warning=FALSE, fig.width=10, fig.cap="The chart shows the existence of institutional data policy of non-partnered projects in time."}
+## ggplot policy by years started
 policy_year_started %>% 
   filter(YearStarted>1950) %>% 
   ggplot(aes(x=YearStarted, y=policy_simple, color=policy_simple))+
@@ -598,17 +616,17 @@ policy_year_started %>%
   #geom_point(aes(x=YearStarted, y=policy_simple))
   geom_density()+
   geom_vline(xintercept=2015, linetype=2, colour="brown") +
-  ggtitle("Requirement of institutional data policy for non-partnered projects since 1990") +
+  ggtitle("Requirement of institutional data policy of non-partnered projects since 1990") +
   xlab("Start year of a project") + ylab("Existence of institutional data policy") +
   #coord_flip() +
   theme_bw() +
   #coord_cartesian(xlim = c(0, 5)) +
   theme(axis.text = element_text(size = 9)) +
   theme(plot.title = element_text(size = 13))
-
 ```
+Our expectations on data policies being progressively implemented over the last seven years were confirmed only partially. As the chart below demonstrates, the number of projects that indicated existing institutional data policy grows steadily since 2015 (indicated by brown dashed vertical line). On contrary, the number of projects that indicated no existing data policy decreases, but only relatively slowly. The projects responded `N/A` are those who consider themselves in February 2022 as `closed`.
 
-The following chart shows clear geographic differences in implementation of data policies based on the main country where the project is based. France, Germany, and Italy are listed as countries where data policies are required, yet some projects in Germany and Italy answered that no data policies are required. Thus the practical implementation of data policies may depend on particular funding agency or institution, rather than on nation-wide policies. However, our results are only preliminary and based on a very small sample and need to be confirmed by further investigation.
+The following figure shows clear geographic differences in implementation of data policies based on the main country where the project is based. France, Germany, and Italy are listed as countries where data policies are required, yet some projects in Germany and Italy answered that no data policies are required. Thus the practical implementation of data policies may depend on particular funding agency or institution, rather than on nation-wide policies. However, our results are only preliminary and based on a very small sample and need to be confirmed by further investigation.
 
 ```{r, echo=FALSE}
 #processing
@@ -619,14 +637,15 @@ policy_country<- projects_comb %>%
 policy_country$policy_simple <- ifelse(grepl("Neither our grant funding*", policy_year_started$policy), "Voluntary", 
                                         ifelse(grepl("Policies are on the way*|Not with an official request*|We don't work for any institution*", policy_year_started$policy), "No", 
                                                ifelse(grepl("The French National Centre for Scientific Research strongly encourages its members to comply*|Not with an official request*", policy_year_started$policy), "Yes",
-                                                                                policy_year_started$policy)))
-  
+                                                                              policy_year_started$policy)))
+```
+```{r, fig.align="center", warning=FALSE, fig.width=10, fig.cap="The chart shows the requirement of institutional data policy of non-partnered projects by country."}
 ## ggplot policy by countries
 policy_country %>% 
   filter(YearStarted>1950) %>% 
   ggplot(aes(x=Country, y=policy_simple, color=policy_simple))+
   geom_point(aes(x=Country, y=policy_simple), size=4) +
-  ggtitle("Requirement of institutional data policy for non-partnered projects by country") +
+  ggtitle("Requirement of institutional data policy of non-partnered projects by country") +
   xlab("Country") + ylab("Existence of institutional data policy") +
   #coord_cartesian(xlim = c(0, 5)) +
   theme_bw() +
@@ -688,6 +707,7 @@ policy_share
 **Question**: *Linked Open Datasets: The project uses the following systems:*
 
 To see more data, click on the arrow in the top right hand corner of the table below.
+
 ```{r}
 lod2 <- as.data.frame(unlist(str_split(projects$`Linked Open Data: The project uses the following systems (check all that apply)`, ", ")))
 colnames(lod2) <- c("linked_data")
@@ -814,7 +834,7 @@ The present report demonstrates a great variation in the epigraphic discipline i
 
 The established projects mostly follow the FAIR principles, although to a variable extent. The majority of established projects share their data under a Creative Commons license in one or more widely accepted formats (with Epidoc XML being the most popular format for all types of projects irrespective of their status and longevity). In general, the more established projects provide more access points to their data as well as more data formats than the projects with less institutional support. The use of standardized terminologies is still limited and project-specific, mostly due to the lack of uniformly accepted standards. On contrary, the adoption of Linked Open Datasets (LOD) and creation of links within the epigraphic datasets with stable identifiers to those LOD sources seems to be fairly advanced, especially in the case of well-established LOD domains such as Pleiades or Trismegistos, and to a lesser extent the EAGLE vocabularies.
 
-The non-partnered projects follow the FAIR principles, but to a lesser degree than the established projects. There are, however, some short-time projects that fulfill or exceed the requirements for Open Science, but as a general rule the compliance is lower than in the case of established projects. The reason for lower compliance is most likely a combination of only a short-term institutional support, limited access to IT support, poor accessibility of guidelines and discipline specific training.  
+The non-partnered projects follow the FAIR principles, but to a lesser degree than the established projects. There are, however, some short-time projects that fulfill or exceed the requirements for Open Science, but as a general rule the compliance is lower than in the case of established projects. The reason for lower compliance is most likely a combination of only a short-term institutional support, limited access to IT support, poor accessibility of guidelines and discipline specific training.
 
 As to the current and future needs of digital epigraphy, there is a clear demand for more LOD, especially for bibliographical references to standard epigraphic corpora, standardisation of discipline-specific vocabularies (improved EAGLE vocabularies), and prosopographic LOD for the ancient world, all supported by training and providing accessible resources and sets of guidelines for FAIR and Open epigraphy. The need for an accessible and open platform connecting and linking various epigraphic resources through a single access point is generally supported, building on the experience of the EAGLE Project, but now exploiting the model of Linked Open Data.
 
