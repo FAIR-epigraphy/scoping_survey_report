@@ -7,8 +7,11 @@ author:
 date: "`r format(Sys.Date())`"
 output:
   pdf_document:
-    toc: yes
+    toc: true
     toc_depth: '4'
+    number_sections: true
+    df_print: kable
+    highlight: tango
   word_document:
     toc: yes
     toc_depth: '4'
@@ -42,8 +45,21 @@ blockquote {
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-
+knitr::opts_chunk$set(message=FALSE, tidy.opts=list(width.cutoff=60), tidy=TRUE) 
 library(tidyverse)
+library(knitr)
+
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+  # this hook is used only when the linewidth option is not NULL
+  if (!is.null(n <- options$linewidth)) {
+    x = knitr:::split_lines(x)
+    # any lines wider than n should be wrapped
+    if (any(nchar(x) > n)) x = strwrap(x, width = n)
+    x = paste(x, collapse = '\n')
+  }
+  hook_output(x, options)
+})
 ```
 
 # Introduction
@@ -236,7 +252,7 @@ policies
 
 **Question**: *If you have answered YES in the previous question, please specify what are the policies, or provide a link.*
 
-```{r}
+```{r, linewidth=90}
 unique(na.omit(partners$`If you have answered YES in the previous question, please specify what are the policies, or provide link.`))
 ```
 
@@ -521,7 +537,7 @@ policies2
 
 **Question**: *If you have answered YES in the previous question, please specify what are the policies, or provide a link.*
 
-```{r}
+```{r, linewidth=90}
 unique(na.omit(projects$`If you have answered YES in the previous question, please specify what are the policies, or provide link.`))
 ```
 
@@ -737,7 +753,7 @@ lod_i_ratio
 
 **Question**: *Additional digital needs*
 
-```{r}
+```{r, linewidth=90}
 unique(na.omit(partners$`Your personal wish list. Provide a description of potential tasks and issues the FAIR Epigraphy can help your project within the next three years (and beyond)`))
 ```
 
@@ -786,7 +802,7 @@ lod_i_ratio2
 
 **Question**: *Additional digital needs*
 
-```{r}
+```{r, linewidth=90}
 unique(na.omit(projects$`Your personal wish list. Provide a description of potential tasks and issues the FAIR Epigraphy can help your project within the next three years (and beyond)`))
 ```
 
