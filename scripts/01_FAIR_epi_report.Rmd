@@ -735,7 +735,7 @@ The `domain-specific repository for epigraphic data` or the `open and accessible
 
 **Question**: *Potential ideas that our project would benefit from:*
 
-```{r}
+```{r, linewidth=90}
 lod_ideas <- as.data.frame(unlist(str_split(partners$`Select all items your project would benefit from in the next three years:`, ", ")))
 colnames(lod_ideas) <- c("lod_i")
 
