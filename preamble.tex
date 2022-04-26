@@ -1,5 +1,6 @@
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{microtype}
 \usepackage[bf,singlelinecheck=off]{caption}
 \usepackage[scale=.8]{sourcecodepro}
 
@@ -8,5 +9,8 @@
 
 
     \makeatletter
-    \let\@fnsymbol\@alph
+    %\let\@fnsymbol\@alph
+    \let\@fnsymbol\@arabic
     \makeatother
+
+%\renewcommand{\thefootnote}{\arabic{footnote}}

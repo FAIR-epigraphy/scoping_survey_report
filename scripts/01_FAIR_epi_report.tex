@@ -1,10 +1,11 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
 \documentclass[
-  10pt,
-]{article}
+  12pt,
+]{scrreprt}
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -37,11 +38,15 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={Digital epigraphy in 2022: state of the art},
+  pdftitle={ Digital Epigraphy in 2022},
   pdfauthor={Petra Hermankova; Marietta Horster; Jonathan Prag},
-  pdfkeywords={inscriptions, digital-epigraphy, FAIR data
-principles, Linked Open Data, survey},
-  hidelinks,
+  pdfkeywords={inscriptions, digital-epigraphy, FAIR data principles,
+Linked Open Data, survey},
+  colorlinks=true,
+  linkcolor={Maroon},
+  filecolor={Maroon},
+  citecolor={cyan},
+  urlcolor={blue},
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=1in]{geometry}
@@ -97,6 +102,7 @@ principles, Linked Open Data, survey},
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{microtype}
 \usepackage[bf,singlelinecheck=off]{caption}
 \usepackage[scale=.8]{sourcecodepro}
 
@@ -105,15 +111,28 @@ principles, Linked Open Data, survey},
 
 
     \makeatletter
-    \let\@fnsymbol\@alph
+    %\let\@fnsymbol\@alph
+    \let\@fnsymbol\@arabic
     \makeatother
-\usepackage{graphicx} \usepackage{fancyhdr} \pagestyle{fancy} \setlength\headheight{18pt} \fancyhead[R]{\includegraphics[width=1.2cm]{../assets/logo.jpg}}
+
+%\renewcommand{\thefootnote}{\arabic{footnote}}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 
-\title{Digital epigraphy in 2022: state of the art\thanks{The FAIR
-Epigraphy project was funded by \ldots{}}}
+\title{\includegraphics[width=3in,height=\textheight]{../assets/banner.png}\\
+Digital Epigraphy in 2022\thanks{This work was supported by the Arts and
+Humanities Research Council (AHRC) {[}grant number AH/W010682/1{]}; and
+the Deutsche Forschungsgemeinschaft (DFG) {[}grant number
+468455971{]}.}}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{A Report from the Scoping Survey of the FAIR Epigraphy
+Project}
 \author{Petra Hermankova\footnote{Johannes Gutenberg University in
   Mainz,
   \href{mailto:petra.hermankova@uni.mainz.de}{\nolinkurl{petra.hermankova@uni.mainz.de}},
@@ -124,25 +143,34 @@ Horster\footnote{Johannes Gutenberg University in Mainz,
 Prag\footnote{Oxford University,
   \href{mailto:jonathan.prag@merton.ox.ac.uk}{\nolinkurl{jonathan.prag@merton.ox.ac.uk}},
   \url{https://orcid.org/0000-0003-3819-8537}}}
-\date{25 April, 2022}
+\date{26 April, 2022}
 
 \begin{document}
 \maketitle
 \begin{abstract}
 This document maps the state of digital epigraphy in 2022, with a focus
 on Open Science practices and accessibility of resources. The report is
-based on responses received during the digital survey circulating
-between February and April 2022, organised by the FAIR Epigraphy
-Project. The responses cover a broad spectrum of projects from Europe
-and the US, ranging from well established projects with a relatively
-stable institutional support to a short-term projects with more narrow
-focus and limited access to IT support and funding. The results of the
-survey will be used to inform the planning of the FAIR Epigraphy project
-in the following three years.
+based on anonymised responses received during the digital survey
+circulating between February and April 2022, organised by the FAIR
+Epigraphy Project. The responses cover a broad spectrum of projects from
+Europe and the US, ranging from well established projects with a
+relatively stable institutional support to a short-term projects with
+more narrow focus and limited access to IT support and funding. The
+results of the survey will be used to inform the planning of the FAIR
+Epigraphy project in the following three years. The report is fully
+reproducible (written in R programming language) and along with the
+anonymised data accessible via its own GitHub repository
+(\url{https://github.com/FAIR-epigraphy/scoping_survey_report}), and
+published through Zenodo.
 \end{abstract}
 
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
 \hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+\chapter{Introduction}\label{introduction}}
 
 The field of digital epigraphy has seen significant development in
 recent years: not only are traditional epigraphic corpora increasingly
@@ -268,7 +296,7 @@ supplement to the text of this report and can be accessed under the
 CC-BY-SA 4.0 International License.
 
 \hypertarget{fair-epigraphy-partner-projects}{%
-\section{FAIR Epigraphy partner
+\chapter{FAIR Epigraphy partner
 projects}\label{fair-epigraphy-partner-projects}}
 
 This section summarises the results of the online survey
@@ -288,7 +316,7 @@ average duration of a project being 6 years. The shortest participating
 project reported their duration as 3 years and the longest 207 as years.
 
 \hypertarget{language-coverage}{%
-\subsection{Language coverage}\label{language-coverage}}
+\section{Language coverage}\label{language-coverage}}
 
 \textbf{Question:} \emph{What is the predominant language of epigraphic
 data in your project (for mixed collections or collections where other
@@ -361,7 +389,7 @@ Mediterranean/European linguistic space.
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{it-infrastructure}{%
-\subsection{IT infrastructure}\label{it-infrastructure}}
+\section{IT infrastructure}\label{it-infrastructure}}
 
 \textbf{Question}: \emph{Does the project have a website?}
 
@@ -447,7 +475,7 @@ SQL(33\%) and CSV (17\%). 25\% of projects use only one type of data
 format, while 50\% use two or more data format types.
 
 \hypertarget{data-sharing}{%
-\subsection{Data sharing}\label{data-sharing}}
+\section{Data sharing}\label{data-sharing}}
 
 \textbf{Question}: Do you share your data outside of your project?
 
@@ -563,7 +591,7 @@ minority of participating partner projects shares the data on an
 on-demand basis or have a non-public API access point to their data.
 
 \hypertarget{institutional-policies}{%
-\subsection{Institutional policies}\label{institutional-policies}}
+\section{Institutional policies}\label{institutional-policies}}
 
 \textbf{Question:} \emph{Does your institution or funding body require
 your project to comply with any data policies (e.g., FAIR principles,
@@ -625,7 +653,7 @@ or at ERC Open Science policies page
 \url{https://erc.europa.eu/managing-your-project/open-science}.
 
 \hypertarget{open-science-practice}{%
-\subsection{Open Science practice}\label{open-science-practice}}
+\section{Open Science practice}\label{open-science-practice}}
 
 \textbf{Question}: \emph{Standardized terminologies: The project uses
 the following systems:}
@@ -750,7 +778,7 @@ space for improvement and potentially great benefit in creating and
 further improving prosopographic LOD.
 
 \hypertarget{non-partnered-epigraphy-projects}{%
-\section{Non-partnered epigraphy
+\chapter{Non-partnered epigraphy
 projects}\label{non-partnered-epigraphy-projects}}
 
 This section summarises the results of the online survey
@@ -794,7 +822,7 @@ in the future. 15\% of projects are currently not active, but might be
 reactivated in the future.
 
 \hypertarget{language-coverage-1}{%
-\subsection{Language coverage}\label{language-coverage-1}}
+\section{Language coverage}\label{language-coverage-1}}
 
 \textbf{Question:} \emph{What is the predominant language of epigraphic
 data in your project (for mixed collections or collections where other
@@ -856,7 +884,7 @@ the wider Mediterranean/European linguistic space.
 \end{verbatim}
 
 \hypertarget{it-infrastructure-1}{%
-\subsection{IT infrastructure}\label{it-infrastructure-1}}
+\section{IT infrastructure}\label{it-infrastructure-1}}
 
 \textbf{Question}: \emph{Does the project have a website?}
 
@@ -998,10 +1026,10 @@ The data format of the projects that are no longer active is recorded in
 the following \emph{Data sharing} section, under \emph{Closed Projects}.
 
 \hypertarget{data-sharing-1}{%
-\subsection{Data sharing}\label{data-sharing-1}}
+\section{Data sharing}\label{data-sharing-1}}
 
 \hypertarget{active-projects}{%
-\subsubsection{Active projects}\label{active-projects}}
+\subsection{Active projects}\label{active-projects}}
 
 This section summarized only the `active' projects. For
 `closed/non-active' projects, see the section below.
@@ -1138,7 +1166,7 @@ limited number of projects.
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{closed-projects}{%
-\subsubsection{Closed projects}\label{closed-projects}}
+\subsection{Closed projects}\label{closed-projects}}
 
 This section summarized only the `closed/non-active' projects. For
 `active' projects, see the section above.
@@ -1224,7 +1252,7 @@ similar archival infrastructure.
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{institutional-policies-1}{%
-\subsection{Institutional policies}\label{institutional-policies-1}}
+\section{Institutional policies}\label{institutional-policies-1}}
 
 \emph{Question:} \emph{Does your institution or funding body require
 your project to comply with any data policies (e.g., FAIR principles,
@@ -1338,7 +1366,13 @@ February 2022 as \texttt{closed}.
 
 The following figure shows clear geographic differences in
 implementation of data policies based on the main country where the
-project is based.
+project is based. France, Germany, and Italy are listed as countries
+where data policies are required, yet some projects in Germany and Italy
+answered that no data policies are required. Thus the practical
+implementation of data policies may depend on particular funding agency
+or institution, rather than on nation-wide policies. However, our
+results are only preliminary and based on a very small sample and need
+to be confirmed by further investigation.
 
 \begin{figure}
 
@@ -1349,16 +1383,8 @@ project is based.
 \caption{The chart shows the requirement of institutional data policy of non-partnered projects by country.}\label{fig:unnamed-chunk-38}
 \end{figure}
 
-France, Germany, and Italy are listed as countries where data policies
-are required, yet some projects in Germany and Italy answered that no
-data policies are required. Thus the practical implementation of data
-policies may depend on particular funding agency or institution, rather
-than on nation-wide policies. However, our results are only preliminary
-and based on a very small sample and need to be confirmed by further
-investigation.
-
 \hypertarget{open-science-practice-1}{%
-\subsection{Open Science Practice}\label{open-science-practice-1}}
+\section{Open Science Practice}\label{open-science-practice-1}}
 
 \textbf{Question}: \emph{Are you familiar with the FAIR data
 principles?}
@@ -1506,7 +1532,7 @@ projects, while combined prosopographic datasets (LGPN+PIR) in 39\% of
 projects. Only 12\% of participating projects do not use any LOD.
 
 \hypertarget{future-needs-of-digital-epigraphy}{%
-\section{Future needs of digital
+\chapter{Future needs of digital
 epigraphy}\label{future-needs-of-digital-epigraphy}}
 
 This section covers the wishes of partner projects as well as all
@@ -1515,7 +1541,7 @@ so no individual or project can be identified but otherwise presented as
 submitted in the survey.
 
 \hypertarget{partner-projects}{%
-\subsection{Partner projects}\label{partner-projects}}
+\section{Partner projects}\label{partner-projects}}
 
 \textbf{Question}: \emph{Our project would like to be able to use within
 the next three years:}
@@ -1641,7 +1667,7 @@ guidelines for FAIR practices in epigraphy, which currently do not
 exist.
 
 \hypertarget{non-partnered-projects}{%
-\subsection{Non-partnered projects}\label{non-partnered-projects}}
+\section{Non-partnered projects}\label{non-partnered-projects}}
 
 \textbf{Question}: \emph{Our project would like to be able to use within
 the next three years:}
@@ -1781,7 +1807,7 @@ solution together. The FAIR Epigraphy project may offer one channel to
 explore and collaborate on the meeting of these needs in future.
 
 \hypertarget{summary}{%
-\section{Summary}\label{summary}}
+\chapter{Summary}\label{summary}}
 
 The present report demonstrates a great variation in the epigraphic
 discipline in 2022. Although the majority of participating projects
@@ -1837,7 +1863,7 @@ supported, building on the experience of the EAGLE Project, but now
 exploiting the model of Linked Open Data.
 
 \hypertarget{bibliography}{%
-\section{Bibliography}\label{bibliography}}
+\chapter{Bibliography}\label{bibliography}}
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
