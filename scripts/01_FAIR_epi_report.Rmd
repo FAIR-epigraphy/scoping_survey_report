@@ -9,17 +9,6 @@ author:
 - Jonathan Prag^[University of Oxford, jonathan.prag@merton.ox.ac.uk, https://orcid.org/0000-0003-3819-8537]
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  pdf_document:
-    toc: true
-    toc_depth: '3'
-    df_print: kable
-    highlight: tango
-    keep_tex: true
-    #latex_engine: pdflatex
-    latex_engine: xelatex
-    fig_caption: yes
-    includes:
-      in_header: "../preamble.tex"
   html_document:
     css: ../"style.css"
     df_print: paged
@@ -32,6 +21,17 @@ output:
     toc_depth: 4
     toc_float: yes
     code_download: yes
+  pdf_document:
+    toc: true
+    toc_depth: '3'
+    df_print: kable
+    highlight: tango
+    keep_tex: true
+    #latex_engine: pdflatex
+    latex_engine: xelatex
+    fig_caption: yes
+    includes:
+      in_header: "../preamble.tex"
   word_document:
     toc: yes
     toc_depth: '4'
