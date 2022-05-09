@@ -39,7 +39,7 @@
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
   pdftitle={ Digital Epigraphy in 2022},
-  pdfauthor={Petra Hermankova; Marietta Horster; Jonathan Prag},
+  pdfauthor={Petra Heřmánková; Marietta Horster; Jonathan Prag},
   pdfkeywords={inscriptions, digital-epigraphy, FAIR data principles,
 Linked Open Data, survey},
   colorlinks=true,
@@ -76,7 +76,7 @@ Linked Open Data, survey},
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
 \newlength{\csllabelwidth}
@@ -133,17 +133,18 @@ Digital Epigraphy in 2022\footnote{This work was supported by the Arts
 \makeatother
 \subtitle{A Report from the Scoping Survey of the FAIR Epigraphy
 Project}
-\author{Petra Hermankova\footnote{Johannes Gutenberg University in
+\author{Petra Heřmánková\footnote{Johannes Gutenberg University in
   Mainz,
   \href{mailto:petra.hermankova@uni.mainz.de}{\nolinkurl{petra.hermankova@uni.mainz.de}},
   \url{https://orcid.org/0000-0002-6349-0540}} \and Marietta
-Horster\footnote{Johannes Gutenberg University in Mainz,
+Horster\footnote{Johannes Gutenberg University in Mainz, Corpus
+  Inscriptionum Latinarum/BBAW,
   \href{mailto:horster@uni.mainz.de}{\nolinkurl{horster@uni.mainz.de}},
   \url{https://orcid.org/0000-0003-1434-224X}} \and Jonathan
-Prag\footnote{Oxford University,
+Prag\footnote{University of Oxford,
   \href{mailto:jonathan.prag@merton.ox.ac.uk}{\nolinkurl{jonathan.prag@merton.ox.ac.uk}},
   \url{https://orcid.org/0000-0003-3819-8537}}}
-\date{26 April, 2022}
+\date{09 May, 2022}
 
 \begin{document}
 \maketitle
@@ -154,12 +155,12 @@ based on anonymised responses received during the digital survey
 circulating between February and April 2022, organised by the FAIR
 Epigraphy Project. The responses cover a broad spectrum of projects from
 Europe and the US, ranging from well established projects with a
-relatively stable institutional support to a short-term projects with
-more narrow focus and limited access to IT support and funding. The
-results of the survey will be used to inform the planning of the FAIR
-Epigraphy project in the following three years. The report is fully
-reproducible (written in R programming language) and along with the
-anonymised data accessible via its own GitHub repository
+relatively stable institutional support to short-term projects with more
+narrow focus and limited access to IT support and funding. The results
+of the survey will be used to inform the planning of the FAIR Epigraphy
+project in the following three years. The report is fully reproducible
+(written in R programming language) and along with the anonymised data
+accessible via its own GitHub repository
 (\url{https://github.com/FAIR-epigraphy/scoping_survey_report}), and
 published through Zenodo.
 \end{abstract}
@@ -176,22 +177,22 @@ The field of digital epigraphy has seen significant development in
 recent years: not only are traditional epigraphic corpora increasingly
 being digitised and made accessible via their websites for anyone to
 browse and search but several resources are already born digital without
-any printed edition, e.g., \emph{Inscriptions of Greek Cyrenaica}
+any printed edition, e.g.~\emph{Inscriptions of Greek Cyrenaica}
 (\protect\hyperlink{ref-roueche_inscriptions_2020}{Roueche \emph{et
 al.}, 2020}), \emph{Inscriptions of Roman Tripolitania}
 (\protect\hyperlink{ref-roueche_inscriptions_2022}{Roueche, 2022}); for
 more see (\protect\hyperlink{ref-bruun_epigraphy_2015}{Elliott, 2015}).
 Most inscriptions contain references to places, people or events, or
-contain spatio-temporal data related to the place and time of their
-creation and provide an ideal resource to study past communities as a
-whole. However, in order to be able to harness their full potential and
-for example access \emph{all} inscriptions from a place of interest or
-of a given type, we need to link the existing datasets together. The
-concept of \emph{Linked Open Data} (LOD) provides a means of connecting
-various digital datasets while enriching the text with broader
-spatio-temporal context as well as prosopographic data, leading to the
-creation of new connections between individual inscriptions as well as
-archaeological sites or potential re-evaluation of historical narratives
+contain data related to the place and time of their creation and provide
+an ideal resource to study past communities as a whole. However, in
+order to be able to harness their full potential and for example access
+\emph{all} inscriptions from a place of interest or of a given type, we
+need to link the existing datasets together. The concept of \emph{Linked
+Open Data} (LOD) provides a means of connecting various digital datasets
+while enriching the text with, e.g.~broader spatio-temporal context as
+well as prosopographic data, leading to the creation of new connections
+between individual inscriptions as well as archaeological sites or
+potential re-evaluation of historical narratives
 (\protect\hyperlink{ref-bagnall_pleiades_2006}{Bagnall \emph{et al.},
 2006}; \protect\hyperlink{ref-geser_wp15_2016}{Geser, 2016};
 \protect\hyperlink{ref-tupman_where_2021}{Tupman, 2021}). Although many
@@ -201,13 +202,13 @@ considerable gap in the LOD implementation across the discipline and
 thus the accessibility of the data.
 
 The contribution of individual projects can be beneficial to groups
-sharing similar interests (i.e., geographic area, chronological period,
+sharing similar interests (e.g.~geographic area, chronological period,
 linguistic environment) but is rather limited to the epigraphic
 discipline as a whole. The value of LOD lies in being able to build on
 the efforts and investment of numerous generations of epigraphers who
 relentlessly produced high-quality publications in an analogue and
-nowadays, in a digital form. Whether there is one master database
-connecting all the inscriptions to one, or not, once the data is FAIR
+nowadays, also in a digital form. Whether there is one master database
+connecting all the inscriptions together, or not, once the data is FAIR
 and linked to other LOD, new avenues of research open - either to large
 scale comparative studies such as
 (\protect\hyperlink{ref-assael_restoring_2022}{Assael \emph{et al.},
@@ -215,7 +216,7 @@ scale comparative studies such as
 \emph{et al.}, 2021}) or projects working on the same material but with
 different emphases (\protect\hyperlink{ref-mullen_manual_2021}{Mullen \&
 Bowman, 2021}; \protect\hyperlink{ref-willi_manual_2021}{Willi, 2021}).
-Once the data are linked, there is no need to build one central
+Once the data is linked, there is no need to build one central
 repository, which is often costly and non-sustainable in the long run as
 documented by the recent experience of the EAGLE Portal
 (\protect\hyperlink{ref-orlandi_digital_2021}{Orlandi, 2021}), but
@@ -240,7 +241,7 @@ needs with the principles of FAIR science. The overall desirability for
 linguistic, and material culture of the ancient world.
 
 \begin{quote}
-\emph{``The principles emphasise machine-actionability (i.e., the
+\emph{``The principles emphasise machine-actionability (i.e.~the
 capacity of computational systems to find, access, interoperate, and
 reuse data with none or minimal human intervention) because humans
 increasingly rely on computational support to deal with data as a result
@@ -257,10 +258,10 @@ replicate any current efforts, but rather to align existing initiatives
 and bring them together to create a hub of high-quality tools and FAIR
 compliant standards and resources for the modern epigraphic discipline.
 Our internationally collaborative approach will enable and support
-innovative research across epigraphic data, and the wider linked web of
+innovative research across epigraphic data and the wider linked web of
 data (especially archaeological data), such that all epigraphic data is
 increasingly FAIR for both the research community and the wider public.
-To that end, we aim to:
+To this end, we aim to:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -285,15 +286,27 @@ discipline, we have circulated the two scoping surveys in February 2022
 Epigraphy: Scoping survey for partners and collaborators}} and
 \href{https://github.com/FAIR-epigraphy/scoping_survey_report/data/02_Survey_projects_questions.pdf}{\emph{Digital
 epigraphy in 2022: scoping survey}} for all digital epigraphy projects).
-The results of the surveys, presented in the current report, will be
-used to plan the activities and efficiently allocate the resources of
-the FAIR Epigraphy Project in the next three years. The survey answers
-are anonymised so that individual projects cannot be identified on the
-basis of their replies and the data is stored as a TSV (tab-separated
-value) file within the project's GitHub repository
+The results of the surveys presented in the current report will be used
+to plan the activities and efficiently allocate the resources of the
+FAIR Epigraphy Project in the next three years. The survey answers are
+anonymised so that individual projects cannot be identified on the basis
+of their replies and the data is stored as a TSV (tab-separated value)
+file within the project's GitHub repository
 (\url{https://github.com/FAIR-epigraphy/scoping_survey_report/}) as a
 supplement to the text of this report and can be accessed under the
-CC-BY-SA 4.0 International License.
+CC-BY-SA 4.0 International License. The report is produced in two
+formats: a traditional PDF (available at
+\url{https://github.com/FAIR-epigraphy/scoping_survey_report/blob/main/scripts/01_FAIR_epi_report.pdf})
+and an interactive HTML page where reader can browse through the
+responses (available at
+\url{https://fair-epigraphy.github.io/scoping_survey_report/scripts/01_FAIR_epi_report.html}).
+If you are viewing this report in the HTML format, you can click on the
+arrow in the top right hand corner of the table to see more data (where
+the arrow is available).
+
+\emph{Disclaimer}: The views and opinions expressed during the survey
+(presented in tables) do not necessarily reflect the views or positions
+of the FAIR Epigraphy Project.
 
 \hypertarget{fair-epigraphy-partner-projects}{%
 \chapter{FAIR Epigraphy partner
@@ -303,29 +316,31 @@ This section summarises the results of the online survey
 \href{https://github.com/FAIR-epigraphy/scoping_survey_report/data/01_Survey_partners_questions.pdf}{\emph{FAIR
 Epigraphy: Scoping survey for partners and collaborators}} aimed at the
 established digital projects that are already official partners and
-collaborators of the FAIR Epigraphy Project. We sent the survey to 16
+collaborators of the FAIR Epigraphy Project. We sent the survey to 14
 partner projects. We received 13 responses to the survey, with a
-response rate of 75\% with some participants responding on behalf of two
+response rate of 93\% with some participants responding on behalf of two
 projects combined into one response (and thus skewing the response
-rate). 92\% of partner projects gave consent to publish their anonymised
-responses as part of this report. Those who participated in the survey
-but did not give their consent are excluded from the report.
+rate). 100\% of participating partner projects gave consent to publish
+their anonymised responses as part of this report.
 
-The partner projects represent relatively established projects with the
-average duration of a project being 6 years. The shortest participating
-project reported their duration as 3 years and the longest 207 as years.
+The partner projects represent successful projects with the average
+duration of a project being 6 years. The shortest participating project
+reported their duration as 3 years and the longest as 207 years.
 
 \hypertarget{language-coverage}{%
 \section{Language coverage}\label{language-coverage}}
 
 \textbf{Question:} \emph{What is the predominant language of epigraphic
 data in your project (for mixed collections or collections where other
-languages are predominant provide details in Other)}
+languages are predominant provide details in Other)}\footnote{If you are
+  viewing this report in the HTML format, you can click on the arrow in
+  the top right hand corner of the table to see more data (where
+  available). This functionality is not available in the PDF format.}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8750}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0417}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0833}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8902}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0366}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0732}}@{}}
 \toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 language
@@ -336,8 +351,8 @@ ratio
 \end{minipage} \\
 \midrule
 \endhead
-Latin & 8 & 28 \\
-Greek & 7 & 24 \\
+Latin & 9 & 30 \\
+Greek & 7 & 23 \\
 Hebrew & 2 & 7 \\
 Other & 2 & 7 \\
 Ancient Celtic & 1 & 3 \\
@@ -345,8 +360,8 @@ Elymian & 1 & 3 \\
 Etruscan & 1 & 3 \\
 Gaulish & 1 & 3 \\
 Oscan & 1 & 3 \\
-other epichoric languages from the west provinces (ex. Africa) & 1 &
-3 \\
+other epichoric languages from the west provinces of Rome (excl. Africa)
+& 1 & 3 \\
 Phoenician-Punic & 1 & 3 \\
 Punic & 1 & 3 \\
 Raetic & 1 & 3 \\
@@ -356,35 +371,45 @@ Sikel & 1 & 3 \\
 
 \textbf{Commentary:} The language coverage of the participating projects
 consists predominantly of Latin and Greek either on its own or in
-combination (representing 52\% of the answers). The languages listed as
+combination (representing 53\% of the answers). The languages listed as
 \texttt{Other} consisted of \emph{Other, Ancient Celtic, Elymian,
 Etruscan, Gaulish, Oscan, other epichoric languages from the west
-provinces (ex. Africa)}. 7 participating projects record inscriptions in
-one language only, while 5 contain inscriptions in two and more
-languages (7 being the maximum number of listed languages.) The
+provinces of Rome (excl. Africa)}. 8 participating projects record
+inscriptions in one language only, while 5 contain inscriptions in two
+or more languages (7 being the maximum number of listed languages.) The
 \texttt{Other} (i.e.~other than Greek and Latin) category encompassed a
 substantial part of the surveyed projects, documenting the need to
 expand beyond the traditional Latin and Greek focus of the classical
-epigraphic discipline. It is, however, worth noting the majority of
-participating projects the records languages from the wider
+epigraphic discipline. It is, however, worth noting that the majority of
+participating projects record languages from the wider
 Mediterranean/European linguistic space.
 
 \textbf{Combinations of languages as retrieved from the survey:}
 
-\begin{verbatim}
-##  [1] "Greek; Latin"                                                                
-##  [2] "Latin"                                                                       
-##  [3] "Gaulish"                                                                     
-##  [4] "Latin; Greek; Punic; Etruscan; Hebrew; Raetic; Other"                        
-##  [5] "Latin; Greek; other epichoric languages from the west provinces (ex. Africa)"
-##  [6] "Greek"                                                                       
-##  [7] "Ancient Celtic"                                                              
-##  [8] "Latin"                                                                       
-##  [9] "Latin; Greek; Other"                                                         
-## [10] "Greek; Latin; Phoenician-Punic; Oscan; Sikel; Elymian; Hebrew"               
-## [11] "Latin"                                                                       
-## [12] "Greek"
-\end{verbatim}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 0\tabcolsep) * \real{1.0000}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+partners\$Language\_clean
+\end{minipage} \\
+\midrule
+\endhead
+Greek; Latin \\
+Latin \\
+Gaulish \\
+Latin; Greek; Punic; Etruscan; Hebrew; Raetic; Other \\
+Latin; Greek; other epichoric languages from the west provinces of Rome
+(excl. Africa) \\
+Greek \\
+Ancient Celtic \\
+Latin \\
+Latin; Greek; Other \\
+Greek; Latin; Phoenician-Punic; Oscan; Sikel; Elymian; Hebrew \\
+Latin \\
+Latin \\
+Greek \\
+\bottomrule
+\end{longtable}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -398,7 +423,7 @@ Mediterranean/European linguistic space.
 Website & n \\
 \midrule
 \endhead
-Yes & 12 \\
+Yes & 13 \\
 \bottomrule
 \end{longtable}
 
@@ -408,9 +433,6 @@ maintain an online presence (as of February 2022).
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \textbf{Question}: \emph{Does your project have an IT specialist(s)?}
-
-To see more data, click on the arrow in the top right hand corner of the
-table below.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9492}}
@@ -426,8 +448,8 @@ ratio
 \end{minipage} \\
 \midrule
 \endhead
-Yes, equivalent of part-time (\textless1.0 FTE) position & 7 & 58 \\
-No & 2 & 17 \\
+Yes, equivalent of part-time (\textless1.0 FTE) position & 7 & 54 \\
+No & 3 & 23 \\
 We paid some specialists, but currently we have no budget for them (and
 this is a problem, even for the sustainability and ordinary maintainance
 of our digital assets) & 1 & 8 \\
@@ -437,12 +459,12 @@ Yes, equivalent of more than full-time (\textgreater1.0 FTE) position &
 \bottomrule
 \end{longtable}
 
-\textbf{Commentary}: Majority of these established digital projects have
+\textbf{Commentary}: The majority of the digital partner projects have
 an IT specialist, yet only 2 projects have an equivalent of 1.0 FTE or
-more at their disposal. 58 \% of projects have access to part-time IT
+more at their disposal. 54 \% of projects have access to part-time IT
 support for their projects, which in some instances may be only a few
-hours per week per project. 3 projects reported no availability of IT
-support, even on a part-time basis (representing 25\% of participating
+hours per week per project. 4 projects reported no availability of IT
+support, even on a part-time basis (representing 31\% of participating
 partner projects).
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -461,6 +483,7 @@ Epidoc XML, in print & 1 & 2 \\
 Epidoc XML, JSON, CSV & 1 & 3 \\
 Epidoc XML, JSON, RDF & 1 & 3 \\
 Epidoc XML, SQL or similar & 1 & 2 \\
+None - we use analog systems (printed) & 1 & 1 \\
 RDF, SQL or similar & 1 & 2 \\
 SQL or similar & 1 & 1 \\
 We aim to switch to Epidoc XML storable data & 1 & 1 \\
@@ -468,16 +491,17 @@ We aim to switch to Epidoc XML storable data & 1 & 1 \\
 \end{longtable}
 
 \textbf{Commentary}: The majority of projects use \texttt{Epidoc\ XML}
-as their main output data format (83\% of participating projects),
+as their main output data format (77\% of participating projects),
 either in combination with other formats or as a sole data format. Other
-data formats are represented less frequently: JSON (17\%), RDF (17\%),
-SQL(33\%) and CSV (17\%). 25\% of projects use only one type of data
-format, while 50\% use two or more data format types.
+data formats are represented less frequently: JSON (15\%), RDF (15\%),
+SQL(31\%) and CSV (15\%). 31\% of projects use only one type of data
+format, while 46\% use two or more data format types.
 
 \hypertarget{data-sharing}{%
 \section{Data sharing}\label{data-sharing}}
 
-\textbf{Question}: Do you share your data outside of your project?
+\textbf{Question}: \emph{Do you share your data outside of your
+project?}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8929}}
@@ -493,31 +517,30 @@ ratio
 \end{minipage} \\
 \midrule
 \endhead
-Yes, under a Creative Commons license & 7 & 58 \\
+Yes, under a Creative Commons license & 7 & 54 \\
 Not currently, but we are thinking about it & 1 & 8 \\
 Yes, on demand & 1 & 8 \\
+Yes, under a Creative Commons license; Yes, without any license & 1 &
+8 \\
 Yes, without any license & 1 & 8 \\
 Yes, without any license, We aim to switch to CC-BY 4.0 & 1 & 8 \\
-Yes, without any licenses, The question of licences is under
+Yes, without any licenses; The question of licences is under
 consideration & 1 & 8 \\
 \bottomrule
 \end{longtable}
 
 \textbf{Commentary}: All partner projects reported their willingness to
 share the data, even if they are not currently doing it, or if they
-provide the data only on demand. 58\% of partner projects share the data
+provide the data only on demand. 54\% of partner projects share the data
 under a Creative Commons license (\url{https://creativecommons.org/}),
-which is the preferred mode according to the FAIR data principles. Large
-part of partners that are currently not using Creative Commons licenses
-are considering their use in the future.
+which is the preferred mode according to the FAIR data principles. The
+majority of partners which are currently not using Creative Commons
+licenses are considering their use in the future.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\textbf{Question}: \emph{How do share your data with users outside your
-project?}
-
-To see more data, click on the arrow in the top right hand corner of the
-table below.
+\textbf{Question}: \emph{How do you share your data with users outside
+your project?}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9574}}
@@ -536,6 +559,7 @@ share\_method
 Individual Epidoc XMLs or Epidoc XML dumps on the website & 1 & 1 \\
 Individual Epidoc XMLs or Epidoc XML dumps on the website; Via search
 output on our website & 1 & 2 \\
+Linking with other databases & 1 & 1 \\
 Other publicly accessible repository (specify in Other); Universitat de
 Barcelona & 1 & 2 \\
 Public repository on GitHub & 1 & 1 \\
@@ -580,21 +604,22 @@ or not, or it is intended to be accessible in the future). The average
 \caption{Figure showing the popularity of individual sharing methods and formats across partner projects.}\label{fig:unnamed-chunk-11}
 \end{figure}
 
-\textbf{Commentary}: Epidoc XML is by far the most popular format for
-data sharing (implemented by 6 projects), however other Open Science
-services are starting to make their way into established digital
-epigraphy projects, such as sharing via a public repository, implemented
-by 4 (GitHub) and 4 (Zenodo) projects respectively, as well as providing
-raw data in the CSV (comma-separated value) format (4 projects), or as
-JSON (JavaScript Object Notation) files (4 projects). Only a relative
-minority of participating partner projects shares the data on an
-on-demand basis or have a non-public API access point to their data.
+\textbf{Commentary}: Direct download of the Epidoc XML is by far the
+most popular format for data sharing (implemented by 6 projects),
+however other Open Science services are starting to make their way into
+established digital epigraphy projects, such as sharing via a public
+repository, implemented by 4 (GitHub) and 4 (Zenodo) projects
+respectively, as well as providing raw data in the CSV (comma-separated
+value) format (4 projects), or as JSON (JavaScript Object Notation)
+files (4 projects). A minority of participating partner projects shares
+the data on an on-demand basis or have a non-public API access point to
+their data.
 
 \hypertarget{institutional-policies}{%
 \section{Institutional policies}\label{institutional-policies}}
 
 \textbf{Question:} \emph{Does your institution or funding body require
-your project to comply with any data policies (e.g., FAIR principles,
+your project to comply with any data policies (e.g.~FAIR principles,
 data storage, data sharing, Open Science)?}
 
 \begin{longtable}[]{@{}
@@ -611,39 +636,49 @@ ratio
 \end{minipage} \\
 \midrule
 \endhead
-Yes & 7 & 58 \\
-No & 3 & 25 \\
+Yes & 7 & 54 \\
+No & 3 & 23 \\
 Not yet & 1 & 8 \\
 The ERC open data policies don't apply to this project, but we are
 following them anyway. & 1 & 8 \\
+This is an objective, but not currently a requirement of the project. &
+1 & 8 \\
 \bottomrule
 \end{longtable}
 
-\textbf{Commentary}: The majority of projects (represented by 58\%) are
+\textbf{Commentary}: The majority of projects (represented by 54\%) are
 required to comply with data-related policy introduced either by their
-institution or a funding body. A smaller part of partner projects (33\%)
-is not required to follow any data policy, but some follow it on a
-voluntary basis.
+institution or a funding body. 47\% of partner projects is not required
+to follow any data policy, but some follow it on a voluntary basis.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \textbf{Question}: \emph{If you have answered YES in the previous
 question, please specify what are the policies, or provide a link.}
 
-\begin{verbatim}
-## [1] "The funding body (the ERC) expects that research results are available in open
-access"
-## [2] "Open access publication."
-## [3] "Actualització de la Política d’Accés Obert a la Universitat de Barcelona
-(http://hdl.handle.net/2445/142065)"
-## [4] "Data Sharing, Open Science"
-## [5] "usual ERC requirements"
-## [6] "Currently subject to ERC open data policies
-(https://ec.europa.eu/research/participants/docs/h2020-funding-guide/cross-cutting-issues/open-access-data-management/open-access_en.htm);
-previously Oxford University open data policies (which mirror UKRI policies:
-https://www.ukri.org/publications/ukri-open-access-policy/)"
-## [7] "https://forschungsdatenmanagement.bbaw.de/de"
-\end{verbatim}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 0\tabcolsep) * \real{1.0000}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+policy\_specified
+\end{minipage} \\
+\midrule
+\endhead
+The funding body (the ERC) expects that research results are available
+in open access \\
+Open access publication. \\
+Actualització de la Política d'Accés Obert a la Universitat de Barcelona
+(\url{http://hdl.handle.net/2445/142065}) \\
+Data Sharing, Open Science \\
+usual ERC requirements \\
+Currently subject to ERC open data policies
+(\url{https://ec.europa.eu/research/participants/docs/h2020-funding-guide/cross-cutting-issues/open-access-data-management/open-access_en.htm});
+previously Oxford University open data policies (which mirror UKRI
+policies:
+\url{https://www.ukri.org/publications/ukri-open-access-policy/}) \\
+\url{https://forschungsdatenmanagement.bbaw.de/de} \\
+\bottomrule
+\end{longtable}
 
 \textbf{Commentary}: Several of the partner projects follow the ERC data
 and open access policies. More information on ERC Open Research Data and
@@ -658,13 +693,10 @@ or at ERC Open Science policies page
 \textbf{Question}: \emph{Standardized terminologies: The project uses
 the following systems:}
 
-To see more data, click on the arrow in the top right hand corner of the
-table below.
-
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9615}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0128}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0256}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9627}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0124}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0249}}@{}}
 \toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 standard\_terminologies
@@ -675,30 +707,34 @@ ratio
 \end{minipage} \\
 \midrule
 \endhead
-Internal authority lists & 7 & 58 \\
-Own version of EAGLE vocabularies (edited for our project) & 7 & 58 \\
+Internal authority lists & 8 & 62 \\
+Own version of EAGLE vocabularies (edited for our project) & 7 & 54 \\
 EAGLE vocabularies as provided at
-\url{https://www.eagle-network.eu/resources/vocabularies/} & 5 & 42 \\
-``Pre-defined lists are a problem in itself as it is difficult to
+\url{https://www.eagle-network.eu/resources/vocabularies/} & 5 & 38 \\
+Other: ``Pre-defined lists are a problem in itself as it is difficult to
 categorize in advance everything what may be found in real life. Besides
 there often are open questions. Flexibility and openness for real
 evidence is needed.'' & 1 & 8 \\
-\url{http://kerameikos.org/} for vase forms & 1 & 8 \\
-some use of \url{https://www.getty.edu/research/tools/vocabularies/aat/}
-where EAGLE is deficient & 1 & 8 \\
+Other: \url{http://kerameikos.org/} for vase forms & 1 & 8 \\
+Other: Language of publication is Latin & 1 & 8 \\
+Other: use of
+\url{https://www.getty.edu/research/tools/vocabularies/aat/} where EAGLE
+is deficient & 1 & 8 \\
 \bottomrule
 \end{longtable}
 
-\textbf{Commentary}: The lists of vocabularies for the epigraphic
-discipline created by the EAGLE project
-(\url{https://www.eagle-network.eu/resources/vocabularies/}) are used by
-most of the projects: either in the original form (50\% of participating
-projects) or in the form modified for the needs of the project (66\% of
-participating projects). The need for modifications suggests that the
-EAGLE vocabularies do not in fact form a community-wide standard and
-need to be improved before becoming one. The process has been already
-started by the Epigraphy.info Vocabularies working group of which
-Hermankova, Horster, and Prag are all members. For more details see
+\textbf{Commentary}: The internal authority lists are the most used
+method to record epigraphic terminologies (54 \% of projects). The lists
+of vocabularies for the epigraphic discipline created by the EAGLE
+project (\url{https://www.eagle-network.eu/resources/vocabularies/}) are
+used either in the original form (38\% of participating projects) or in
+the form modified for the needs of the project (62\% of participating
+projects). The use of non-standardized internal authority lists and the
+need for modifications suggests that the EAGLE vocabularies do not in
+fact form a community-wide standard and need to be improved before
+becoming one. The process has been already started by the Epigraphy.info
+Vocabularies working group of which Hermankova, Horster, and Prag are
+all members. For more details see
 \url{https://epigraphy.info/vocabularies_wg/}. If you would like to join
 the working group, please get in touch with the authors.
 
@@ -712,16 +748,16 @@ of vocabularies systems}
 standard\_method\_no & n & ratio \\
 \midrule
 \endhead
-1 & 6 & 50 \\
-2 & 3 & 25 \\
-3 & 2 & 17 \\
+1 & 6 & 46 \\
+2 & 4 & 31 \\
+3 & 2 & 15 \\
 4 & 1 & 8 \\
 \bottomrule
 \end{longtable}
 
-\textbf{Commentary}: The majority of projects (50\%) uses only one
-method to record their standard terminologies, while 50\% of projects
-use a combination of two or three methods. Internal authority lists are
+\textbf{Commentary}: The majority of projects (46\%) uses only one
+method to record their standard terminologies, while 54\% of projects
+use a combination of two or more methods. Internal authority lists are
 used in combination with the EAGLE vocabularies both in their original
 and modified form. Sharing or publication of internal authority lists
 would therefore be highly beneficial for improving the existing EAGLE
@@ -733,49 +769,55 @@ vocabularies.
 following systems:}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.7895}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.0263}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.0526}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1316}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8800}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0200}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1000}}@{}}
 \toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 linked\_data
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
 n
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-ratio
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
 ratio\_all\_proj
 \end{minipage} \\
 \midrule
 \endhead
-Trismegistos & 10 & 24 & 83 \\
-Pleiades & 9 & 22 & 75 \\
-EAGLE vocabularies & 7 & 17 & 58 \\
-PIR & 3 & 7 & 25 \\
-EDH People & 2 & 5 & 17 \\
-LGPN & 2 & 5 & 17 \\
-Adriatlas & 1 & 2 & 8 \\
-Cartapulia & 1 & 2 & 8 \\
-\url{http://kerameikos.org/} & 1 & 2 & 8 \\
-More under consideration. Trismegistos is not free! & 1 & 2 & 8 \\
-OxREP mines database & 1 & 2 & 8 \\
-Period.O & 1 & 2 & 8 \\
-We provide TM references in our bibliography but inconsistently and
-without cross linking & 1 & 2 & 8 \\
-We were working on a cooperation with TM when our funding finished & 1 &
-2 & 8 \\
+Trismegistos & 10 & 77 \\
+Pleiades & 9 & 69 \\
+EAGLE vocabularies & 7 & 54 \\
+PIR & 4 & 31 \\
+EDH People & 2 & 15 \\
+LGPN & 2 & 15 \\
+Other: Adriatlas & 1 & 8 \\
+Other: Cartapulia & 1 & 8 \\
+Other: \url{http://kerameikos.org/} & 1 & 8 \\
+Other: More under consideration. Trismegistos is not free! & 1 & 8 \\
+Other: OxREP mines database & 1 & 8 \\
+Other: Publication is in complete sentences and descriptions which would
+first have to be converted into linked open reference data & 1 & 8 \\
+Other: We provide TM references in our bibliography but inconsistently
+and without cross linking & 1 & 8 \\
+Other: We were working on a cooperation with TM when our funding
+finished & 1 & 8 \\
+Period.O & 1 & 8 \\
 \bottomrule
 \end{longtable}
 
 \textbf{Commentary}: From the listed Linked Open Datasets (LOD),
-Pleaides and Trismegistos are by far the most popular, being used in
-75\% and 83\% of all participating projects. The EAGLE vocabularies are
-used in 58\% of all participating projects. Prosopographic data,
-represented by EDH People, PIR, and LGPN are used by 59\% of all
-participating projects. The survey responses suggest there is a great
-space for improvement and potentially great benefit in creating and
-further improving prosopographic LOD.
+Trismegistos and Pleaides are by far the most popular, being used in
+77\% and in 69\% of all participating projects. The EAGLE vocabularies
+are used in 54\% of all participating projects.
+
+Group of LOD resources focusing on geographic data (e.g.~Pleiades,
+Adriatlas, Cartapulia, Trismegistos) seems to be strongly represented
+amongst participating projects (92 \% use at least one of them),
+suggesting the geographic LOD are well-established for the study of the
+ancient world.
+
+The prosopographic data, represented by EDH People, PIR, and LGPN are
+used by 46\% of all participating projects. The survey responses suggest
+there is a great space for improvement and potentially great benefit in
+creating and further improving prosopographic LOD.
 
 \hypertarget{non-partnered-epigraphy-projects}{%
 \chapter{Non-partnered epigraphy
@@ -783,7 +825,7 @@ projects}\label{non-partnered-epigraphy-projects}}
 
 This section summarises the results of the online survey
 \href{https://github.com/FAIR-epigraphy/scoping_survey_report/data/02_Survey_projects_questions.pdf}{\emph{Digital
-epigraphy in 2022: scoping survey}} for all digital epigraphy projects)
+epigraphy in 2022: scoping survey}} for all digital epigraphy projects
 aimed at digital projects currently listed under Digital Epigraphy
 Projects on the Digital Classicist Wiki page
 (\url{https://wiki.digitalclassicist.org/Category:Projects}) that were
@@ -798,10 +840,9 @@ responses are excluded from the report but will be used to inform the
 FAIR Epigraphy planning and decision making.
 
 The respondents represent a wide range of projects from well established
-projects to short-term mostly PhD projects, with the average duration of
-a project being 5.5 years. The shortest participating project reported
-their duration as 1 year and the longest 117 years (that was clearly not
-digital for the whole of that time).
+projects to short-term PhD projects, with the average duration of a
+project being 5.5 years. The shortest participating project reported
+their duration as 1 year and the longest 117 years.
 
 \textbf{Question}: \emph{Is the project still active?}
 
@@ -870,18 +911,23 @@ the wider Mediterranean/European linguistic space.
 
 \textbf{Combinations of languages as retrieved from the survey:}
 
-\begin{verbatim}
-##  [1] "Latin"                                           
-##  [2] "Greek"                                           
-##  [3] "Greek; Latin; Other"                             
-##  [4] "Latin; Greek"                                    
-##  [5] "Hittite; Akkadian; Hurrian; Luwian; Hattian u.a."
-##  [6] "Greek; Latin; Aramaic; Phoenician; Arabic"       
-##  [7] "Greek; Latin"                                    
-##  [8] "Phoenician; Punic; Neopunic"                     
-##  [9] "Palaeo-European; Palaeo-Hispanic"                
-## [10] "Ancient Languages of the Mediterranean area"
-\end{verbatim}
+\begin{longtable}[]{@{}l@{}}
+\toprule
+unique(projects\$Language\_clean) \\
+\midrule
+\endhead
+Latin \\
+Greek \\
+Greek; Latin; Other \\
+Latin; Greek \\
+Hittite; Akkadian; Hurrian; Luwian; Hattian u.a. \\
+Greek; Latin; Aramaic; Phoenician; Arabic \\
+Greek; Latin \\
+Phoenician; Punic; Neopunic \\
+Palaeo-European; Palaeo-Hispanic \\
+Ancient Languages of the Mediterranean area \\
+\bottomrule
+\end{longtable}
 
 \hypertarget{it-infrastructure-1}{%
 \section{IT infrastructure}\label{it-infrastructure-1}}
@@ -904,9 +950,6 @@ maintains an online presence (as of February 2022).
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \textbf{Question}: \emph{Does your project have an IT specialist(s)?}
-
-To see more data, click on the arrow in the top right hand corner of the
-table below.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9455}}
@@ -934,7 +977,7 @@ databases. & 1 & 4 \\
 We do not have an IT specialist permanently assigned to the project, but
 the project has institutional support, including whatever IT support is
 necessary. & 1 & 4 \\
-We had & 1 & 4 \\
+We had one & 1 & 4 \\
 We have the support of two IT specialists for maintenance and small
 updates, but for every major development we need to find new funding & 1
 & 4 \\
@@ -947,7 +990,7 @@ specialist available for at least several hours per week or share them
 with other digital projects within their institution. Several projects
 report difficulty with finding financial resources to support further
 development and long-term sustainability of the project or even
-day-to-day support. 27\% of the participating projects report that they
+day-to-day support. 23\% of the participating projects report that they
 currently do not have any access to IT support. An additional 27\% of
 projects did not indicate whether they have access to IT support because
 they are no longer active. In order to understand the precise
@@ -958,9 +1001,6 @@ clarify the current funding status of individual projects.
 
 \textbf{Question}: \emph{Does your project store epigraphic data in the
 following formats\ldots?}
-
-To see more data, click on the arrow in the top right hand corner of the
-table below.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9261}}
@@ -978,13 +1018,13 @@ no\_format
 \endhead
 Epidoc XML & 6 & 1 \\
 SQL or similar & 4 & 1 \\
+3D models only & 1 & 1 \\
 CSV, SQL or similar & 1 & 2 \\
 Epidoc XML, CSV & 1 & 2 \\
 Epidoc XML, JSON, RDF, CSV & 1 & 4 \\
 Epidoc XML, SQL or similar & 1 & 2 \\
 JSON, SQL or similar, the xml version of the data is available through
 the EAGLE project & 1 & 3 \\
-None - we use analog systems (printed), 3d viewers & 1 & 2 \\
 RDF & 1 & 1 \\
 SQL or similar, We are working on providing also an Epidoc XML version
 of at least the annotated texts
@@ -1005,22 +1045,13 @@ formats such as Epidoc XML or SQL: JSON (8\%), RDF (8\%), and CSV
 data and 3D data format. 4\% of projects indicated using their own
 version of Epidoc XML, adapted to their specific needs.
 
-15\% of projects use only one type of data format, while 27\% use two or
-more data format types (such as Epidoc XML, SQL or similar, CSV, JSON,
-RDF, the xml version of the data is available through the EAGLE project,
-None - we use analog systems (printed), 3d viewers, We are working on
-providing also an Epidoc XML version of at least the annotated texts
+19\% of projects use only one type of data format, while 23\% use two or
+more data format types (such as Epidoc XML, SQL or similar, 3D models
+only, CSV, JSON, RDF, the xml version of the data is available through
+the EAGLE project, We are working on providing also an Epidoc XML
+version of at least the annotated texts
 (\url{https://epidoc.stoa.org/gl/latest/app-epi-mycenaean.html})), XML
 adapted from Epidoc XML).
-
-The frequent use of SQL format signalize a relatively low compliance
-with the FAIR data principles, with individual databases being recorded
-in non-standard format with a specific purpose in mind, which are not
-immediately interoperable with e.g.~Epidoc XML based projects. 4
-projects use SQL as their sole data storage format, and depending on the
-structure of a given database, there might be a higher risk of not being
-easily \emph{Findable}, \emph{Accessible}, and \emph{Interoperable} with
-the rest of the existing epigraphic datasets.
 
 The data format of the projects that are no longer active is recorded in
 the following \emph{Data sharing} section, under \emph{Closed Projects}.
@@ -1036,9 +1067,6 @@ This section summarized only the `active' projects. For
 
 \textbf{Question}: \emph{Do you share your data outside of your
 project?}
-
-To see more data, click on the arrow in the top right hand corner of the
-table below.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9217}}
@@ -1081,16 +1109,13 @@ license, while 5\% provide the data only on demand.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\textbf{Question}: \emph{How do share your data with users outside your
-project?}
-
-To see more data, click on the arrow in the top right hand corner of the
-table below.
+\textbf{Question}: \emph{How do you share your data with users outside
+your project?}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9454}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0102}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0444}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9490}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0096}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0414}}@{}}
 \toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 share\_all
@@ -1116,7 +1141,7 @@ Other publicly accessible repository (specify in Other), Individual
 JSONs or JSON dump on the website, Individual Epidoc XMLs or Epidoc XML
 dumps on the website, Public API on our website, French Huma-Num
 platform and services, particularly Nakala services for our photographs
-& 1 & 6 \\
+(\url{https://nakala.fr/}) & 1 & 6 \\
 Other publicly accessible repository (specify in Other), We have a
 DSpace instance for sharing project data. At present we are behind on
 putting material on the externally accessible database because of
@@ -1142,11 +1167,7 @@ project & 1 & 2 \\
 least one way of sharing the data (whether it is currently accessible to
 the public or not, or it is intended to be accessible in the future).
 The average (median) number of sharing methods per project is 2, while
-the maximum number is 6 (e.g.,Other publicly accessible repository
-(specify in Other), Individual JSONs or JSON dump on the website,
-Individual Epidoc XMLs or Epidoc XML dumps on the website, Public API on
-our website, French Huma-Num platform and services, particularly Nakala
-services for our photographs).
+the maximum number is 6.
 
 There is no discipline-wide standard for data repository as all projects
 use either their institutional or national resources that may or may not
@@ -1154,14 +1175,14 @@ be ideal for epigraphic data. From those who share the data, the Epidoc
 XML format is the most popular format for data sharing, as well as
 search output on the project's website. Open Science practices do not
 seem to be a popular choice in digital epigraphy, such as sharing via
-public repository (e.g., GitHub or Zenodo), as well as providing raw
-data in the CSV (comma-separated value) format, or as JSON (JavaScript
-Object Notation) files. Computer-automated access to data is rare and
-manual human interaction, such as manual selection and/or manual
-download of files prevails, potentially hindering any quantitative and
-reproducible studies, or linking of datasets via automated processes.
-For example, an API access point is currently available only for a very
-limited number of projects.
+public repository (e.g.~GitHub or Zenodo), as well as providing raw data
+in the CSV (comma-separated value) format, or as JSON (JavaScript Object
+Notation) files. Computer-automated access to data is rare and manual
+human interaction, such as manual selection and/or manual download of
+files prevails, potentially hindering any quantitative and reproducible
+studies, or linking of datasets via automated processes. For example, an
+API access point is currently available only for a very limited number
+of projects.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -1208,9 +1229,9 @@ available.
 accessible?}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9011}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0330}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0659}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9250}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0250}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0500}}@{}}
 \toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 service
@@ -1224,10 +1245,11 @@ ratio
 Individual Epidoc XMLs or Epidoc XML dumps on the website & 4 & 57 \\
 Public repository on GitHub & 3 & 43 \\
 Other publicly accessible repository (specify in Other) & 2 & 29 \\
+Other: \url{https://open.library.ubc.ca/collections/squeezes} & 1 &
+14 \\
+Other: ILC4CLARIN Repository
 \url{https://dspace-clarin-it.ilc.cnr.it/repository/xmlui/handle/20.500.11752/OPEN-548}
 & 1 & 14 \\
-\url{https://open.library.ubc.ca/collections/squeezes} & 1 & 14 \\
-ILC4CLARIN Repository & 1 & 14 \\
 Via search output on our website & 1 & 14 \\
 We don't currently share data outside our project & 1 & 14 \\
 \bottomrule
@@ -1237,8 +1259,8 @@ We don't currently share data outside our project & 1 & 14 \\
 projects are closed. Out of these closed projects, 57\% provide their
 data in the Epidoc XML format on their website, 43\% provide their data
 via public repository on GitHub, 29\% via other publicly accessible
-repositories, such as ILC4CLARIN Repository. 14\% of closed projects
-don't currently share data outside the project (=1 project).
+repositories, such as Via search output on our website. 14\% of closed
+projects don't currently share data outside the project (=1 project).
 
 The fact that even the closed projects share their data in some form
 even after their project is no longer active/does not have funding for
@@ -1255,11 +1277,8 @@ similar archival infrastructure.
 \section{Institutional policies}\label{institutional-policies-1}}
 
 \emph{Question:} \emph{Does your institution or funding body require
-your project to comply with any data policies (e.g., FAIR principles,
+your project to comply with any data policies (e.g.~FAIR principles,
 data storage, data sharing, Open Science)?}
-
-To see more data, click on the arrow in the top right hand corner of the
-table below.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9471}}
@@ -1293,6 +1312,9 @@ any policy. 16\% of projects are required to comply with data related
 policies, while an additional 20\% of projects are encouraged to comply
 with FAIR data principles but no rules are enforced.
 
+FIX: Some of the projects are already closed, requirements has changed
+in the last 5 years, not previously required.
+
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \textbf{Question}: \emph{If you have answered YES in the previous
@@ -1306,7 +1328,6 @@ https://www.ouvrirlascience.fr/plan-national-pour-la-science-ouverte/; FAIR prin
 Mandatory deposit of our publications on the open archive HAL,
 https://hal.archives-ouvertes.fr/"
 ## [3] "Creative Commons"
-## [4] "data sharing"
 \end{verbatim}
 
 \textbf{Commentary}: Digital policies in the field of digital epigraphy
@@ -1314,11 +1335,6 @@ are still being implemented, which does not reflect yet on past and
 current projects. There is a variation between national policies amongst
 our responses, with France providing a vocal example in the
 implementation of Open Science in digital epigraphy.
-
-When we compare the average duration of the project and the requirement
-to follow any institutional policies regarding the FAIR data, we see
-that established projects are more likely required to follow such
-policies than short and mid-term projects.
 
 \begin{longtable}[]{@{}lr@{}}
 \toprule
@@ -1336,30 +1352,30 @@ Yes & 35.750000 \\
 
 The main factor influencing the need to comply with institutional
 principles seems to be however also the age of the project - for
-projects created in recent years (e.g., since 2015), we would expect
-FAIR data policy being one of conditions for securing funding. In order
-to verify this hypothesis, we collected the additional information
-manually from projects websites and published materials, such as the
-official project start-date, the country of origin of a given project,
-indication of existing funding and primary focus of a given project
-(text publication or metadata collection); the anonymised data are saved
-as a TSV in the same GitHub repository as
+projects created in recent years (e.g.~since 2015), we would expect FAIR
+data policy being one of conditions for securing funding. In order to
+verify this hypothesis, we collected the additional information manually
+from projects websites and published materials, such as the official
+project start-date, the country of origin of a given project, indication
+of existing funding and primary focus of a given project (text
+publication or metadata collection); the anonymised data is saved as a
+TSV in the same GitHub repository as
 \texttt{/data/02\_scoping\_survey\_anonymised\_PostSurvey.tsv}.
 
 \begin{figure}
 
-{\centering \includegraphics{01_FAIR_epi_report_files/figure-latex/unnamed-chunk-36-1} 
+{\centering \includegraphics{01_FAIR_epi_report_files/figure-latex/unnamed-chunk-37-1} 
 
 }
 
-\caption{The chart shows the existence of institutional data policy of non-partnered projects in time.}\label{fig:unnamed-chunk-36}
+\caption{The chart shows the existence of institutional data policy of non-partnered projects in time.}\label{fig:unnamed-chunk-37}
 \end{figure}
 
 Our expectations on data policies being progressively implemented over
 the last seven years were confirmed only partially. As the chart below
 demonstrates, the number of projects that indicated existing
 institutional data policy grows steadily since 2015 (indicated by brown
-dashed vertical line). On contrary, the number of projects that
+dashed vertical line). On the contrary, the number of projects that
 indicated no existing data policy decreases, but only relatively slowly.
 The projects responded \texttt{N/A} are those who consider themselves in
 February 2022 as \texttt{closed}.
@@ -1376,11 +1392,11 @@ to be confirmed by further investigation.
 
 \begin{figure}
 
-{\centering \includegraphics{01_FAIR_epi_report_files/figure-latex/unnamed-chunk-38-1} 
+{\centering \includegraphics{01_FAIR_epi_report_files/figure-latex/unnamed-chunk-39-1} 
 
 }
 
-\caption{The chart shows the requirement of institutional data policy of non-partnered projects by country.}\label{fig:unnamed-chunk-38}
+\caption{The chart shows the requirement of institutional data policy of non-partnered projects by country.}\label{fig:unnamed-chunk-39}
 \end{figure}
 
 \hypertarget{open-science-practice-1}{%
@@ -1401,23 +1417,20 @@ No & 1 & 4 \\
 \end{longtable}
 
 \textbf{Commentary}: The majority of projects (73\%) is familiar with
-FAIR data policy, however, 23\% of participating projects are familiar
-only vaguely and would benefit from clear guidelines customised for the
-epigraphic community. Only 4\% of projects are not familiar with FAIR
-data principles.
+FAIR data policy, however, 23\% of participating projects are only
+vaguely familiar and would benefit from clear guidelines customised for
+the epigraphic community. Only 4\% of projects are not familiar with
+FAIR data principles.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \textbf{Question}: \emph{Standardized terminologies: The project uses
 the following systems:}
 
-To see more data, click on the arrow in the top right hand corner of the
-table below.
-
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9494}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0169}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0337}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9514}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0162}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0324}}@{}}
 \toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 standard\_terminologies
@@ -1432,33 +1445,37 @@ Internal authority lists & 13 & 37 \\
 EAGLE vocabularies as provided at
 \url{https://www.eagle-network.eu/resources/vocabularies/} & 7 & 20 \\
 Own version of EAGLE vocabularies (edited for our project) & 6 & 17 \\
-We don't use any standardized lists & 3 & 9 \\
-\url{https://epigraphie.mom.fr} & 1 & 3 \\
-The project suggests the use of vocabularies in digital projects dealing
-with ancient writing cultures & 1 & 3 \\
-We created our own thesaurus with OpenTheso tool (EpiVoc)
+We don't use any standardized lists & 2 & 6 \\
+Other: \url{https://epigraphie.mom.fr} & 1 & 3 \\
+Other: The project suggests the use of vocabularies in digital projects
+dealing with ancient writing cultures {[}FAIR Epi: Not Applicable{]} & 1
+& 3 \\
+Other: We created our own thesaurus with OpenTheso tool (EpiVoc)
 \url{https://thesaurus.mom.fr/opentheso/?idt=th61} and we aligne with
 existing vocabularies (work still in progress) & 1 & 3 \\
-We generated a system for metadata based on the UBC library's ability to
-categorize objects (it was very limited for ancient objects) & 1 & 3 \\
-We use standard Mycenological terms but the community does not yet have
-standardized lists. & 1 & 3 \\
-We use the data provided by Konkordanz der Hethitischen
+Other: We don't use any standardized lists & 1 & 3 \\
+Other: We generated a system for metadata based on the UBC library's
+ability to categorize objects (it was very limited for ancient objects)
+& 1 & 3 \\
+Other: We use standard Mycenological terms but the community does not
+yet have standardized lists. & 1 & 3 \\
+Other: We use the data provided by Konkordanz der Hethitischen
 Keilschrifttafeln (www.hethiter.net/hetkonk) & 1 & 3 \\
 \bottomrule
 \end{longtable}
 
-\textbf{Commentary}: 9\% of projects don't use any standardized lists or
+\textbf{Commentary}: 6\% of projects don't use any standardized lists or
 vocabularies. 37\% of projects use their own internal authority lists.
 EAGLE vocabularies in their original form are used by 20\% of projects,
-and in an edited version by 17\% of projects. Several projects, that
-focus on languages other than Greek and Latin, have created their own
+and in an edited version by 17\% of projects. Several projects that
+focus on languages other than Greek and Latin have created their own
 systems, sometimes working from existing vocabularies, but also building
-thesauri, e.g.~the response: We created our own thesaurus with OpenTheso
-tool (EpiVoc) \url{https://thesaurus.mom.fr/opentheso/?idt=th61} and we
-aligne with existing vocabularies (work still in progress) or We use
-standard Mycenological terms but the community does not yet have
-standardized lists..
+thesauri, e.g.~the the creation of a thesaurus OpenTheso tool (EpiVoc)
+\url{https://thesaurus.mom.fr/opentheso/?idt=th61} aligned with existing
+vocabularies or using terms of the community.
+
+Fix in commentary: We don't use any standardized lists - includes
+projects with focus on visualisation of inscriptions
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -1486,13 +1503,10 @@ vocabularies, the type of material etc.
 \textbf{Question}: \emph{Linked Open Datasets: The project uses the
 following systems:}
 
-To see more data, click on the arrow in the top right hand corner of the
-table below.
-
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8696}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0435}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0870}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8831}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0390}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0779}}@{}}
 \toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 linked\_data
@@ -1507,21 +1521,23 @@ Pleiades & 13 & 50 \\
 Trismegistos & 13 & 50 \\
 EAGLE vocabularies & 9 & 35 \\
 LGPN & 7 & 27 \\
-None & 3 & 12 \\
+Other: None & 3 & 12 \\
 PIR & 3 & 12 \\
-diacritical marks from Leiden (CIL) & 1 & 4 \\
-Geonames & 1 & 4 \\
-GODOT: \url{https://godot.date/home} & 1 & 4 \\
-I can't remember (sorry!) & 1 & 4 \\
-iDaiGazetteer & 1 & 4 \\
-idRef & 1 & 4 \\
-None were yet available: a new edition will want to use all & 1 & 4 \\
-Pactols & 1 & 4 \\
+Other: diacritical marks from Leiden (CIL) & 1 & 4 \\
+Other: Geonames & 1 & 4 \\
+Other: GODOT: \url{https://godot.date/home} & 1 & 4 \\
+Other: I can't remember (sorry!) & 1 & 4 \\
+Other: iDaiGazetteer & 1 & 4 \\
+Other: idRef & 1 & 4 \\
+Other: None were yet available - a new edition will want to use all & 1
+& 4 \\
+Other: Pactols & 1 & 4 \\
+Other: PLRE & 1 & 4 \\
+Other: ToposTexts & 1 & 4 \\
+Other: under demand & 1 & 4 \\
+Other: We periodically ask to Trismegistos an ID for our records & 1 &
+4 \\
 Period.O & 1 & 4 \\
-PLRE & 1 & 4 \\
-ToposTexts & 1 & 4 \\
-under demand & 1 & 4 \\
-We periodically ask to Trismegistos an ID for our records & 1 & 4 \\
 \bottomrule
 \end{longtable}
 
@@ -1529,16 +1545,21 @@ We periodically ask to Trismegistos an ID for our records & 1 & 4 \\
 used in 50\% of all participating projects, as well as Trismegistos with
 50\%. EAGLE vocabularies are represented in 35\% of participating
 projects, while combined prosopographic datasets (LGPN+PIR) in 39\% of
-projects. Only 12\% of participating projects do not use any LOD.
+projects. Only \% of participating projects do not use any LOD.
+
+FIX: Prosopography - LGPN, PIR, PLRE Geography - Trismegistos, Pleiades,
+Geonames, iDaiGazetteer Chronological aspect - Periodo, Godot
+
+It is worth noting that not every category listed amongst the responses
+is a true linked open dataset.
 
 \hypertarget{future-needs-of-digital-epigraphy}{%
 \chapter{Future needs of digital
 epigraphy}\label{future-needs-of-digital-epigraphy}}
 
-This section covers the wishes of partner projects as well as all
-participating digital epigraphy projects. The responses were anonymised
-so no individual or project can be identified but otherwise presented as
-submitted in the survey.
+This section covers the wishes of all participating digital epigraphy
+projects. The responses were anonymised so no individual or project can
+be identified but otherwise presented as submitted in the survey.
 
 \hypertarget{partner-projects}{%
 \section{Partner projects}\label{partner-projects}}
@@ -1546,13 +1567,10 @@ submitted in the survey.
 \textbf{Question}: \emph{Our project would like to be able to use within
 the next three years:}
 
-To see more data, click on the arrow in the top right hand corner of the
-table below.
-
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9259}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0123}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0617}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.9280}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0120}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0600}}@{}}
 \toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 lod\_f
@@ -1564,39 +1582,40 @@ ratio\_all\_proj
 \midrule
 \endhead
 Bibliographical references to all epigraphic publications with stable
-URI (e.g.~Zenon) & 10 & 83 \\
+URI (e.g.~Zenon) & 11 & 85 \\
 EAGLE vocabularies (revised and extended with clear structure +
-eliminated duplicates + multi-language support) & 9 & 75 \\
-Roman Prosopographical data with stable URIs & 9 & 75 \\
+eliminated duplicates + multi-language support) & 10 & 77 \\
+Roman Prosopographical data with stable URIs & 10 & 77 \\
 Greek Onomastic data with stable URIs (e.g.~LGPN with stable
-identifiers) & 6 & 50 \\
-Open and accessible RDF Triplestore & 6 & 50 \\
-One domain specific repository for epigraphic data & 5 & 42 \\
-standardised terminologies for instrumentum domesticum and palaeography
-& 1 & 8 \\
-We are not sure what is meant by ``epigraphic data'' in the preceding
-entry. If something like a papyri.info for inscriptions then no. If a
-basic aggregator like Humanities Commons for epigraphy then that would
-be nore useful. & 1 & 8 \\
+identifiers) & 7 & 54 \\
+Open and accessible RDF Triplestore & 7 & 54 \\
+One domain specific repository for epigraphic data & 5 & 38 \\
+Other: standardised terminologies for instrumentum domesticum and
+palaeography & 1 & 8 \\
+Other: We are not sure what is meant by ``epigraphic data'' in the
+preceding entry. If something like a papyri.info for inscriptions then
+no. If a basic aggregator like Humanities Commons for epigraphy then
+that would be more useful. & 1 & 8 \\
 \bottomrule
 \end{longtable}
 
 \textbf{Commentary}: The most popular is the option
 \texttt{Bibliographical\ references\ to\ all\ epigraphic\ publications\ with\ stable\ URI\ (e.g.\ Zenon)}
-represents the wishes of 83\% of all partner projects.
+represents the wishes of 85\% of all partner projects.
 
-The great interest in prosopographic LOD for is supported by 75\% of
-partner projects for the Roman world and 50\% of projects for the Greek
+The great interest in prosopographic LOD for is supported by 77\% of
+partner projects for the Roman world and 54\% of projects for the Greek
 world respectively.
 
-The \texttt{improved\ EAGLE\ vocabularies} are wished for by 75\% of
+The \texttt{improved\ EAGLE\ vocabularies} are wished for by 77\% of
 partner projects.
 
-The \texttt{domain-specific\ repository\ for\ epigraphic\ data} or the
+The \texttt{domain-specific\ repository\ for\ epigraphic\ data}
+(discussed also under \texttt{Other} responses) or the
 \texttt{open\ and\ accessible\ RDF\ Triplestore} do not seem to be the
 highest priority of participating projects, but still relatively popular
-as 42\% of responses wishes for one of the two. One participating
-project wishes specifically for the following: standardised
+as 38\% of responses wishes for one of the two. One participating
+project wishes specifically for the following: Other: standardised
 terminologies for instrumentum domesticum and palaeography.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -1618,13 +1637,13 @@ ratio\_all\_proj
 \end{minipage} \\
 \midrule
 \endhead
-Set of guidelines for FAIR and Linked Open Data in epigraphy & 11 &
+Set of guidelines for FAIR and Linked Open Data in epigraphy & 12 &
 92 \\
-Practical scripted examples on how to use LOD in epigraphy & 9 & 75 \\
-Workshop on FAIR principles in epigraphy & 7 & 58 \\
+Practical scripted examples on how to use LOD in epigraphy & 10 & 77 \\
+Workshop on FAIR principles in epigraphy & 8 & 62 \\
+Workshop on how to use LOD in epigraphy & 7 & 54 \\
 Set of guidelines/resources for quantitative analysis of epigraphic data
-& 6 & 50 \\
-Workshop on how to use LOD in epigraphy & 6 & 50 \\
+& 6 & 46 \\
 NA & 1 & 8 \\
 \bottomrule
 \end{longtable}
@@ -1672,9 +1691,6 @@ exist.
 \textbf{Question}: \emph{Our project would like to be able to use within
 the next three years:}
 
-To see more data, click on the arrow in the top right hand corner of the
-table below.
-
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8615}}
   >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0231}}
@@ -1698,13 +1714,14 @@ identifiers) & 13 & 50 \\
 One domain specific repository for epigraphic data & 11 & 42 \\
 Roman Prosopographical data with stable URIs & 11 & 42 \\
 Open and accessible RDF Triplestore & 6 & 23 \\
-None & 2 & 8 \\
-Geolocation of inscriptions and searches related to geography & 1 & 4 \\
-In the case of our project most of the options are not applicable & 1 &
-4 \\
-LGPN does not yet contain Mycenaean names but I would be happy if that
-changed & 1 & 4 \\
-This project is currently closed & 1 & 4 \\
+Other: None & 2 & 8 \\
+Other: Geolocation of inscriptions and searches related to geography & 1
+& 4 \\
+Other: In the case of our project most of the options are not applicable
+& 1 & 4 \\
+Other: LGPN does not yet contain Mycenaean names but I would be happy if
+that changed & 1 & 4 \\
+Other: This project is currently closed & 1 & 4 \\
 \bottomrule
 \end{longtable}
 
@@ -1719,17 +1736,17 @@ non-partnered projects. The
 the \texttt{open\ and\ accessible\ RDF\ Triplestore} (42\%) do not seem
 to be the highest priority of participating projects, but still a
 relatively popular response. One participating project wishes
-specifically for the following: Geolocation of inscriptions and searches
-related to geography, which other existing projects, such as Pleiades or
-Trismegistos, might be better equipped to do.
+specifically for the following: Other: Geolocation of inscriptions and
+searches related to geography, which other existing projects, such as
+Pleiades or Trismegistos, might be better equipped to do. The
+differences between the wishes and answers of the non-partnered projects
+is inter alia related that several partner projects come from a world
+beyond Greek and Latin epigraphy.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \textbf{Question}: \emph{Potential ideas that our project would benefit
 from:}
-
-To see more data, click on the arrow in the top right hand corner of the
-table below.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.8626}}
@@ -1763,10 +1780,7 @@ from
 \texttt{A\ set\ of\ guidelines\ for\ FAIR\ and\ Linked\ Open\ Data\ in\ epigraphy}.
 There is a general interest in practical examples (65\%) and workshop(s)
 on how to use LOD in epigraphy (62\%), as well as resources for
-quantitative analysis of data in epigraphy (62\%). There might be
-potential synergy in organising workshops in digital epigraphy between
-some of the participating projects,
-e.g.~\texttt{the\ French\ School\ at\ Athens}.
+quantitative analysis of data in epigraphy (42\%).
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -1810,22 +1824,35 @@ explore and collaborate on the meeting of these needs in future.
 \chapter{Summary}\label{summary}}
 
 The present report demonstrates a great variation in the epigraphic
-discipline in 2022. Although the majority of participating projects
-record inscriptions in Latin and Greek, we see a diverse array of
-projects expanding beyond the traditional boundaries of the discipline.
+discipline in 2022.
+
+Fix: It seems as a small number of projects participated in the survey,
+but the responses provide a representative sample of the current state
+of the discipline.
+
+Diversity - countries, project focus, \textgreater{} represented in the
+survey.
+
+Although the majority of participating projects record inscriptions in
+Latin and Greek, we see a diverse array of projects expanding beyond the
+focus of the discipline the way it was established in the 19th century.
 The projects participating in the survey involve well-established
 projects that have existed over several decades, regional or thematic
 corpora, and more specialised, short-term PhD projects. We have observed
 a clear distinction between on the one hand projects with a long
 tradition and most importantly with relatively stable institutional
 support, which have access to institutional repositories, policies and
-IT services and other, small-scale projects with limited support and
-access to resources and training, typified by to short-term projects on
-a specific topic that may lack access to long-term institutional
-support. One of the missions of the FAIR Epigraphy project is to support
-projects with limited access to resources by providing accessible and
-comprehensible training and guidelines for FAIR and Linked Open Data
-principles in epigraphy.
+at least basic IT services and other, small-scale projects with limited
+support and access to resources and training, typified by to short-term
+projects on a specific topic that may lack access to long-term
+institutional support. One of the missions of the FAIR Epigraphy project
+is to support projects with limited access to resources by providing
+accessible and comprehensible training and guidelines for FAIR and
+Linked Open Data principles in epigraphy.
+
+Another mission is to provide support to established projects
+
+Discuss with Jonathan -
 
 The established projects mostly follow the FAIR principles, although to
 a variable extent. The majority of established projects share their data
@@ -1839,28 +1866,32 @@ mostly due to the lack of uniformly accepted standards. On contrary, the
 adoption of Linked Open Datasets (LOD) and creation of links within the
 epigraphic datasets with stable identifiers to those LOD sources seems
 to be fairly advanced, especially in the case of well-established LOD
-domains such as Pleiades or Trismegistos, and to a lesser extent the
-EAGLE vocabularies.
+domains such as Pleiades or Trismegistos for the Graeco-Roman projects,
+and to a lesser extent the EAGLE vocabularies.
+
+Fix: The response rate of non-partnered projects was lower
+\textgreater{} low FAIR compliance, or ceased existing before FAIR
+principles were established. (explain)
 
 The non-partnered projects follow the FAIR principles, but to a lesser
 degree than the established projects. There are, however, some
 short-time projects that fulfill or exceed the requirements for Open
 Science, but as a general rule the compliance is lower than in the case
-of established projects. The reason for lower compliance is most likely
-a combination of only a short-term institutional support, limited access
-to IT support, poor accessibility of guidelines and discipline specific
-training.
+of established projects. The reason for lower compliance in some
+projects is most likely a combination of only a short-term institutional
+support, limited access to IT support, poor accessibility of guidelines
+and discipline specific training.
 
 As to the current and future needs of digital epigraphy, there is a
-clear demand for more LOD, especially for bibliographical references to
-standard epigraphic corpora, standardisation of discipline-specific
-vocabularies (improved EAGLE vocabularies), and prosopographic LOD for
-the ancient world, all supported by training and providing accessible
-resources and sets of guidelines for FAIR and Open epigraphy. The need
-for an accessible and open platform connecting and linking various
-epigraphic resources through a single access point is generally
-supported, building on the experience of the EAGLE Project, but now
-exploiting the model of Linked Open Data.
+clear demand for more or better LOD. The requests concerned especially
+bibliographical references to standard epigraphic corpora,
+standardisation of discipline-specific vocabularies (improved EAGLE
+vocabularies), and prosopographic LOD for the ancient world. In
+addition, there is a wish for support by training and providing
+accessible resources and sets of guidelines for FAIR and Open epigraphy.
+
+Fix: Next steps \& next survey (interviews with partners before next
+survey)
 
 \hypertarget{bibliography}{%
 \chapter{Bibliography}\label{bibliography}}
