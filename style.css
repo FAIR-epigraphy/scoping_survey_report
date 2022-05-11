@@ -24,4 +24,10 @@ code.r{ /* Code block */
 pre { /* Code block - determines code spacing between lines */
     font-size: 11px;
 }
+
+.table{
+  width:auto;
+  font-size: 10px;
+}
+
 </style>
