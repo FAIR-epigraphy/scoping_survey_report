@@ -1,6 +1,8 @@
 # Digital Epigraphy in 2022
 *A Report from the Scoping Survey of the FAIR Epigraphy Project* 
 
+[![DOI](https://zenodo.org/badge/464419328.svg)](https://zenodo.org/badge/latestdoi/464419328)
+
 ## Abstract
 
 This document maps the state of digital epigraphy in early 2022, with a focus on Open Science practices and accessibility of resources. The report is based on anonymised responses received during the digital survey circulating between February and April 2022, organised by the FAIR Epigraphy Project. The responses cover a broad spectrum of projects from Europe and the US, ranging from well established projects with a relatively stable institutional support to short-term projects with more narrow focus and limited access to IT support and funding. The results of the survey will be used to inform the planning of the FAIR Epigraphy project in the following three years. The report is fully reproducible (written in R programming language) and along with the anonymised data accessible via its own GitHub repository (https://github.com/FAIR-epigraphy/scoping_survey_report), and published through Zenodo.
@@ -28,5 +30,4 @@ This work was supported by the Arts and Humanities Research Council (AHRC) [gran
 
 ## Cite us
 
-XXX citation from Zenodo
 
