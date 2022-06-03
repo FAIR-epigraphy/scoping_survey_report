@@ -1,6 +1,9 @@
 # Digital Epigraphy in 2022
-* A Report from the Scoping Survey of the FAIR Epigraphy Project* 
+*A Report from the Scoping Survey of the FAIR Epigraphy Project* 
 
+## Abstract
+
+This document maps the state of digital epigraphy in early 2022, with a focus on Open Science practices and accessibility of resources. The report is based on anonymised responses received during the digital survey circulating between February and April 2022, organised by the FAIR Epigraphy Project. The responses cover a broad spectrum of projects from Europe and the US, ranging from well established projects with a relatively stable institutional support to short-term projects with more narrow focus and limited access to IT support and funding. The results of the survey will be used to inform the planning of the FAIR Epigraphy project in the following three years. The report is fully reproducible (written in R programming language) and along with the anonymised data accessible via its own GitHub repository (https://github.com/FAIR-epigraphy/scoping_survey_report), and published through Zenodo.
 
 1. View the report as [PDF](https://github.com/FAIR-epigraphy/scoping_survey_report/blob/main/scripts/01_FAIR_epi_report.pdf)
 
@@ -14,11 +17,6 @@
 * Marietta Horster [![](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0003-1434-224X), Johannes Gutenberg University in Mainz, Corpus Inscriptionum Latinarum/BBAW, horster@uni.mainz.de
 
 * Jonathan Prag [![](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0003-3819-8537), University of Oxford, jonathan.prag@merton.ox.ac.uk
-
-## Abstract
-
-This document maps the state of digital epigraphy in early 2022, with a focus on Open Science practices and accessibility of resources. The report is based on anonymised responses received during the digital survey circulating between February and April 2022, organised by the FAIR Epigraphy Project. The responses cover a broad spectrum of projects from Europe and the US, ranging from well established projects with a relatively stable institutional support to short-term projects with more narrow focus and limited access to IT support and funding. The results of the survey will be used to inform the planning of the FAIR Epigraphy project in the following three years. The report is fully reproducible (written in R programming language) and along with the anonymised data accessible via its own GitHub repository (https://github.com/FAIR-epigraphy/scoping_survey_report), and published through Zenodo.
-
 
 ## License
 
