@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+references:
+  - type: "report"
+authors: 
+  - affiliation: "Johannes Gutenberg University in Mainz"
+    family-names: "Heřmánková"
+    given-names: "Petra"
+    orcid: "https://orcid.org/0000-0002-6349-0540"
+  - affiliation: "Johannes Gutenberg University in Mainz; Corpus Inscriptionum Latinarum/BBAW"
+    family-names: "Horster"
+    given-names: "Marietta"
+    orcid: "https://orcid.org/0000-0003-1434-224X"
+  - affiliation: "University of Oxford"
+    family-names: "Prag"
+    given-names: "Jonathan"
+    orcid: "https://orcid.org/0000-0003-3819-8537"    
+license: cc-by-nc-4.0
+repository-code: "https://github.com/FAIR-epigraphy/scoping_survey_report/"
+title: "Digital Epigraphy in 2022: A Report from the Scoping Survey of the FAIR Epigraphy Project"
+version: 1.0.0
+doi: 10.5281/zenodo.6610696
+date-released: 2022-06-03
+abstract: "This document maps the state of digital epigraphy in early 2022, with a focus on Open Science practices and accessibility of resources. The report is based on anonymised responses received during the digital survey circulating between February and April 2022, organised by the FAIR Epigraphy Project. The responses cover a broad spectrum of projects from Europe and the US, ranging from well established projects with a relatively stable institutional support to short-term projects with more narrow focus and limited access to IT support and funding. The results of the survey will be used to inform the planning of the FAIR Epigraphy project in the following three years. The report is fully reproducible (written in R programming language) and along with the anonymised data accessible via its own GitHub repository (https://github.com/FAIR-epigraphy/scoping_survey_report), and published through Zenodo."
+keywords:
+  - "digital epigraphy"
+  - "inscriptions"
+  - "FAIR principles"
+  - "Open Science"
+  - "Linked Open data"
+
